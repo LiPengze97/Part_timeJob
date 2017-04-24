@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		055FD87BC57AAF6988F78381 /* Pods_TravelPal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CE7437F83FD8A51101D46C /* Pods_TravelPal.framework */; };
 		8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FD1C1EADA78900EA132C /* AppDelegate.swift */; };
 		8E48FD1F1EADA78900EA132C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FD1E1EADA78900EA132C /* ViewController.swift */; };
 		8E48FD221EADA78900EA132C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E48FD201EADA78900EA132C /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47CE7437F83FD8A51101D46C /* Pods_TravelPal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelPal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C993913E750029AD8FBE27C /* Pods-TravelPal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.debug.xcconfig"; sourceTree = "<group>"; };
 		8E48FD191EADA78900EA132C /* TravelPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E48FD1C1EADA78900EA132C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E48FD1E1EADA78900EA132C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		8E48FD261EADA78900EA132C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E48FD291EADA78900EA132C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E48FD2B1EADA78900EA132C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				055FD87BC57AAF6988F78381 /* Pods_TravelPal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451BF75C0306E909813C94BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6C993913E750029AD8FBE27C /* Pods-TravelPal.debug.xcconfig */,
+				A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8E48FD101EADA78900EA132C = {
 			isa = PBXGroup;
 			children = (
 				8E48FD1B1EADA78900EA132C /* TravelPal */,
 				8E48FD1A1EADA78900EA132C /* Products */,
+				451BF75C0306E909813C94BB /* Pods */,
+				AD6709B7DE80D7CECDC6B9D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +83,14 @@
 			path = TravelPal;
 			sourceTree = "<group>";
 		};
+		AD6709B7DE80D7CECDC6B9D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47CE7437F83FD8A51101D46C /* Pods_TravelPal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E48FD2E1EADA78900EA132C /* Build configuration list for PBXNativeTarget "TravelPal" */;
 			buildPhases = (
+				89B5A0B00DA13B8DC672EEE8 /* [CP] Check Pods Manifest.lock */,
 				8E48FD151EADA78900EA132C /* Sources */,
 				8E48FD161EADA78900EA132C /* Frameworks */,
 				8E48FD171EADA78900EA132C /* Resources */,
+				128E237E92BF49764C9744E6 /* [CP] Embed Pods Frameworks */,
+				D5B5994C8566C86C44074F43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,6 +161,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		128E237E92BF49764C9744E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89B5A0B00DA13B8DC672EEE8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D5B5994C8566C86C44074F43 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E48FD151EADA78900EA132C /* Sources */ = {
@@ -263,6 +338,7 @@
 		};
 		8E48FD2F1EADA78900EA132C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C993913E750029AD8FBE27C /* Pods-TravelPal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7NHUNFTCZQ;
@@ -276,6 +352,7 @@
 		};
 		8E48FD301EADA78900EA132C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7NHUNFTCZQ;

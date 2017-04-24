@@ -1,0 +1,6 @@
+framework module Pods_TravelPal {
+  umbrella header "Pods-TravelPal-umbrella.h"
+
+  export *
+  module * { export * }
+}
