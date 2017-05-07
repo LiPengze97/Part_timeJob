@@ -3,7 +3,11 @@ platform :ios, '9.0'
 use_frameworks!
 target “TravelPal” do
 pod ‘AMap2DMap'
+pod 'AMapSearch'
+pod 'AMapLocation'
 pod ‘Alamofire’
-pod 'NIMSDK'
+pod 'SwiftyJSON'
+pod 'RongCloudIM/IMLib', '~> 2.8.3'
+pod 'RongCloudIM/IMKit', '~> 2.8.3'  
 end
 

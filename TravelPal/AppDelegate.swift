@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +18,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.backgroundColor = UIColor.white
+        //高德地图
+        AMapServices.shared().apiKey = "30e945acb2834ca1fb6e8de43ffefa4b"
+        //网易云信
+        RCIM.shared().initWithAppKey("8w7jv4qb78a3y")
+        RCIM.shared().connect(withToken: "FC1GYeLtuPzrqRxcCsu5D0Ihz9rAQWIHhUAxahX3SGc1aigJlG4K8VngTwnpjE/JuIqn+d5ntoxWLfrrPx8aIg==", success: { (userid) in
+            print("登陆成功")
+        }, error: { (status) in
+            print("登录失败",status)
+        }) { 
+            print("Token出错")
+        }
+        let map_VC = MapViewController()
+        let IM_VC = IMListViewController()
+        let map_naviController = UINavigationController(rootViewController: map_VC)
+        let IM_naviController = UINavigationController(rootViewController: IM_VC)
+        map_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        IM_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
+        
+        //tabbar
+        let tabbarVC = UITabBarController()
+        tabbarVC.viewControllers = [map_naviController,IM_naviController]
+        
+        let tt = TravelPalViewController()
+        
+        let stb = UIStoryboard.init(name: "Main", bundle: nil)
+        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
+        self.window?.rootViewController = ma
         return true
     }
 
