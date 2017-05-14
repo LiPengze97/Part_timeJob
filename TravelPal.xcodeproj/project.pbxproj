@@ -15,6 +15,15 @@
 		8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */; };
 		8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35131EAE3F970005C942 /* UserManager.swift */; };
 		8E3E35161EAE3F9F0005C942 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35151EAE3F9F0005C942 /* Router.swift */; };
+		8E46AED11EC8430B004A95D5 /* LvbanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */; };
+		8E46AED41EC8488D004A95D5 /* TPPersonInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED21EC8488D004A95D5 /* TPPersonInfoCell.swift */; };
+		8E46AED51EC8488D004A95D5 /* TPPersonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E46AED31EC8488D004A95D5 /* TPPersonInfoCell.xib */; };
+		8E46AED81EC84F78004A95D5 /* TPTravelInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED61EC84F78004A95D5 /* TPTravelInfoCell.swift */; };
+		8E46AED91EC84F78004A95D5 /* TPTravelInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E46AED71EC84F78004A95D5 /* TPTravelInfoCell.xib */; };
+		8E46AEDE1EC85313004A95D5 /* TPDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AEDC1EC85313004A95D5 /* TPDetailInfoCell.swift */; };
+		8E46AEDF1EC85313004A95D5 /* TPDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E46AEDD1EC85313004A95D5 /* TPDetailInfoCell.xib */; };
+		8E46AEE21EC8534C004A95D5 /* TPGeoInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AEE01EC8534C004A95D5 /* TPGeoInfoCell.swift */; };
+		8E46AEE31EC8534C004A95D5 /* TPGeoInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E46AEE11EC8534C004A95D5 /* TPGeoInfoCell.xib */; };
 		8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FD1C1EADA78900EA132C /* AppDelegate.swift */; };
 		8E48FD1F1EADA78900EA132C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E48FD1E1EADA78900EA132C /* ViewController.swift */; };
 		8E48FD221EADA78900EA132C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E48FD201EADA78900EA132C /* Main.storyboard */; };
@@ -27,6 +36,7 @@
 		8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */; };
 		8EA4C0721EB9EAB6003047E7 /* TravelPalTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */; };
 		8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6C7731EB0DA900069578A /* IMListViewController.swift */; };
+		8ECBDF5F1EC747680025579E /* TPDetailToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECBDF5E1EC747680025579E /* TPDetailToolBar.swift */; };
 		8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +51,15 @@
 		8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalDetailViewController.swift; sourceTree = "<group>"; };
 		8E3E35131EAE3F970005C942 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		8E3E35151EAE3F9F0005C942 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvbanInfo.swift; sourceTree = "<group>"; };
+		8E46AED21EC8488D004A95D5 /* TPPersonInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPersonInfoCell.swift; sourceTree = "<group>"; };
+		8E46AED31EC8488D004A95D5 /* TPPersonInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPPersonInfoCell.xib; sourceTree = "<group>"; };
+		8E46AED61EC84F78004A95D5 /* TPTravelInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPTravelInfoCell.swift; sourceTree = "<group>"; };
+		8E46AED71EC84F78004A95D5 /* TPTravelInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPTravelInfoCell.xib; sourceTree = "<group>"; };
+		8E46AEDC1EC85313004A95D5 /* TPDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDetailInfoCell.swift; sourceTree = "<group>"; };
+		8E46AEDD1EC85313004A95D5 /* TPDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPDetailInfoCell.xib; sourceTree = "<group>"; };
+		8E46AEE01EC8534C004A95D5 /* TPGeoInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPGeoInfoCell.swift; sourceTree = "<group>"; };
+		8E46AEE11EC8534C004A95D5 /* TPGeoInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPGeoInfoCell.xib; sourceTree = "<group>"; };
 		8E48FD191EADA78900EA132C /* TravelPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E48FD1C1EADA78900EA132C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E48FD1E1EADA78900EA132C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +74,7 @@
 		8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalViewController.swift; sourceTree = "<group>"; };
 		8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalTabelViewController.swift; sourceTree = "<group>"; };
 		8EB6C7731EB0DA900069578A /* IMListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMListViewController.swift; sourceTree = "<group>"; };
+		8ECBDF5E1EC747680025579E /* TPDetailToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDetailToolBar.swift; sourceTree = "<group>"; };
 		8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConversationViewController.swift; sourceTree = "<group>"; };
 		A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +105,7 @@
 			children = (
 				8EA4C0661EB9E6C1003047E7 /* Controller */,
 				8EA4C0651EB9E6BC003047E7 /* View */,
+				8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */,
 			);
 			name = TravelPal;
 			sourceTree = "<group>";
@@ -156,7 +177,18 @@
 		8EA4C0651EB9E6BC003047E7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E5C7A461EBB6F9A000E64F7 /* DemoCell.swift */,
+				8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */,
 				8E10915E1EB717CF006E4CCD /* HeadSegmentView.swift */,
+				8ECBDF5E1EC747680025579E /* TPDetailToolBar.swift */,
+				8E46AED21EC8488D004A95D5 /* TPPersonInfoCell.swift */,
+				8E46AED31EC8488D004A95D5 /* TPPersonInfoCell.xib */,
+				8E46AED61EC84F78004A95D5 /* TPTravelInfoCell.swift */,
+				8E46AED71EC84F78004A95D5 /* TPTravelInfoCell.xib */,
+				8E46AEDC1EC85313004A95D5 /* TPDetailInfoCell.swift */,
+				8E46AEDD1EC85313004A95D5 /* TPDetailInfoCell.xib */,
+				8E46AEE01EC8534C004A95D5 /* TPGeoInfoCell.swift */,
+				8E46AEE11EC8534C004A95D5 /* TPGeoInfoCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -168,8 +200,6 @@
 				8E3E350C1EAE1C170005C942 /* MapViewController.swift */,
 				8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */,
 				8E5C7A451EBB6F9A000E64F7 /* MainTableViewController.swift */,
-				8E5C7A461EBB6F9A000E64F7 /* DemoCell.swift */,
-				8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */,
 				8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */,
 			);
 			name = Controller;
@@ -252,8 +282,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E46AED51EC8488D004A95D5 /* TPPersonInfoCell.xib in Resources */,
+				8E46AED91EC84F78004A95D5 /* TPTravelInfoCell.xib in Resources */,
+				8E46AEE31EC8534C004A95D5 /* TPGeoInfoCell.xib in Resources */,
 				8E48FD2A1EADA78900EA132C /* LaunchScreen.storyboard in Resources */,
 				8E48FD271EADA78900EA132C /* Assets.xcassets in Resources */,
+				8E46AEDF1EC85313004A95D5 /* TPDetailInfoCell.xib in Resources */,
 				8E48FD221EADA78900EA132C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,19 +350,25 @@
 				8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */,
 				8E5C7A4C1EBB6FD3000E64F7 /* FoldingCell.swift in Sources */,
 				8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */,
+				8E46AEE21EC8534C004A95D5 /* TPGeoInfoCell.swift in Sources */,
 				8EA4C0721EB9EAB6003047E7 /* TravelPalTabelViewController.swift in Sources */,
+				8E46AED41EC8488D004A95D5 /* TPPersonInfoCell.swift in Sources */,
 				8E10915D1EB71774006E4CCD /* Consts.swift in Sources */,
 				8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */,
 				8E48FD251EADA78900EA132C /* TravelPal.xcdatamodeld in Sources */,
 				8E3E35161EAE3F9F0005C942 /* Router.swift in Sources */,
+				8ECBDF5F1EC747680025579E /* TPDetailToolBar.swift in Sources */,
 				8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */,
 				8E48FD1F1EADA78900EA132C /* ViewController.swift in Sources */,
 				8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */,
 				8E1091611EB718C6006E4CCD /* UIView+Ext.swift in Sources */,
+				8E46AED11EC8430B004A95D5 /* LvbanInfo.swift in Sources */,
+				8E46AED81EC84F78004A95D5 /* TPTravelInfoCell.swift in Sources */,
 				8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */,
 				8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */,
 				8E5C7A471EBB6F9A000E64F7 /* MainTableViewController.swift in Sources */,
 				8E5C7A481EBB6F9A000E64F7 /* DemoCell.swift in Sources */,
+				8E46AEDE1EC85313004A95D5 /* TPDetailInfoCell.swift in Sources */,
 				8E3E350D1EAE1C170005C942 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

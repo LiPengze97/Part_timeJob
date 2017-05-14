@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol RequestJumpDelegate {
+    func requestJump()
+}
+
 class DemoCell: FoldingCell {
-  
+    var delegate: RequestJumpDelegate?
+    
   @IBOutlet weak var closeNumberLabel: UILabel!
   @IBOutlet weak var openNumberLabel: UILabel!
+    @IBOutlet weak var requsetBtn: UIButton!
   
   var number: Int = 0 {
     didSet {
@@ -23,21 +29,19 @@ class DemoCell: FoldingCell {
     
     foregroundView.layer.cornerRadius = 10
     foregroundView.layer.masksToBounds = true
-    
     super.awakeFromNib()
   }
   
+
   override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
     
     let durations = [0.26, 0.2, 0.2]
     return durations[itemIndex]
   }
+    
+    @IBAction func requestTapped(_ sender: Any) {
+            delegate?.requestJump()
+    }
+
 }
 
-// MARK: Actions
-extension DemoCell {
-  
-  @IBAction func buttonHandler(_ sender: AnyObject) {
-    print("tap")
-  }
-}

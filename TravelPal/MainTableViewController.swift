@@ -27,8 +27,9 @@ class MainTableViewController: UITableViewController {
     
     let kCloseCellHeight: CGFloat = 179
     let kOpenCellHeight: CGFloat = 488
-
+    
     let kRowsCount = 10
+    var vview = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 242))
     
     var cellHeights = [CGFloat]()
 
@@ -38,6 +39,7 @@ class MainTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         createCellHeightsArray()
         self.tableView.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
         
     }
     
@@ -109,4 +111,5 @@ class MainTableViewController: UITableViewController {
 
         
     }
+
 }

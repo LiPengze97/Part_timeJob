@@ -15,9 +15,12 @@ open class UserManager{
     var nickName = ""
     var phone = ""
     var school = ""
-    var avtar = ""
+    var avtar = ""//头像
     var type = ""
     var username = ""
+    var sex = 0
+    var credit = 3//用户信誉
+    
     fileprivate var password = ""
     
     open static let sharedInstance: UserManager = UserManager()

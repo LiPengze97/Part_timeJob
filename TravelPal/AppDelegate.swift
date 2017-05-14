@@ -43,10 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabbarVC.viewControllers = [map_naviController,IM_naviController]
         
         let tt = TravelPalViewController()
-        
-        let stb = UIStoryboard.init(name: "Main", bundle: nil)
-        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
-        self.window?.rootViewController = ma
+        let ttt = TravelPalDetailViewController()
+//        let stb = UIStoryboard.init(name: "Main", bundle: nil)
+//        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
+        let tt_naviController = UINavigationController(rootViewController: ttt)
+        self.window?.rootViewController = tt_naviController
         return true
     }
 

@@ -9,9 +9,11 @@
 import UIKit
 
 class TravelPalViewController: UIViewController {
-//    var vcArray = Array<MainTableViewController>()
+    var vcArray = Array<MainTableViewController>()
     var tableViewArray = Array<UITableView>()
     var currentTabelView = UITableView()
+    var stb = UIStoryboard.init(name: "Main", bundle: nil)
+    
     
     var lastTableViewOffsetY = CGFloat()
     
@@ -29,29 +31,38 @@ class TravelPalViewController: UIViewController {
         scroll.showsHorizontalScrollIndicator = false
         scroll.isPagingEnabled = true
         scroll.delegate = self
-        for i in 0..<headSegmentArray.count {
-//            let tptVC = MainTableViewController()
-           /* tptVC.view.frame = CGRect.init(x: SCREEN_WIDTH*CGFloat(i), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
-            scroll.addSubview(tptVC.view)
-            self.vcArray.append(tptVC)
-            self.tableViewArray.append(tptVC.tableView)
-            
-            tptVC.tableView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)*/
-        }
         scroll.contentSize = CGSize.init(width: CGFloat(headSegmentArray.count)*SCREEN_WIDTH, height: SCREEN_HEIGHT)
         return scroll
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.isHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.addSubview(self.bottomScroll)
-        
+        for i in 0..<headSegmentArray.count {
+            let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController") as! MainTableViewController
+            ma.view.frame = CGRect.init(x: SCREEN_WIDTH*CGFloat(i), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
+            ma.vview.backgroundColor = UIColor.clear
+            ma.tableView.tableHeaderView = ma.vview
+            self.bottomScroll.addSubview(ma.tableView)
+            self.vcArray.append(ma)
+            self.tableViewArray.append(ma.tableView)
+            for j in 0..<ma.tableView.visibleCells.count {
+                (ma.tableView.visibleCells[j] as! DemoCell).delegate = self
+            }
+            ma.tableView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
+        }
         self.view.addSubview(mapView)
         self.view.addSubview(headSegmentView)
+        self.headSegmentView.sendData(titles: headSegmentArray)
+        self.mapView.frame = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 200);
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -71,7 +82,7 @@ class TravelPalViewController: UIViewController {
         
         if ( tableViewoffsetY >= 0 && tableViewoffsetY <= 136) {
             self.headSegmentView.frame = CGRect.init(x: 0, y: 200-tableViewoffsetY, width: SCREEN_WIDTH, height: 40)
-            self.mapView.frame = CGRect.init(x: 0, y: 0-tableViewoffsetY, width: SCREEN_WIDTH, height: 200);
+            self.mapView.frame = CGRect.init(x: 0, y: 0-tableViewoffsetY, width: SCREEN_WIDTH, height: 200)
             
         }else if( tableViewoffsetY < 0){
             self.headSegmentView.frame = CGRect.init(x: 0, y: 200, width: SCREEN_WIDTH, height:40);
@@ -83,19 +94,22 @@ class TravelPalViewController: UIViewController {
         }
 
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
     }
-    */
+    
 }
+
 
 extension TravelPalViewController: HeadSegmentViewDelegate {
     func clickSegement(index: NSInteger) {
+        print("ssss")
         self.currentTabelView = self.tableViewArray[0]
         for table:UITableView in self.tableViewArray{
             if(self.lastTableViewOffsetY >= 0 && self.lastTableViewOffsetY<=136){
@@ -112,6 +126,10 @@ extension TravelPalViewController: HeadSegmentViewDelegate {
     }
     
     
+}
+
+extension MainTableViewController{
+
 }
 
 extension TravelPalViewController: UIScrollViewDelegate{
@@ -135,3 +153,13 @@ extension TravelPalViewController: UIScrollViewDelegate{
 
     }
 }
+
+extension TravelPalViewController: RequestJumpDelegate{
+    func requestJump() {
+        
+        let tpd = TravelPalDetailViewController()
+        self.navigationController?.pushViewController(tpd, animated: true)
+    }
+}
+
+

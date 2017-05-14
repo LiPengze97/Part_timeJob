@@ -621,7 +621,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="buttonHandler:" destination="3Pz-mx-VLl" eventType="touchUpInside" id="sRP-S7-7ah"/>
+                                                                <action selector="requestTapped:" destination="3Pz-mx-VLl" eventType="touchUpInside" id="mgA-ak-tnX"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 people have sent a request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQF-w2-AtW">
@@ -696,6 +696,7 @@
                                     <outlet property="foregroundView" destination="zfk-4u-96R" id="eAA-nv-E7U"/>
                                     <outlet property="foregroundViewTop" destination="ESf-BX-JQ3" id="br8-Nn-Gh1"/>
                                     <outlet property="openNumberLabel" destination="kTb-uE-nwp" id="hvb-3o-3x0"/>
+                                    <outlet property="requsetBtn" destination="PNR-5y-NZ4" id="srR-f3-PU3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -710,6 +711,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i8n-z5-UYm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="936" y="116"/>
+        </scene>
+        <!--Travel Pal Detail View Controller-->
+        <scene sceneID="xqd-Xk-lO1">
+            <objects>
+                <viewController id="Mbc-2a-sQz" customClass="TravelPalDetailViewController" customModule="TravelPal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qEn-hn-d5j"/>
+                        <viewControllerLayoutGuide type="bottom" id="7I0-rq-qdL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Snh-wB-TrG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Qv-ru-fpg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2117" y="116"/>
         </scene>
     </scenes>
     <resources>
