@@ -13,4 +13,14 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
 let headSegmentArray = ["推荐","最新","热门","礼物","美食","生活","设计感","家居","数码","阅读","学生党","上班族","美妆","护理","运动户外","健康"]
 
-
+open class BannerItem: NSObject {
+    
+    public var image: UIImage?, title: String?
+    
+    static func item(title: String, image: UIImage) -> BannerItem {
+        let item = BannerItem()
+        item.title = title
+        item.image = image
+        return item
+    }
+}

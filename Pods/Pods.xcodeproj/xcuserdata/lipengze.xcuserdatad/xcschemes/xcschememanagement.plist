@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>OverlayController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TravelPal.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2ADAEF871A9FB77754B66BF5A155198E</key>
+		<key>413D45075658040964A95B42EFA55CB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C3A5FBE117D896C4BDE4D197F496E01</key>
+		<key>58B0CAD3DF88CA34073FB7CDBE2DC510</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E74384D3B29B4E46AF71BDD871765312</key>
 		<dict>
 			<key>primary</key>
 			<true/>

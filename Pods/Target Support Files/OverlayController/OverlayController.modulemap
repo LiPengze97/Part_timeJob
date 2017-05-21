@@ -1,0 +1,6 @@
+framework module OverlayController {
+  umbrella header "OverlayController-umbrella.h"
+
+  export *
+  module * { export * }
+}
