@@ -7,13 +7,67 @@
 //
 
 import UIKit
-
-class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate {
+//本类为发布寻找旅伴的页面
+class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
+    //发布按钮
     @IBOutlet weak var postBtn: UIButton!
+    //所有的Textfield
+    @IBOutlet weak var fromText: UITextField!
+    @IBOutlet weak var destText: UITextField!
+    @IBOutlet weak var deptTimeText: UITextField!
+    @IBOutlet weak var backTimeText: UITextField!
+    @IBOutlet weak var havePeopleText: UITextField!
+    @IBOutlet weak var planPeopleText: UITextField!
+    @IBOutlet weak var budgetText: UITextField!
+    @IBOutlet weak var transportationText: UITextField!
+    @IBOutlet weak var userLoactionText: UITextField!
+    
+    //Textview及其上面的label
+    @IBOutlet weak var textviewLabel: UILabel!
+    @IBOutlet weak var detailText: UITextView!
+    //datePicker日期选择器
+    var datePicker = UIDatePicker.init()
+    
+    
     var locationManager:AMapLocationManager? = nil
     let keys = ["简要信息","详细信息","位置信息"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailText.delegate = self
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.minuteInterval = 1
+        datePicker.tag = 1
+        deptTimeText.tag = 2
+        backTimeText.tag = 3
+        datePicker.addTarget(self, action: #selector(TPPosterTableViewController.setTime), for: .valueChanged)
+        deptTimeText.delegate = self
+        backTimeText.delegate = self
+        setLocation()
+        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        tableView.separatorStyle = .none
+        postBtn.layer.cornerRadius = 10
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func setTime(datePicker:UIDatePicker){
+        let dateformat = DateFormatter.init()
+        let date = datePicker.date
+        dateformat.dateFormat = "yyyy-MM-dd HH:mm"
+        let str = dateformat.string(from: date)
+        
+    }
+    
+    //MARK:初始化页面需要的方法
+    func setLocation(){
         locationManager = AMapLocationManager()
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -44,28 +98,29 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             }
             
             if let location = location {
-                NSLog("location:%@", location)
+                NSLog("🐶location:%@", location)
             }
             
             if let reGeocode = reGeocode {
-                NSLog("reGeocode:%@", reGeocode)
+                NSLog("🐥reGeocode:%@", reGeocode)
+                self?.userLoactionText.text = reGeocode.aoiName
+                
             }
         })
-        tableView.tableFooterView = UIView.init(frame: CGRect.zero)
-        tableView.separatorStyle = .none
-        postBtn.layer.cornerRadius = 10
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func resignResponder(){
+        budgetText.resignFirstResponder()
+        fromText.resignFirstResponder()
+        destText.resignFirstResponder()
+        havePeopleText.resignFirstResponder()
+        planPeopleText.resignFirstResponder()
+        budgetText.resignFirstResponder()
+        transportationText.resignFirstResponder()
+        userLoactionText.resignFirstResponder()
     }
     
+    //MARK:TablviewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 20))
         if section != 3{
@@ -95,6 +150,44 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    //MARK: TextviewDelegate
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == ""{
+            textviewLabel.isHidden = false
+        }else{
+            textviewLabel.isHidden = true
+        }
+        
+        if text == "\n" {
+            return false
+        }
+        return true
+    }
+    //MARK:TextfileDelegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if(textField.tag != 2 || textField.tag != 3){
+            if (self.datePicker.superview != nil){
+                self.datePicker.removeFromSuperview()
+                }
+            return true
+        }
+        
+        if self.datePicker.superview == nil{
+            self.resignFirstResponder()
+            
+            //动画展示需要
+            self.datePicker.frame = CGRect.init(x: 0, y: SCREEN_HEIGHT, width: SCREEN_WIDTH, height: 216)
+            self.view.addSubview(datePicker)
+            
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(0.3)
+            UIView.setAnimationCurve(.easeOut)
+            self.datePicker.bottom -= self.datePicker.height
+            UIView.commitAnimations()
+        }
+        return true
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
