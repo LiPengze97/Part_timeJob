@@ -8,6 +8,7 @@ PODS:
   - AMapSearch (5.0.0):
     - AMapFoundation (~> 1.2)
   - OverlayController (0.0.2)
+  - RAMAnimatedTabBarController (2.0.13)
   - RongCloudIM/IMKit (2.8.10):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.8.10)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - AMapLocation
   - AMapSearch
   - OverlayController
+  - RAMAnimatedTabBarController (~> 2.0.13)
   - RongCloudIM/IMKit (~> 2.8.3)
   - RongCloudIM/IMLib (~> 2.8.3)
   - SwiftyJSON
@@ -30,9 +32,10 @@ SPEC CHECKSUMS:
   AMapLocation: 6016f0e09c127461c9c8e36945f34c0f037ad962
   AMapSearch: cf7fd100d533995822d92c22586abfaf7cdf6eef
   OverlayController: f8300b6f3a2bb3778f431668540d07cb4051b6a7
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   RongCloudIM: 654e9893b94f6e5a085e832335532ed2a8ea5930
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 4e54d3456680fa063f477cf32804ea1a0f491420
+PODFILE CHECKSUM: 9ebf57e2df7a911890b8e1f54af81e483e78e68e
 
 COCOAPODS: 1.2.0

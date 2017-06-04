@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 //本类为发布寻找旅伴的页面
 class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
     //发布按钮

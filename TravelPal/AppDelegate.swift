@@ -47,8 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let qq = TravelPostViewController()
 //        let stb = UIStoryboard.init(name: "Main", bundle: nil)
 //        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
-        //let tt_naviController = UINavigationController(rootViewController: ttt)
-        //self.window?.rootViewController = qq
+        let tt_naviController = UINavigationController(rootViewController: tt)
+        self.window?.rootViewController = tt_naviController
         return true
     }
 

@@ -11,6 +11,13 @@
 		8E10915D1EB71774006E4CCD /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10915C1EB71774006E4CCD /* Consts.swift */; };
 		8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10915E1EB717CF006E4CCD /* HeadSegmentView.swift */; };
 		8E1091611EB718C6006E4CCD /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1091601EB718C6006E4CCD /* UIView+Ext.swift */; };
+		8E3285A11EDF0EF200178785 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859B1EDF0EF200178785 /* NSDate+Extension.m */; };
+		8E3285A21EDF0EF200178785 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859D1EDF0EF200178785 /* UIView+Extension.m */; };
+		8E3285A31EDF0EF200178785 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859F1EDF0EF200178785 /* WSDatePickerView.m */; };
+		8E3285A41EDF0EF200178785 /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3285A01EDF0EF200178785 /* WSDatePickerView.xib */; };
+		8E3285A51EDF101700178785 /* NSDate+Extension.h in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859A1EDF0EF200178785 /* NSDate+Extension.h */; };
+		8E3285A61EDF101700178785 /* UIView+Extension.h in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859C1EDF0EF200178785 /* UIView+Extension.h */; };
+		8E3285A71EDF101700178785 /* WSDatePickerView.h in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859E1EDF0EF200178785 /* WSDatePickerView.h */; };
 		8E3E350D1EAE1C170005C942 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E350C1EAE1C170005C942 /* MapViewController.swift */; };
 		8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */; };
 		8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35131EAE3F970005C942 /* UserManager.swift */; };
@@ -35,11 +42,27 @@
 		8E5C7A4C1EBB6FD3000E64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */; };
 		8E7035C71ECC945900AA8E36 /* OverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7035C61ECC945900AA8E36 /* OverlayController.swift */; };
 		8E7BA4861ED18C9D00969F3C /* TPPosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */; };
+		8E91455B1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */; };
 		8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */; };
 		8EA4C0721EB9EAB6003047E7 /* TravelPalTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */; };
 		8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6C7731EB0DA900069578A /* IMListViewController.swift */; };
 		8EC842951ED5C6B10078D674 /* TPFindPalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC842941ED5C6B10078D674 /* TPFindPalTableViewController.swift */; };
 		8ECBDF5F1EC747680025579E /* TPDetailToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECBDF5E1EC747680025579E /* TPDetailToolBar.swift */; };
+		8EE1F28B1EE1A10600B0DD1E /* HELoopPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2861EE1A10600B0DD1E /* HELoopPageView.swift */; };
+		8EE1F28C1EE1A10600B0DD1E /* tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2871EE1A10600B0DD1E /* tableview.swift */; };
+		8EE1F28D1EE1A10600B0DD1E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2881EE1A10600B0DD1E /* SearchViewController.swift */; };
+		8EE1F28E1EE1A10600B0DD1E /* BGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2891EE1A10600B0DD1E /* BGButton.swift */; };
+		8EE1F28F1EE1A10600B0DD1E /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F28A1EE1A10600B0DD1E /* InformationViewController.swift */; };
+		8EE1F29B1EE1A2E400B0DD1E /* allDingDan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2951EE1A2E400B0DD1E /* allDingDan.swift */; };
+		8EE1F29C1EE1A2E400B0DD1E /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2961EE1A2E400B0DD1E /* PersonalViewController.swift */; };
+		8EE1F29D1EE1A2E400B0DD1E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2971EE1A2E400B0DD1E /* DetailViewController.swift */; };
+		8EE1F29E1EE1A2E400B0DD1E /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2981EE1A2E400B0DD1E /* SignViewController.swift */; };
+		8EE1F29F1EE1A2E400B0DD1E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2991EE1A2E400B0DD1E /* RegisterViewController.swift */; };
+		8EE1F2A01EE1A2E400B0DD1E /* forgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F29A1EE1A2E400B0DD1E /* forgetViewController.swift */; };
+		8EE1F2A41EE1A2F700B0DD1E /* DingDanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A21EE1A2F700B0DD1E /* DingDanCell.swift */; };
+		8EE1F2A51EE1A2F700B0DD1E /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A31EE1A2F700B0DD1E /* ProductTableViewCell.swift */; };
+		8EE1F2A81EE1A30300B0DD1E /* myButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A61EE1A30300B0DD1E /* myButton.swift */; };
+		8EE1F2A91EE1A30300B0DD1E /* myLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A71EE1A30300B0DD1E /* myLayout.swift */; };
 		8EE6D5C71ECEEA2900C6F0EA /* TravelPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE6D5C61ECEEA2900C6F0EA /* TravelPostViewController.swift */; };
 		8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +73,13 @@
 		8E10915C1EB71774006E4CCD /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		8E10915E1EB717CF006E4CCD /* HeadSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadSegmentView.swift; sourceTree = "<group>"; };
 		8E1091601EB718C6006E4CCD /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		8E32859A1EDF0EF200178785 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extension.h"; path = "WSDaePickerView/NSDate+Extension.h"; sourceTree = "<group>"; };
+		8E32859B1EDF0EF200178785 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extension.m"; path = "WSDaePickerView/NSDate+Extension.m"; sourceTree = "<group>"; };
+		8E32859C1EDF0EF200178785 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extension.h"; path = "WSDaePickerView/UIView+Extension.h"; sourceTree = "<group>"; };
+		8E32859D1EDF0EF200178785 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extension.m"; path = "WSDaePickerView/UIView+Extension.m"; sourceTree = "<group>"; };
+		8E32859E1EDF0EF200178785 /* WSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WSDatePickerView.h; path = WSDaePickerView/WSDatePickerView.h; sourceTree = "<group>"; };
+		8E32859F1EDF0EF200178785 /* WSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WSDatePickerView.m; path = WSDaePickerView/WSDatePickerView.m; sourceTree = "<group>"; };
+		8E3285A01EDF0EF200178785 /* WSDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WSDatePickerView.xib; path = WSDaePickerView/WSDatePickerView.xib; sourceTree = "<group>"; };
 		8E3E350C1EAE1C170005C942 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8E3E350E1EAE1C930005C942 /* TravelPal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TravelPal-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalDetailViewController.swift; sourceTree = "<group>"; };
@@ -77,11 +107,27 @@
 		8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		8E7035C61ECC945900AA8E36 /* OverlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayController.swift; sourceTree = "<group>"; };
 		8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPosterTableViewController.swift; sourceTree = "<group>"; };
+		8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPoster2TableViewController.swift; sourceTree = "<group>"; };
 		8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalViewController.swift; sourceTree = "<group>"; };
 		8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalTabelViewController.swift; sourceTree = "<group>"; };
 		8EB6C7731EB0DA900069578A /* IMListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMListViewController.swift; sourceTree = "<group>"; };
 		8EC842941ED5C6B10078D674 /* TPFindPalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPFindPalTableViewController.swift; sourceTree = "<group>"; };
 		8ECBDF5E1EC747680025579E /* TPDetailToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDetailToolBar.swift; sourceTree = "<group>"; };
+		8EE1F2861EE1A10600B0DD1E /* HELoopPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HELoopPageView.swift; sourceTree = "<group>"; };
+		8EE1F2871EE1A10600B0DD1E /* tableview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableview.swift; sourceTree = "<group>"; };
+		8EE1F2881EE1A10600B0DD1E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		8EE1F2891EE1A10600B0DD1E /* BGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGButton.swift; sourceTree = "<group>"; };
+		8EE1F28A1EE1A10600B0DD1E /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		8EE1F2951EE1A2E400B0DD1E /* allDingDan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allDingDan.swift; sourceTree = "<group>"; };
+		8EE1F2961EE1A2E400B0DD1E /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
+		8EE1F2971EE1A2E400B0DD1E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8EE1F2981EE1A2E400B0DD1E /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
+		8EE1F2991EE1A2E400B0DD1E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		8EE1F29A1EE1A2E400B0DD1E /* forgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = forgetViewController.swift; sourceTree = "<group>"; };
+		8EE1F2A21EE1A2F700B0DD1E /* DingDanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DingDanCell.swift; sourceTree = "<group>"; };
+		8EE1F2A31EE1A2F700B0DD1E /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		8EE1F2A61EE1A30300B0DD1E /* myButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myButton.swift; sourceTree = "<group>"; };
+		8EE1F2A71EE1A30300B0DD1E /* myLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myLayout.swift; sourceTree = "<group>"; };
 		8EE6D5C61ECEEA2900C6F0EA /* TravelPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPostViewController.swift; sourceTree = "<group>"; };
 		8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConversationViewController.swift; sourceTree = "<group>"; };
 		A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +167,7 @@
 		8E10915A1EB713D6006E4CCD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				8E3285991EDF0EEA00178785 /* date */,
 				8E3E35131EAE3F970005C942 /* UserManager.swift */,
 				8E3E35151EAE3F9F0005C942 /* Router.swift */,
 				8E3E350E1EAE1C930005C942 /* TravelPal-Bridging-Header.h */,
@@ -146,6 +193,20 @@
 			name = Tabbar;
 			sourceTree = "<group>";
 		};
+		8E3285991EDF0EEA00178785 /* date */ = {
+			isa = PBXGroup;
+			children = (
+				8E32859A1EDF0EF200178785 /* NSDate+Extension.h */,
+				8E32859B1EDF0EF200178785 /* NSDate+Extension.m */,
+				8E32859C1EDF0EF200178785 /* UIView+Extension.h */,
+				8E32859D1EDF0EF200178785 /* UIView+Extension.m */,
+				8E32859E1EDF0EF200178785 /* WSDatePickerView.h */,
+				8E32859F1EDF0EF200178785 /* WSDatePickerView.m */,
+				8E3285A01EDF0EF200178785 /* WSDatePickerView.xib */,
+			);
+			name = date;
+			sourceTree = "<group>";
+		};
 		8E48FD101EADA78900EA132C = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +228,8 @@
 		8E48FD1B1EADA78900EA132C /* TravelPal */ = {
 			isa = PBXGroup;
 			children = (
+				8EE1F2901EE1A16900B0DD1E /* Personnal */,
+				8EE1F2851EE1A0F400B0DD1E /* Travel */,
 				8E1091621EB72AC2006E4CCD /* Tabbar */,
 				8E10915B1EB713E2006E4CCD /* IM */,
 				8E10915A1EB713D6006E4CCD /* Tools */,
@@ -212,9 +275,55 @@
 				8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */,
 				8EE6D5C61ECEEA2900C6F0EA /* TravelPostViewController.swift */,
 				8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */,
+				8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */,
 				8EC842941ED5C6B10078D674 /* TPFindPalTableViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		8EE1F2851EE1A0F400B0DD1E /* Travel */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1F2861EE1A10600B0DD1E /* HELoopPageView.swift */,
+				8EE1F2871EE1A10600B0DD1E /* tableview.swift */,
+				8EE1F2881EE1A10600B0DD1E /* SearchViewController.swift */,
+				8EE1F2891EE1A10600B0DD1E /* BGButton.swift */,
+				8EE1F28A1EE1A10600B0DD1E /* InformationViewController.swift */,
+			);
+			name = Travel;
+			sourceTree = "<group>";
+		};
+		8EE1F2901EE1A16900B0DD1E /* Personnal */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1F2A11EE1A2EC00B0DD1E /* V */,
+				8EE1F2941EE1A2CF00B0DD1E /* C */,
+			);
+			name = Personnal;
+			sourceTree = "<group>";
+		};
+		8EE1F2941EE1A2CF00B0DD1E /* C */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1F2951EE1A2E400B0DD1E /* allDingDan.swift */,
+				8EE1F2961EE1A2E400B0DD1E /* PersonalViewController.swift */,
+				8EE1F2971EE1A2E400B0DD1E /* DetailViewController.swift */,
+				8EE1F2981EE1A2E400B0DD1E /* SignViewController.swift */,
+				8EE1F2991EE1A2E400B0DD1E /* RegisterViewController.swift */,
+				8EE1F29A1EE1A2E400B0DD1E /* forgetViewController.swift */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		8EE1F2A11EE1A2EC00B0DD1E /* V */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1F2A21EE1A2F700B0DD1E /* DingDanCell.swift */,
+				8EE1F2A61EE1A30300B0DD1E /* myButton.swift */,
+				8EE1F2A71EE1A30300B0DD1E /* myLayout.swift */,
+				8EE1F2A31EE1A2F700B0DD1E /* ProductTableViewCell.swift */,
+			);
+			name = V;
 			sourceTree = "<group>";
 		};
 		AD6709B7DE80D7CECDC6B9D3 /* Frameworks */ = {
@@ -300,6 +409,7 @@
 				8E48FD2A1EADA78900EA132C /* LaunchScreen.storyboard in Resources */,
 				8E48FD271EADA78900EA132C /* Assets.xcassets in Resources */,
 				8E46AEDF1EC85313004A95D5 /* TPDetailInfoCell.xib in Resources */,
+				8E3285A41EDF0EF200178785 /* WSDatePickerView.xib in Resources */,
 				8E48FD221EADA78900EA132C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,9 +469,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3285A51EDF101700178785 /* NSDate+Extension.h in Sources */,
+				8E3285A61EDF101700178785 /* UIView+Extension.h in Sources */,
+				8E3285A71EDF101700178785 /* WSDatePickerView.h in Sources */,
+				8E3285A21EDF0EF200178785 /* UIView+Extension.m in Sources */,
 				8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */,
 				8E5C7A4C1EBB6FD3000E64F7 /* FoldingCell.swift in Sources */,
 				8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */,
+				8E91455B1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift in Sources */,
 				8EE6D5C71ECEEA2900C6F0EA /* TravelPostViewController.swift in Sources */,
 				8E46AEE21EC8534C004A95D5 /* TPGeoInfoCell.swift in Sources */,
 				8EC842951ED5C6B10078D674 /* TPFindPalTableViewController.swift in Sources */,
@@ -371,17 +486,34 @@
 				8E10915D1EB71774006E4CCD /* Consts.swift in Sources */,
 				8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */,
 				8E48FD251EADA78900EA132C /* TravelPal.xcdatamodeld in Sources */,
+				8EE1F29B1EE1A2E400B0DD1E /* allDingDan.swift in Sources */,
+				8EE1F28C1EE1A10600B0DD1E /* tableview.swift in Sources */,
 				8E3E35161EAE3F9F0005C942 /* Router.swift in Sources */,
 				8ECBDF5F1EC747680025579E /* TPDetailToolBar.swift in Sources */,
 				8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */,
 				8E48FD1F1EADA78900EA132C /* ViewController.swift in Sources */,
+				8EE1F29F1EE1A2E400B0DD1E /* RegisterViewController.swift in Sources */,
+				8EE1F28E1EE1A10600B0DD1E /* BGButton.swift in Sources */,
+				8EE1F28B1EE1A10600B0DD1E /* HELoopPageView.swift in Sources */,
 				8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */,
+				8EE1F29E1EE1A2E400B0DD1E /* SignViewController.swift in Sources */,
+				8EE1F2A01EE1A2E400B0DD1E /* forgetViewController.swift in Sources */,
 				8E1091611EB718C6006E4CCD /* UIView+Ext.swift in Sources */,
+				8EE1F29D1EE1A2E400B0DD1E /* DetailViewController.swift in Sources */,
+				8EE1F2A91EE1A30300B0DD1E /* myLayout.swift in Sources */,
+				8EE1F28F1EE1A10600B0DD1E /* InformationViewController.swift in Sources */,
 				8E46AED11EC8430B004A95D5 /* LvbanInfo.swift in Sources */,
+				8EE1F2A41EE1A2F700B0DD1E /* DingDanCell.swift in Sources */,
+				8EE1F28D1EE1A10600B0DD1E /* SearchViewController.swift in Sources */,
+				8EE1F29C1EE1A2E400B0DD1E /* PersonalViewController.swift in Sources */,
 				8E46AED81EC84F78004A95D5 /* TPTravelInfoCell.swift in Sources */,
 				8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */,
 				8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */,
+				8EE1F2A51EE1A2F700B0DD1E /* ProductTableViewCell.swift in Sources */,
+				8E3285A11EDF0EF200178785 /* NSDate+Extension.m in Sources */,
 				8E5C7A471EBB6F9A000E64F7 /* MainTableViewController.swift in Sources */,
+				8E3285A31EDF0EF200178785 /* WSDatePickerView.m in Sources */,
+				8EE1F2A81EE1A30300B0DD1E /* myButton.swift in Sources */,
 				8E5C7A481EBB6F9A000E64F7 /* DemoCell.swift in Sources */,
 				8E46AEDE1EC85313004A95D5 /* TPDetailInfoCell.swift in Sources */,
 				8E7BA4861ED18C9D00969F3C /* TPPosterTableViewController.swift in Sources */,
