@@ -97,9 +97,6 @@
 		  publishTime 发布时间
 		  detailed 详细信息
 		  valid 是否有效}]
------------------------------------------------------------------------------
-# 常规业务：
-	统一使用/user/common前缀
 ## 发布旅游信息：
 	addTourism[post]
 	参数：
@@ -112,6 +109,20 @@
 		transportation 交通工具 varchar(10)
 		detailed 详细信息 varchar(255)
 	返回值：
+## 报名旅游信息：
+	applyTourism[post]
+	参数：
+		id 要报名的旅游
+	返回值：
+## 删除旅游信息：
+	deleteTourism[post]	
+	参数：
+		id 要删除的旅游
+	返回值
+	
+-----------------------------------------------------------------------------
+# 常规业务：
+	统一使用/common前缀
 ## 获取旅游信息：
 	getTourisms[get]
 	参数：
@@ -128,14 +139,4 @@
 		  transportation 交通工具 varchar(10)
 		  publishTime 发布时间 TIMESTAMP
 		  detailed 详细信息 varchar(255)}]
-## 报名旅游信息：
-	applyTourism[post]
-	参数：
-		id 要报名的旅游
-	返回值：
-## 删除旅游信息：
-	deleteTourism[post]	
-	参数：
-		id 要删除的旅游
-	返回值
-	
+
