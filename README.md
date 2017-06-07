@@ -124,7 +124,7 @@
 # 常规业务：
 	统一使用/common前缀
 ## 获取旅游信息：
-	getTourisms[get]
+	getTourism[get]
 	参数：
 	返回值：
 		[{id 唯一标示 int(9) 自增
