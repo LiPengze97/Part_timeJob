@@ -69,12 +69,13 @@
 	参数：
 		id 手机号
 	返回值
-## 设置基本信息：
-	userInfo[post]
+## 设置,获取基本信息：
+	userInfo[post/get]
 	参数：
 		username 昵称
 		location 所在地
 	返回值
+	[注]获取基本信息不传参数
 ## 实名认证：
 	realName[post]
 	参数：
