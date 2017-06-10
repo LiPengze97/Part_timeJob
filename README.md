@@ -52,23 +52,6 @@
 -----------------------------------------------------------------------------
 # 用户相关：
 	统一使用/user前缀
-## 登录：
-	login[post]
-	参数：
-		id 手机号
-		password 密码
-	返回值：
-## 注册：
-	registered[post]
-	参数：
-		id 手机号
-		password 密码 （重复密码在前端进行验证）
-	返回值
-## 检查用户名是否存在：
-	exists[get]
-	参数：
-		id 手机号
-	返回值
 ## 设置,获取基本信息：
 	userInfo[post/get]
 	参数：
@@ -96,7 +79,8 @@
 		  transportation 交通工具
 		  publishTime 发布时间
 		  detailed 详细信息
-		  valid 是否有效}]
+		  valid 是否有效
+                  applyTime 报名时间}]
 ## 发布旅游信息：
 	addTourism[post]
 	参数：
@@ -139,4 +123,21 @@
 		  transportation 交通工具 varchar(10)
 		  publishTime 发布时间 TIMESTAMP
 		  detailed 详细信息 varchar(255)}]
+## 登录：
+	login[post]
+	参数：
+		id 手机号
+		password 密码
+	返回值：
+## 注册：
+	registered[post]
+	参数：
+		id 手机号
+		password 密码 （重复密码在前端进行验证）
+	返回值
+## 检查用户名是否存在：
+	exists[get]
+	参数：
+		id 手机号
+	返回值
 
