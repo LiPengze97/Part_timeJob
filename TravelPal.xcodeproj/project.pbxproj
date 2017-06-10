@@ -63,7 +63,11 @@
 		8EE1F2A51EE1A2F700B0DD1E /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A31EE1A2F700B0DD1E /* ProductTableViewCell.swift */; };
 		8EE1F2A81EE1A30300B0DD1E /* myButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A61EE1A30300B0DD1E /* myButton.swift */; };
 		8EE1F2A91EE1A30300B0DD1E /* myLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1F2A71EE1A30300B0DD1E /* myLayout.swift */; };
+		8EE52EF31EEC2E3C003C0116 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE52EF21EEC2E3C003C0116 /* empty.swift */; };
 		8EE6D5C71ECEEA2900C6F0EA /* TravelPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE6D5C61ECEEA2900C6F0EA /* TravelPostViewController.swift */; };
+		8EEBAAC41EE821F900AA1313 /* TPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBAAC31EE821F900AA1313 /* TPTabBarController.swift */; };
+		8EEBAAC61EE8223E00AA1313 /* TPFabuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBAAC51EE8223E00AA1313 /* TPFabuView.swift */; };
+		8EEBAAC81EE8346D00AA1313 /* TPBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */; };
 		8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -128,7 +132,11 @@
 		8EE1F2A31EE1A2F700B0DD1E /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		8EE1F2A61EE1A30300B0DD1E /* myButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myButton.swift; sourceTree = "<group>"; };
 		8EE1F2A71EE1A30300B0DD1E /* myLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myLayout.swift; sourceTree = "<group>"; };
+		8EE52EF21EEC2E3C003C0116 /* empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = empty.swift; sourceTree = "<group>"; };
 		8EE6D5C61ECEEA2900C6F0EA /* TravelPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPostViewController.swift; sourceTree = "<group>"; };
+		8EEBAAC31EE821F900AA1313 /* TPTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPTabBarController.swift; sourceTree = "<group>"; };
+		8EEBAAC51EE8223E00AA1313 /* TPFabuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPFabuView.swift; sourceTree = "<group>"; };
+		8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPBannerView.swift; sourceTree = "<group>"; };
 		8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConversationViewController.swift; sourceTree = "<group>"; };
 		A06FEA187D5B982ACD7948DB /* Pods-TravelPal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +181,8 @@
 				8E3E350E1EAE1C930005C942 /* TravelPal-Bridging-Header.h */,
 				8E10915C1EB71774006E4CCD /* Consts.swift */,
 				8E1091601EB718C6006E4CCD /* UIView+Ext.swift */,
+				8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */,
+				8EE52EF21EEC2E3C003C0116 /* empty.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -189,6 +199,8 @@
 		8E1091621EB72AC2006E4CCD /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				8EEBAAC31EE821F900AA1313 /* TPTabBarController.swift */,
+				8EEBAAC51EE8223E00AA1313 /* TPFabuView.swift */,
 			);
 			name = Tabbar;
 			sourceTree = "<group>";
@@ -235,7 +247,6 @@
 				8E10915A1EB713D6006E4CCD /* Tools */,
 				8E1091591EB713BC006E4CCD /* TravelPal */,
 				8E48FD1C1EADA78900EA132C /* AppDelegate.swift */,
-				8E48FD1E1EADA78900EA132C /* ViewController.swift */,
 				8E48FD201EADA78900EA132C /* Main.storyboard */,
 				8E48FD261EADA78900EA132C /* Assets.xcassets */,
 				8E48FD281EADA78900EA132C /* LaunchScreen.storyboard */,
@@ -289,6 +300,7 @@
 				8EE1F2881EE1A10600B0DD1E /* SearchViewController.swift */,
 				8EE1F2891EE1A10600B0DD1E /* BGButton.swift */,
 				8EE1F28A1EE1A10600B0DD1E /* InformationViewController.swift */,
+				8E48FD1E1EADA78900EA132C /* ViewController.swift */,
 			);
 			name = Travel;
 			sourceTree = "<group>";
@@ -471,7 +483,9 @@
 			files = (
 				8E3285A51EDF101700178785 /* NSDate+Extension.h in Sources */,
 				8E3285A61EDF101700178785 /* UIView+Extension.h in Sources */,
+				8EEBAAC81EE8346D00AA1313 /* TPBannerView.swift in Sources */,
 				8E3285A71EDF101700178785 /* WSDatePickerView.h in Sources */,
+				8EEBAAC61EE8223E00AA1313 /* TPFabuView.swift in Sources */,
 				8E3285A21EDF0EF200178785 /* UIView+Extension.m in Sources */,
 				8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */,
 				8E5C7A4C1EBB6FD3000E64F7 /* FoldingCell.swift in Sources */,
@@ -486,6 +500,7 @@
 				8E10915D1EB71774006E4CCD /* Consts.swift in Sources */,
 				8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */,
 				8E48FD251EADA78900EA132C /* TravelPal.xcdatamodeld in Sources */,
+				8EEBAAC41EE821F900AA1313 /* TPTabBarController.swift in Sources */,
 				8EE1F29B1EE1A2E400B0DD1E /* allDingDan.swift in Sources */,
 				8EE1F28C1EE1A10600B0DD1E /* tableview.swift in Sources */,
 				8E3E35161EAE3F9F0005C942 /* Router.swift in Sources */,
@@ -509,6 +524,7 @@
 				8E46AED81EC84F78004A95D5 /* TPTravelInfoCell.swift in Sources */,
 				8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */,
 				8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */,
+				8EE52EF31EEC2E3C003C0116 /* empty.swift in Sources */,
 				8EE1F2A51EE1A2F700B0DD1E /* ProductTableViewCell.swift in Sources */,
 				8E3285A11EDF0EF200178785 /* NSDate+Extension.m in Sources */,
 				8E5C7A471EBB6F9A000E64F7 /* MainTableViewController.swift in Sources */,

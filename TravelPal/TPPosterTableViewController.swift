@@ -12,6 +12,8 @@ import UIKit
 class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
     //发布按钮
     @IBOutlet weak var postBtn: UIButton!
+    //取消按钮
+    @IBOutlet weak var cancelBtn: UIButton!
     //所有的Textfield
     @IBOutlet weak var fromText: UITextField!
     @IBOutlet weak var destText: UITextField!
@@ -47,6 +49,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         tableView.tableFooterView = UIView.init(frame: CGRect.zero)
         tableView.separatorStyle = .none
         postBtn.layer.cornerRadius = 10
+        cancelBtn.layer.cornerRadius = 10
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -189,6 +192,11 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             UIView.commitAnimations()
         }
         return true
+    }
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true) { 
+            //TODO: 加HUD
+        }
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

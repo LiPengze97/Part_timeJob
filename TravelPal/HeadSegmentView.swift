@@ -29,7 +29,7 @@ class HeadSegmentView: UIView{
         self.addSubview(scroll)
         
         redlineView = UIView.init()
-        redlineView.backgroundColor = UIColor.red
+        redlineView.backgroundColor = UIColor.init(red: 13.0/255, green: 168.0/255, blue: 134.0/255, alpha: 1)
         scroll.addSubview(redlineView)
     }
     
@@ -44,7 +44,7 @@ class HeadSegmentView: UIView{
             let btn = UIButton.init(type: .custom)
             btn.setTitle(titles[i], for: .normal)
             btn.setTitleColor(UIColor.darkGray, for: .normal)
-            btn.setTitleColor(UIColor.red, for: .selected)
+            btn.setTitleColor(UIColor.init(red: 13.0/255, green: 168.0/255, blue: 134.0/255, alpha: 1), for: .selected)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
             
             let size = UIButton.sizeOfLabel(customMaxWidth: SCREEN_WIDTH, systemFontSize: 14.0, filledTextString: titles[i])

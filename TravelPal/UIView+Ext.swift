@@ -109,6 +109,36 @@ extension UIView {
         }
         
     }
+    
+    public var size: CGSize {
+        get { return self.frame.size }
+        set(size) {
+            var frame = self.frame
+            frame.size = size
+            self.frame = frame
+        }
+    }
+    
+    public var centerX: CGFloat {
+        get { return self.center.x }
+        set(centerX) {
+            self.center = CGPoint(x: centerX, y: self.center.y)
+        }
+    }
+    public var centerY: CGFloat {
+        get { return self.center.y }
+        set(centerY) {
+            self.center = CGPoint(x: self.centerX, y: centerY)
+        }
+    }
+    public var origin: CGPoint {
+        get { return self.frame.origin }
+        set(origin) {
+            var frame = self.frame
+            frame.origin = origin
+            self.frame = frame
+        }
+    }
 }
 
 extension UIButton{
@@ -122,5 +152,20 @@ extension UIButton{
         let size = label.frame.size
         
         return size
+    }
+}
+
+extension UIScreen {
+    static var width : CGFloat  {
+        return UIScreen.main.bounds.size.width
+    }
+    static var height : CGFloat  {
+        return UIScreen.main.bounds.size.height
+    }
+    static var size : CGSize  {
+        return UIScreen.main.bounds.size
+    }
+    static var size_swap : CGSize  {
+        return CGSize(width: height, height: width)
     }
 }

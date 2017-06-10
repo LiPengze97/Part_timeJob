@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
 //        self.window?.backgroundColor = UIColor.white
-        //高德地图
+//        高德地图
         AMapServices.shared().apiKey = "30e945acb2834ca1fb6e8de43ffefa4b"
         //网易云信
         RCIM.shared().initWithAppKey("8w7jv4qb78a3y")
@@ -31,24 +31,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }) { 
             print("Token出错")
         }
-        let map_VC = MapViewController()
-        let IM_VC = IMListViewController()
-        let map_naviController = UINavigationController(rootViewController: map_VC)
-        let IM_naviController = UINavigationController(rootViewController: IM_VC)
-        map_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        IM_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
+        let vc = TPTabBarController()
         
-        //tabbar
-        let tabbarVC = UITabBarController()
-        tabbarVC.viewControllers = [map_naviController,IM_naviController]
-        
-        let tt = TravelPalViewController()
-        let ttt = TravelPalDetailViewController()
-        let qq = TravelPostViewController()
+////        let map_VC = MapViewController()
+//        let IM_VC = IMListViewController()
+//        let map_naviController = UINavigationController(rootViewController: map_VC)
+//        let IM_naviController = UINavigationController(rootViewController: IM_VC)
+//        map_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+//        IM_naviController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
+//        
+//        //tabbar
+//        let tabbarVC = UITabBarController()
+//        tabbarVC.viewControllers = [map_naviController,IM_naviController]
+//        
+//        let tt = TravelPalViewController()
+//        let ttt = TravelPalDetailViewController()
+//        let qq = TravelPostViewController()
 //        let stb = UIStoryboard.init(name: "Main", bundle: nil)
 //        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
-        let tt_naviController = UINavigationController(rootViewController: tt)
-        self.window?.rootViewController = tt_naviController
+//        let tt_naviController = UINavigationController(rootViewController: tt)
+        let tt = TravelPalViewController()
+        self.window?.rootViewController = tt
         return true
     }
 

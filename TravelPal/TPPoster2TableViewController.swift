@@ -9,7 +9,10 @@
 import UIKit
 
 class TPPoster2TableViewController: UITableViewController {
-
+    //取消
+    @IBOutlet weak var cancelBtn: UIButton!
+    //发布
+    @IBOutlet weak var postBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +38,11 @@ class TPPoster2TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
+    }
+    @IBAction func cancelBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true) { 
+            //TODO:加HUD
+        }
     }
 
     /*
