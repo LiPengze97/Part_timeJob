@@ -25,9 +25,9 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 20, width: screenwidth, height: 44)
-        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(-40, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.backgroundColor = UIColor.init(red: 13.0/255, green: 168.0/255, blue: 134.0/255, alpha: 1)
+//        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 20, width: screenwidth, height: 44)
+//        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(-40, for: UIBarMetrics.default)
         
     }
     override func viewDidLoad() {
@@ -92,6 +92,8 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
         self.view.addSubview(collectionview)
     }
 
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

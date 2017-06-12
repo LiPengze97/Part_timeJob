@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,12 +42,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>077C134B20022EA2AEB127DE8D18B2B1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>530F1C497F1ABE58FD015FC074198934</key>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E955C20C2B4E51FCE745E312C9644C1</key>
+		<key>965699190112DDBD9B7864D091660DBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDEB7585D62DE3F0265E78940C74D601</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DAE5CCD2746E90345F694F6349490882</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE125B74FE33D8103A3FA4DCAC48E200</key>
 		<dict>
 			<key>primary</key>
 			<true/>

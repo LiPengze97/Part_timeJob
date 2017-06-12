@@ -11,5 +11,7 @@ pod 'RongCloudIM/IMLib', '~> 2.8.3'
 pod 'RongCloudIM/IMKit', '~> 2.8.3'  
 pod 'OverlayController'
 pod 'RAMAnimatedTabBarController', "~> 2.0.13"
+pod 'ActionSheetPicker-3.0'
+pod 'MBProgressHUD'
 end
 

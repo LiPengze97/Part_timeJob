@@ -13,13 +13,11 @@ class TravelPalViewController: UIViewController {
     var tableViewArray = Array<UITableView>()
     var currentTabelView = UITableView()
     var stb = UIStoryboard.init(name: "Main", bundle: nil)
-    var nv:UINavigationController?
+//    var nv:UINavigationController?
     
     var lastTableViewOffsetY = CGFloat()
     
-    
-    var mapView = MAMapView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
-
+    let mapView:MAMapView = MAMapView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
     
     var headSegmentView: HeadSegmentView?
     
@@ -28,8 +26,8 @@ class TravelPalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.nv = UINavigationController.init(rootViewController: self)
-        self.navigationController?.navigationBar.isHidden = true
+//        self.nv = UINavigationController.init(rootViewController: self)
+        
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.addSubview(self.bottomScroll!)
         for i in 0..<headSegmentArray.count {
@@ -57,7 +55,7 @@ class TravelPalViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        
+//        print("🐦")
     }
     
     override func didReceiveMemoryWarning() {

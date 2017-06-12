@@ -15,6 +15,10 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
     private var overlayController : OverlayController!
     override func viewDidLoad() {
         super.viewDidLoad()
+                // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         setTabbar()
         self.stb = UIStoryboard.init(name: "Main", bundle: nil)
         self.tabBar.tintColor = UIColor.init(red: 13.0/255, green: 168.0/255, blue: 134.0/255, alpha: 1)
@@ -22,9 +26,9 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
         btn?.setImage(UIImage.init(named: "add"), for: .normal)
         btn?.addTarget(self, action: #selector(TPTabBarController.tanchu), for: .touchUpInside)
         self.tabBar.addSubview(btn!)
-        // Do any additional setup after loading the view.
-    }
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,7 +95,10 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
         for i in 0..<names.count{
             let ctl = vcs[i]
             let navi:UINavigationController = UINavigationController.init(rootViewController: ctl)
-            
+            if i == 4 {
+//                navi.navigationBar.frame = CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: 44)
+//                navi.navigationBar.setTitleVerticalPositionAdjustment(-40, for: UIBarMetrics.default)
+            }
             ctl.navigationItem.title = names[i]
             navi.tabBarItem.title = names[i]
             

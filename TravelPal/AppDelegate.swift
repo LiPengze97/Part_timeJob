@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
 //        let tt_naviController = UINavigationController(rootViewController: tt)
         let tt = TravelPalViewController()
-        self.window?.rootViewController = tt
+        self.window?.rootViewController = vc
         return true
     }
 

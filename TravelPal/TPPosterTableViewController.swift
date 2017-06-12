@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActionSheetPicker_3_0
 
 //本类为发布寻找旅伴的页面
 class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
@@ -31,6 +32,9 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     //datePicker日期选择器
     var datePicker = UIDatePicker.init()
     
+    var selectedIndex:Int?
+    
+    let transArr = ["飞机","火车/高铁","大巴","自驾","轮船","步行"]
     
     var locationManager:AMapLocationManager? = nil
     let keys = ["简要信息","详细信息","位置信息"]
@@ -140,7 +144,8 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             label.backgroundColor = UIColor.clear
             label.font = UIFont.systemFont(ofSize: 18)
             label.text = keys[section]
-            myView.addSubview(label)}
+            myView.addSubview(label)
+        }
         
         
         
@@ -197,6 +202,47 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         self.dismiss(animated: true) { 
             //TODO: 加HUD
         }
+    }
+    
+    //MARK: -Textfield弹出事件
+    
+    @IBAction func selectTrans(_ sender: Any) {
+        
+        ActionSheetStringPicker.show(withTitle: "选择交通方式", rows: self.transArr, initialSelection: 1, doneBlock: {
+            picker, index, value in
+            self.transportationText.text = value as! String
+            return
+        }, cancel: { ActionStringCancelBlock in return }, origin: sender)
+    }
+    @IBAction func selectDepature(_ sender: Any) {
+        let w = WSDatePickerView.init(dateStyle: .init(0)) { (startDate) in
+            print(startDate!)
+            let dateformat = DateFormatter()
+            dateformat.dateFormat = "YYYY-MM-dd HH:mm"
+            let str = dateformat.string(from: startDate!)
+            self.deptTimeText.text = str
+        }
+        w?.doneButtonColor = UIColor.orange
+        w?.show()
+    }
+    
+    @IBAction func selectBack(_ sender: Any) {
+        let w = WSDatePickerView.init(dateStyle: .init(0)) { (startDate) in
+            print(startDate!)
+            let dateformat = DateFormatter()
+            dateformat.dateFormat = "YYYY-MM-dd HH:mm"
+            let str = dateformat.string(from: startDate!)
+            self.backTimeText.text = str
+        }
+        w?.doneButtonColor = UIColor.orange
+        w?.show()
+
+    }
+    
+    func transSelected(selectedIndex:NSNumber, element:Any){
+        self.selectedIndex = selectedIndex.intValue
+        
+        self.transportationText.text = transArr[selectedIndex.intValue]
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

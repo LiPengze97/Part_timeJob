@@ -107,10 +107,13 @@ class ViewController: UIViewController,tableViewDelegate{
         //设置rollingEnable为true即可开启自动滚动功能
         mainTableView.loopPage.rollingEnable = true
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
     override func viewWillDisappear(_ animated: Bool) {
         //需要在退出前停止自动滚动,否则会内存泄露
-        print("bb")
+
+        
         mainTableView.loopPage.rollingEnable = false
     }
     
