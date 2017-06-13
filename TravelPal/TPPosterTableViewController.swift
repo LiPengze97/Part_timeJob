@@ -8,6 +8,7 @@
 
 import UIKit
 import ActionSheetPicker_3_0
+import MBProgressHUD
 
 //本类为发布寻找旅伴的页面
 class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
@@ -204,6 +205,12 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         }
     }
     
+    @IBAction func postBtnTapped(_ sender: Any) {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .determinate
+        hud.label.text = "发布成功"
+        
+    }
     //MARK: -Textfield弹出事件
     
     @IBAction func selectTrans(_ sender: Any) {

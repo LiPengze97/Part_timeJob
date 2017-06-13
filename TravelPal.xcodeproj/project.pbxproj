@@ -22,7 +22,7 @@
 		8E3E35121EAE3CF70005C942 /* TravelPalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */; };
 		8E3E35141EAE3F970005C942 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35131EAE3F970005C942 /* UserManager.swift */; };
 		8E3E35161EAE3F9F0005C942 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E35151EAE3F9F0005C942 /* Router.swift */; };
-		8E46AED11EC8430B004A95D5 /* LvbanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */; };
+		8E46AED11EC8430B004A95D5 /* CloseLvbanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED01EC8430B004A95D5 /* CloseLvbanInfo.swift */; };
 		8E46AED41EC8488D004A95D5 /* TPPersonInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED21EC8488D004A95D5 /* TPPersonInfoCell.swift */; };
 		8E46AED51EC8488D004A95D5 /* TPPersonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E46AED31EC8488D004A95D5 /* TPPersonInfoCell.xib */; };
 		8E46AED81EC84F78004A95D5 /* TPTravelInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46AED61EC84F78004A95D5 /* TPTravelInfoCell.swift */; };
@@ -41,6 +41,7 @@
 		8E5C7A481EBB6F9A000E64F7 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C7A461EBB6F9A000E64F7 /* DemoCell.swift */; };
 		8E5C7A4C1EBB6FD3000E64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */; };
 		8E7035C71ECC945900AA8E36 /* OverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7035C61ECC945900AA8E36 /* OverlayController.swift */; };
+		8E7A4D561EEFF15B00C77DCE /* TourismLvbanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */; };
 		8E7BA4861ED18C9D00969F3C /* TPPosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */; };
 		8E91455B1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */; };
 		8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */; };
@@ -89,7 +90,7 @@
 		8E3E35111EAE3CF70005C942 /* TravelPalDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalDetailViewController.swift; sourceTree = "<group>"; };
 		8E3E35131EAE3F970005C942 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		8E3E35151EAE3F9F0005C942 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LvbanInfo.swift; sourceTree = "<group>"; };
+		8E46AED01EC8430B004A95D5 /* CloseLvbanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseLvbanInfo.swift; sourceTree = "<group>"; };
 		8E46AED21EC8488D004A95D5 /* TPPersonInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPersonInfoCell.swift; sourceTree = "<group>"; };
 		8E46AED31EC8488D004A95D5 /* TPPersonInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPPersonInfoCell.xib; sourceTree = "<group>"; };
 		8E46AED61EC84F78004A95D5 /* TPTravelInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPTravelInfoCell.swift; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		8E5C7A461EBB6F9A000E64F7 /* DemoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
 		8E5C7A4B1EBB6FD3000E64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		8E7035C61ECC945900AA8E36 /* OverlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayController.swift; sourceTree = "<group>"; };
+		8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourismLvbanInfo.swift; sourceTree = "<group>"; };
 		8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPosterTableViewController.swift; sourceTree = "<group>"; };
 		8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPoster2TableViewController.swift; sourceTree = "<group>"; };
 		8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalViewController.swift; sourceTree = "<group>"; };
@@ -165,9 +167,9 @@
 		8E1091591EB713BC006E4CCD /* TravelPal */ = {
 			isa = PBXGroup;
 			children = (
-				8EA4C0661EB9E6C1003047E7 /* Controller */,
+				8E7A4D541EEFF13A00C77DCE /* Model */,
 				8EA4C0651EB9E6BC003047E7 /* View */,
-				8E46AED01EC8430B004A95D5 /* LvbanInfo.swift */,
+				8EA4C0661EB9E6C1003047E7 /* Controller */,
 			);
 			name = TravelPal;
 			sourceTree = "<group>";
@@ -254,6 +256,15 @@
 				8E48FD231EADA78900EA132C /* TravelPal.xcdatamodeld */,
 			);
 			path = TravelPal;
+			sourceTree = "<group>";
+		};
+		8E7A4D541EEFF13A00C77DCE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E46AED01EC8430B004A95D5 /* CloseLvbanInfo.swift */,
+				8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		8EA4C0651EB9E6BC003047E7 /* View */ = {
@@ -508,6 +519,7 @@
 				8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */,
 				8E48FD1F1EADA78900EA132C /* ViewController.swift in Sources */,
 				8EE1F29F1EE1A2E400B0DD1E /* RegisterViewController.swift in Sources */,
+				8E7A4D561EEFF15B00C77DCE /* TourismLvbanInfo.swift in Sources */,
 				8EE1F28E1EE1A10600B0DD1E /* BGButton.swift in Sources */,
 				8EE1F28B1EE1A10600B0DD1E /* HELoopPageView.swift in Sources */,
 				8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */,
@@ -517,7 +529,7 @@
 				8EE1F29D1EE1A2E400B0DD1E /* DetailViewController.swift in Sources */,
 				8EE1F2A91EE1A30300B0DD1E /* myLayout.swift in Sources */,
 				8EE1F28F1EE1A10600B0DD1E /* InformationViewController.swift in Sources */,
-				8E46AED11EC8430B004A95D5 /* LvbanInfo.swift in Sources */,
+				8E46AED11EC8430B004A95D5 /* CloseLvbanInfo.swift in Sources */,
 				8EE1F2A41EE1A2F700B0DD1E /* DingDanCell.swift in Sources */,
 				8EE1F28D1EE1A10600B0DD1E /* SearchViewController.swift in Sources */,
 				8EE1F29C1EE1A2E400B0DD1E /* PersonalViewController.swift in Sources */,
