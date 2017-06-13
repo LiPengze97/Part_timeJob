@@ -37,7 +37,7 @@
 	returnTime 返回时间 TIMESTAMP
 	publishTime 发布时间 TIMESTAMP
 	detailed 详细信息 varchar(255)
-	type 类型 int(3)
+	type 类型 varchar(50)
 ## 全局约定：
 	返回值形式：{status:(请求的状态),message:(一个简单短语解释状态码),data:{返回的数据object}}
 	状态码： 200表示请求成功
