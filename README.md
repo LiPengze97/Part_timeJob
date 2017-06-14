@@ -135,7 +135,7 @@
 		下单时间 orderTime
 		下单商品 tripId
 		结算时间 payTime
-		是否评分 marked [0,1] 0未评分 1 已评分
+		评分 grade null未评分 其他的是分数
 	}
 ## 收藏
 	collection[post]
