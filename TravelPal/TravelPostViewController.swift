@@ -12,6 +12,8 @@ class TravelPostViewController: UIViewController,UITableViewDelegate,UITableView
     var tableview:UITableView?
     let keys = ["简要信息","详细信息","位置信息"]
     
+    
+    
     //textfieds
     var fromText:UITextField?//出发地
     var destText:UITextField?//目的地
@@ -38,6 +40,9 @@ class TravelPostViewController: UIViewController,UITableViewDelegate,UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+   
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3

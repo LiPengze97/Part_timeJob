@@ -5,7 +5,8 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 #import <RongIMKit/RongIMKit.h>
 #import "WSDatePickerView.h"
-
+#import <MBProgressHUD/MBProgressHUD.h>
 

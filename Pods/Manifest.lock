@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
   - Alamofire (4.4.0)
   - AMap2DMap (4.6.0):
     - AMapFoundation (~> 1.3)
@@ -7,6 +8,7 @@ PODS:
     - AMapFoundation (~> 1.3)
   - AMapSearch (5.0.0):
     - AMapFoundation (~> 1.2)
+  - MBProgressHUD (1.0.0)
   - OverlayController (0.0.2)
   - RAMAnimatedTabBarController (2.0.13)
   - RongCloudIM/IMKit (2.8.10):
@@ -15,10 +17,12 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - Alamofire
   - AMap2DMap
   - AMapLocation
   - AMapSearch
+  - MBProgressHUD
   - OverlayController
   - RAMAnimatedTabBarController (~> 2.0.13)
   - RongCloudIM/IMKit (~> 2.8.3)
@@ -26,16 +30,18 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AMap2DMap: 003fa70526983a1469ae6fc3323a6ee8b5ccf53c
   AMapFoundation: 458974f46a39df8407fd818ab83d2630d494c726
   AMapLocation: 6016f0e09c127461c9c8e36945f34c0f037ad962
   AMapSearch: cf7fd100d533995822d92c22586abfaf7cdf6eef
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   OverlayController: f8300b6f3a2bb3778f431668540d07cb4051b6a7
   RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   RongCloudIM: 654e9893b94f6e5a085e832335532ed2a8ea5930
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 9ebf57e2df7a911890b8e1f54af81e483e78e68e
+PODFILE CHECKSUM: d86f672d9f0b2b349c342cd7f6e4f8ab17c542c4
 
 COCOAPODS: 1.2.0
