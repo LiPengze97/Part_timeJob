@@ -38,6 +38,18 @@
 	publishTime 发布时间 TIMESTAMP
 	detailed 详细信息 varchar(255)
 	type 类型 varchar(50)
+## 商品 trip
+	id 唯一标示 int(9) 自增
+	name 名称 varchar(25)
+	describe 描述 varchar(255)
+	price 价格 double 
+	grade 评分 double
+	collection 收藏 int(9)
+	order 下单 int(9)
+	publishTime 上传时间 timestamp  
+	goTime varchar(255) 出行时间
+	stroke varchar(255) 行程安排
+	know varchar(255) 旅行须知
 ## 全局约定：
 	返回值形式：{status:(请求的状态),message:(一个简单短语解释状态码),data:{返回的数据object}}
 	状态码： 200表示请求成功
@@ -103,7 +115,41 @@
 	参数：
 		id 要删除的旅游
 	返回值
-	
+## 下单
+	order[post]
+	参数：
+		id 预定的商品的id
+	返回值 
+		orderId 订单id
+## 付款
+	pay[post]
+	参数 
+		orderId 订单id
+	返回值
+## 查看我的订单
+	myOrder[get]
+		参数 
+	返回值 
+	{
+		订单 id
+		下单时间 orderTime
+		下单商品 tripId
+		结算时间 payTime
+	}
+## 收藏
+	collection[post]
+	参数 
+		id 收藏的id
+	返回值
+## 查看我的收藏
+	myCollection[get]
+	参数	
+		{商品信息}
+## 取消收藏
+	cancelCollection[post]
+	参数
+		id 要取消的商品id
+	返回值
 -----------------------------------------------------------------------------
 # 常规业务：
 	统一使用/common前缀
@@ -140,4 +186,16 @@
 	参数：
 		id 手机号
 	返回值
-
+## 获取商品
+	getTrip[get]
+	参数：
+	返回值：
+		{商品所有信息，
+		collection [0,1]当前用户是否收藏， 0否1是
+		}
+## 按照id获取指定商品
+	getTripById[get]
+	参数：
+		id 要查看的商品的id
+	返回值
+		{商品的基本信息}
