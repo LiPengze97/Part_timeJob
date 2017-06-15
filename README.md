@@ -178,6 +178,17 @@
 		  transportation 交通工具 varchar(10)
 		  publishTime 发布时间 TIMESTAMP
 		  detailed 详细信息 varchar(255)}]
+## 发送验证码：
+	sendMessage[get]
+	参数：
+		mobile 手机号
+	返回值：
+## 验证验证码是否正确
+	check[get]
+	参数：
+		mobile 手机号
+		code 用户输入的验证码
+	返回值
 ## 登录：
 	login[post]
 	参数：
