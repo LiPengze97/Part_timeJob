@@ -198,7 +198,7 @@
 	参数：
 	返回值：
 		{商品所有信息，
-		collection [0,1]当前用户是否收藏， 0否1是
+		ifCollected [0,1]当前用户是否收藏， 0否1是
 		}
 ## 按照id获取指定商品
 	getTripById[get]
