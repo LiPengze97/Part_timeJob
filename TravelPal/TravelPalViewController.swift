@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import Alamofire
 
-class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMapViewDelegate {
+
+class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMapViewDelegate,TPCalloutViewDelegate {
     var vcArray = Array<MainTableViewController>()
     var tableViewArray = Array<UITableView>()
+    var tourismLvbanInfos:[[TourismLvbanInfo]]?
+    var closeLvbanInfos:[[CloseLvbanInfo]]?
     var currentTabelView = UITableView()
     var locationManager:AMapLocationManager?
     var stb = UIStoryboard.init(name: "Main", bundle: nil)
-//    var nv:UINavigationController?
-    
+    //用户位置信息
+    var userLocation:CLLocation?
+    var userReGeocode: AMapLocationReGeocode?
     var lastTableViewOffsetY = CGFloat()
     
     let mapView:MAMapView = MAMapView(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 64))
@@ -28,7 +33,7 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         super.viewDidLoad()
         setupUI()
 //        self.nv = UINavigationController.init(rootViewController: self)
-        
+        setLocation()
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.addSubview(self.bottomScroll!)
         for i in 0..<headSegmentArray.count {
@@ -56,8 +61,10 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        self.setLocation()
-//        print("🐦")
+        self.tabBarController?.tabBar.isHidden = false
+        
+        UserManager.shared.getTourism()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,13 +99,66 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
 
     }
 
+    //MARK: -MapDelegate
+    func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
+        if annotation.isKind(of: MAPointAnnotation.self){
+        let reuseIdentifier = "annotationReuseIndetifier"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? TPAnnotationView
+        
+        if annotationView == nil {
+            annotationView  = TPAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            annotationView?.calloutView.delegate = self
+        }
+        
+        annotationView?.image = UIImage.init(named: "location")
+        annotationView?.centerOffset = CGPoint(x: 0, y: -18)
+        
+        return annotationView
+        }
+        
+        return nil
+    }
+    
+    //点击气泡
+    func mapView(_ mapView: MAMapView!, didAnnotationViewCalloutTapped view: MAAnnotationView!) {
+        
+       
+    }
+    
+    func navibtnDidTapped() {
+        let tt = TravelPalDetailViewController()
+        
+        self.navigationController?.pushViewController(tt, animated: true)
+    }
+    
+    //设置小蓝点
+    func setUserLocationRepresentation(){
+        
+    }
+    
+    //添加标注
+    func addAnnotation(){
+        let mm = MAPointAnnotation.init()
+        mm.coordinate = (userLocation?.coordinate)!
+        //print("🤞",userLocation?.coordinate)
+        mm.title = "ssss"
+        mm.subtitle = "wwww"
+        mapView.addAnnotation(mm)
+    }
     //MARK:初始化页面需要的方法
     func setLocation(){
         AMapServices.shared().enableHTTPS = true
-        mapView.isShowsUserLocation = true
+        let r = MAUserLocationRepresentation.init()
+        r.showsAccuracyRing = false
+        r.showsHeadingIndicator = true
+        
+        
+        self.mapView.update(r)
+//        mapView.isShowsUserLocation = true
         mapView.delegate = self
         mapView.userTrackingMode = .follow
-        mapView.setZoomLevel(15.5, animated: true)
+        mapView.setZoomLevel(14, animated: true)
+        
         locationManager = AMapLocationManager()
         locationManager?.delegate = self
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -126,16 +186,20 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
                 else {
                     //没有错误：location有返回值，regeocode是否有返回值取决于是否进行逆地理操作，进行annotation的添加
                     self?.mapView.setCenter((location?.coordinate)!, animated: true)
+                    
+                    
                 }
             }
             
             if let location = location {
                 //NSLog("🐶location:%@", location)
-                print("🐶",location.coordinate)
+                //print("🐶",location.coordinate)
+                self?.userLocation = location
+                self?.addAnnotation()
             }
             
             if let reGeocode = reGeocode {
-                NSLog("🐥reGeocode:%@", reGeocode)
+               // NSLog("🐥reGeocode:%@", reGeocode)
                 
                 
             }
@@ -156,6 +220,13 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         bottomScroll?.contentSize = CGSize.init(width: CGFloat(headSegmentArray.count)*SCREEN_WIDTH, height: SCREEN_HEIGHT)
 
     }
+    
+    func userDidGetTourism(notification: NSNotification){
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
+//            self.closeButtonTapped()
+        })
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -222,4 +293,7 @@ extension TravelPalViewController: RequestJumpDelegate{
     }
 }
 
+fileprivate extension Selector{
+//    static let getTourismInfo = #selector()
+}
 

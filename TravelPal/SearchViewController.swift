@@ -12,8 +12,10 @@ import UIKit
 
 class SearchViewController: UIViewController,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate{
     
+//CCCCCCCCCCCCCCCCCC1
+    let array = ["北京","上海","广州","深圳" ,"香港","杭州","重庆","伦敦","济南","济宁","济州岛"]
+//CCCCCCCCCCCCCCCCCC1
 
-    let array = ["北京","上海","广州","深圳" ,"香港","杭州","重庆","伦敦"]
     var result = [String]()
     var historical = [String]()
     var hotsearch = [String]()
@@ -32,11 +34,16 @@ class SearchViewController: UIViewController,UISearchBarDelegate,UITableViewData
          searchBar = UISearchBar(frame: CGRect(x: 60, y: 27, width: self.view.frame.width-120, height: 50))
         searchBar.backgroundColor = UIColor.white
          tableView = UITableView(frame: CGRect(x: 0, y: 70, width: self.view.frame.width, height: self.view.frame.height-70))
+    
+       //CCCCCCCCCCCCCCCCCCCC2
+         let leftbutton = UIButton(frame: CGRect(x: 11, y: 27, width:60 , height: 36))
         
-         var leftbutton = UIButton(frame: CGRect(x: 11, y: 27, width:22 , height: 36))
-        leftbutton.backgroundColor = UIColor.orange
+       // leftbutton.backgroundColor = UIColor.orangeColor()
+        leftbutton.setTitle("返回", for: UIControlState())
+        leftbutton.titleLabel!.font = UIFont.systemFont(ofSize: 15)
+        leftbutton.setTitleColor(UIColor.black, for: UIControlState())
         leftbutton.addTarget(self, action: #selector(SearchViewController.tappedLeft(_:)), for: UIControlEvents.touchUpInside)
-        
+     //CCCCCCCCCCCCCCCCCCCC2
         
         
         
@@ -122,8 +129,8 @@ class SearchViewController: UIViewController,UISearchBarDelegate,UITableViewData
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 14)}
             else if(indexPath.row == 1){
                 for p in 0..<Int(self.hotsearch.count/3)+1{
-                    for s in 0..<3 {
-                       var button = UIButton(frame: CGRect(x: 126*s, y: 46*p, width: 124, height: 44))
+                    for s in 0..<3{
+                       let button = UIButton(frame: CGRect(x: 126*s, y: 46*p, width: 124, height: 44))
                        if(p*3+s < self.hotsearch.count){
                         button.setTitle(self.hotsearch[p*3+s], for: UIControlState())}
                        button.titleLabel!.font = UIFont.systemFont(ofSize: 15)
@@ -136,8 +143,8 @@ class SearchViewController: UIViewController,UISearchBarDelegate,UITableViewData
                 
                  }
             else if(indexPath.row == 3){
-                for t in 0..<historical.count{
-                 var tbutton = UIButton(frame: CGRect(x: 0, y:CGFloat(45*t) , width: self.view.frame.width, height: 44))
+                for  t in 0..<historical.count{
+                 let tbutton = UIButton(frame: CGRect(x: 0, y:CGFloat(45*t) , width: self.view.frame.width, height: 44))
                  tbutton.setTitle("         "+self.historical[t], for: UIControlState())
                  tbutton.backgroundColor = UIColor.white
                  tbutton.titleLabel!.font = UIFont.systemFont(ofSize: 15)
@@ -225,6 +232,12 @@ class SearchViewController: UIViewController,UISearchBarDelegate,UITableViewData
         if(button.tag < 200){s=hotsearch[button.tag-100]}
         else {s = historical[button.tag-200]}
         print(s)
+     
+//CCCCCCCCCCCCCCCCCCCC3
+        let secondView = SearchResultViewController()
+        secondView.result = s
+        self.present(secondView, animated: true, completion: nil)
+//CCCCCCCCCCCCCCCCCCCC3
     
 }
     

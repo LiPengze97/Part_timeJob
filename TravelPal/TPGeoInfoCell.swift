@@ -8,10 +8,27 @@
 
 import UIKit
 
-class TPGeoInfoCell: UITableViewCell {
+class TPGeoInfoCell: UITableViewCell,AMapLocationManagerDelegate,MAMapViewDelegate {
 
+    let userLocation:CLLocationCoordinate2D? = nil
+    let targetLocation:CLLocationCoordinate2D? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
+        let mapview = MAMapView.init(frame: self.bounds)
+        mapview.delegate = self
+        self.addSubview(mapview)
+        
+        mapview.isShowsUserLocation = true
+        mapview.userTrackingMode = .follow
+        
+        
+        if let location = userLocation{
+            let anno = MAPointAnnotation.init()
+            anno.coordinate = location
+            anno.title = "Ta在这里！"
+            mapview.addAnnotation(anno)
+            
+        }
         // Initialization code
     }
 

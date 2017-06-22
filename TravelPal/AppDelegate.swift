@@ -11,7 +11,7 @@ import CoreData
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
 
     var window: UIWindow?
 
@@ -21,16 +21,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
 //        self.window?.backgroundColor = UIColor.white
 //        高德地图
+        
+        //判断是否第一次打开app
+        /*
+        var started = UserDefaults.standard.value(forKey: "started") as? String
+        if started == nil {
+            let vcc = TPWelcomeViewController()
+//            self.window?.rootViewController = vcc
+            vcc.startClosure = {
+                ()-> Void in
+                self.startApp()
+                UserDefaults.standard.setValue("start", forKey: "started")
+                UserDefaults.standard.synchronize()
+            }
+        }
+        */
         AMapServices.shared().apiKey = "30e945acb2834ca1fb6e8de43ffefa4b"
         //网易云信
         RCIM.shared().initWithAppKey("8w7jv4qb78a3y")
-        RCIM.shared().connect(withToken: "FC1GYeLtuPzrqRxcCsu5D0Ihz9rAQWIHhUAxahX3SGc1aigJlG4K8VngTwnpjE/JuIqn+d5ntoxWLfrrPx8aIg==", success: { (userid) in
-            print("登陆成功")
-        }, error: { (status) in
-            print("登录失败",status)
-        }) { 
-            print("Token出错")
-        }
+        RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
+        RCIM.shared().globalConversationAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
+        
         let vc = TPTabBarController()
         
 ////        let map_VC = MapViewController()
@@ -50,9 +61,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let stb = UIStoryboard.init(name: "Main", bundle: nil)
 //        let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController")
 //        let tt_naviController = UINavigationController(rootViewController: tt)
+//   136     JBYpKy1rUGUvfsLIcmkv0kIhz9rAQWIHhUAxahX3SGc1aigJlG4K8V4jncyurMaQMPWhnkPdCquoAqUf48wh4zqLm/gKwSJw
+//   178     IZZ+R6gxLCclMMV9L8tjWMfvrSIfMwqzri3X7DJoFvQB0gTNkJUlQ+UuXso/TnOYjO9zM7QhVnIqEhei5fI4dnVA7y0VlSVg
+        
         let tt = TravelPalViewController()
+        
+        let qq = TPIMListViewController()
+        let na = UINavigationController.init(rootViewController: qq)
         self.window?.rootViewController = vc
+        
         return true
+    }
+    func startApp() {
+        let rootVc = TPTabBarController()
+        // 给viewController配置导航控制器
+//        let navi = UINavigationController(rootViewController: rootVc)
+        self.window?.rootViewController = rootVc
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -122,6 +146,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    // MARK: - RCIMDataSource
+    
+    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        if userId == "13605361772" {
+            let user = RCUserInfo.init(userId: userId, name: "思敏", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
+            return completion(user)
+        }
+        return completion(nil)
+        
     }
 
 }

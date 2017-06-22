@@ -8,8 +8,10 @@
 
 import UIKit
 import ActionSheetPicker_3_0
+import Alamofire
 
-class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDelegate {
+
+class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDelegate,UITextFieldDelegate,UITextViewDelegate {
     //取消
     @IBOutlet weak var cancelBtn: UIButton!
     //发布
@@ -19,12 +21,29 @@ class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDel
     @IBOutlet weak var purposeText: UITextField!
     @IBOutlet weak var planPeopleText: UITextField!
     @IBOutlet weak var deptTimeText: UITextField!
+    @IBOutlet weak var detailText: UITextView!
+    @IBOutlet weak var textviewLabel: UILabel!
+    var parameters: Parameters = [
+        "userId":"17864154582",
+        "departure":"",
+        "destination":"",
+        "planPeople":0,
+        "departureTime":"",
+        "budget":"",
+        "transportation":"",
+        "detailed":"",
+        "type":""
+    ]
     var locationManager:AMapLocationManager? = nil
-    let purposeArr = ["进程游玩","拼车","看电影","约饭","跑腿"]
+    let purposeArr = ["近程游玩","拼车","饮食","电影","购物"]
+    
+    var userLocation:CLLocationCoordinate2D?
     
     @IBOutlet weak var userLoactionText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTags()
+        setLocation()
         cancelBtn.layer.cornerRadius = 10
         postBtn.layer.cornerRadius = 10
         self.tableView.separatorStyle = .none
@@ -40,6 +59,24 @@ class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDel
         // Dispose of any resources that can be recreated.
     }
 
+    func setTags(){
+        self.destText.tag = 0
+        self.purposeText.tag = 1
+        self.planPeopleText.tag = 2
+        self.deptTimeText.tag = 3
+        self.userLoactionText.tag = 4
+        
+        self.planPeopleText.keyboardType = .numberPad
+        
+        self.destText.delegate = self
+        self.purposeText.delegate = self
+        self.planPeopleText.delegate = self
+        self.deptTimeText.delegate = self
+        self.userLoactionText.delegate = self
+        self.detailText.delegate = self
+    }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -92,21 +129,25 @@ class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDel
 
     
     @IBAction func deptSelect(_ sender: Any) {
+        resignAll()
         let w = WSDatePickerView.init(dateStyle: .init(0)) { (startDate) in
             print(startDate!)
             let dateformat = DateFormatter()
             dateformat.dateFormat = "YYYY-MM-dd HH:mm"
             let str = dateformat.string(from: startDate!)
             self.deptTimeText.text = str
+            self.parameters["departureTime"] = str
         }
         w?.doneButtonColor = UIColor.orange
         w?.show()
     }
     
     @IBAction func purposeSelect(_ sender: Any) {
-        ActionSheetStringPicker.show(withTitle: "选择交通方式", rows: self.purposeArr, initialSelection: 1, doneBlock: {
+        resignAll()
+        ActionSheetStringPicker.show(withTitle: "选择交通方式", rows: self.purposeArr, initialSelection: 0, doneBlock: {
             picker, index, value in
             self.purposeText.text = value as! String
+            self.parameters["type"] = self.purposeText.text
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -144,16 +185,105 @@ class TPPoster2TableViewController: UITableViewController,AMapLocationManagerDel
             
             if let location = location {
                 NSLog("🐶location:%@", location)
+                self?.userLocation = location.coordinate
+                self?.parameters["longitude"] = location.coordinate.longitude.description
+                self?.parameters["latitude"] = location.coordinate.latitude.description
+                
             }
             
             if let reGeocode = reGeocode {
                 NSLog("🐥reGeocode:%@", reGeocode)
                 self?.userLoactionText.text = reGeocode.aoiName
-                
+                self?.parameters["departure"] = reGeocode.aoiName
+
             }
         })
     }
     
+    //MARK: 文本相关
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        /*
+         
+        self.destText.tag = 0
+        self.purposeText.tag = 1
+        self.planPeopleText.tag = 2
+        self.deptTimeText.tag = 3
+        self.userLocationText.tag = 4
+         
+         let parameters: Parameters = [
+         "userId":"17864154582",
+         "departure":"",
+         "destination":"",
+         "planPeople":0,
+         "departureTime":"",
+         "returnTime":"",
+         "budget":"",
+         "transportation":"",
+         "detailed":"",
+         "type":""
+         ]
+
+        */
+        switch textField.tag {
+        case 0:
+            parameters["destination"] = textField.text
+        case 1:
+            parameters["type"] = textField.text
+        case 2:
+            parameters["planPeople"] = textField.text
+        case 3:
+            parameters["departureTime"] = textField.text
+        case 4:
+            parameters["departure"] = textField.text
+        default:
+            return
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        parameters["detailed"] = textView.text
+        textviewLabel.isHidden = true
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.detailText.resignFirstResponder()
+    }
+    
+    @IBAction func PostBtnTapped(_ sender: Any) {
+        self.detailText.resignFirstResponder()
+        print(parameters)
+        UserManager.shared.postTour(para: parameters)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func resignAll(){
+        self.destText.resignFirstResponder()
+        self.purposeText.resignFirstResponder()
+        self.planPeopleText.resignFirstResponder()
+        self.deptTimeText.resignFirstResponder()
+        self.userLoactionText.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        resignAll()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == ""{
+            textviewLabel.isHidden = false
+        }else{
+            textviewLabel.isHidden = true
+        }
+        self.parameters["detailed"] = textView.text
+        if text == "\n" {
+            return false
+        }
+        return true
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

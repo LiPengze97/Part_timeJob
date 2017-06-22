@@ -31,13 +31,20 @@ class IMListViewController: RCConversationListViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
         //打开会话界面
         let chat = IMConversationViewController(conversationType: model.conversationType, targetId: model.targetId)
-        chat?.title = model.targetId
+        chat?.title = "BohemianRey"
         
         self.navigationController?.pushViewController(chat!, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        
     }
 
     /*

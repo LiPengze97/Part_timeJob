@@ -11,7 +11,26 @@ import Foundation
 let SCREEN_WIDTH = UIScreen.main.bounds.width
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
-let headSegmentArray = ["推荐","最新","热门","礼物","美食","生活","设计感","家居","数码","阅读","学生党","上班族","美妆","护理","运动户外","健康"]
+let KArrorHeight = 10
+let kPortraitMargin = 5
+let kPortraitWidth = 70
+let kPortraitHeight = 50
+
+let kTitleWidth = 120
+let kTitleHeight = 20
+
+
+let kCalloutWidth = 200.0
+let kCalloutHeight = 70.0
+
+//   136     JBYpKy1rUGUvfsLIcmkv0kIhz9rAQWIHhUAxahX3SGc1aigJlG4K8V4jncyurMaQMPWhnkPdCquoAqUf48wh4zqLm/gKwSJw
+//   178     IZZ+R6gxLCclMMV9L8tjWMfvrSIfMwqzri3X7DJoFvQB0gTNkJUlQ+UuXso/TnOYjO9zM7QhVnIqEhei5fI4dnVA7y0VlSVg
+
+let USER_136_TOKEN = "JBYpKy1rUGUvfsLIcmkv0kIhz9rAQWIHhUAxahX3SGc1aigJlG4K8V4jncyurMaQMPWhnkPdCquoAqUf48wh4zqLm/gKwSJw"
+
+let USER_178_TOKEN = "IZZ+R6gxLCclMMV9L8tjWMfvrSIfMwqzri3X7DJoFvQB0gTNkJUlQ+UuXso/TnOYjO9zM7QhVnIqEhei5fI4dnVA7y0VlSVg"
+
+let headSegmentArray = ["远途旅伴","近程游玩","拼车","饮食","电影","购物"]
 
 open class BannerItem: NSObject {
     

@@ -11,6 +11,7 @@ import UIKit
 protocol tableViewDelegate:NSObjectProtocol {
     func didSelectCell(_ Section: Int,Row:Int)
     func jumpToInformationView(_ title:String)
+    func jumpToSearchResultView(_ title:String)
 }
 
 class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPageViewDelegate,UIScrollViewDelegate {
@@ -85,7 +86,7 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
     var rbutton1 = UIButton()
     var rbutton2 = UIButton()
     var rbutton3 = UIButton()
-    var stringForRbutton = [["旅游0","旅游1","旅游2","旅游3"],["出境游0","出境游1","出境游2","出境游3"],["国内游0","国内游1","国内游2","国内游3"],["周围游0","周围游1","周围游2","周围游3"],["自助游0","自助游1","自助游2","自助游3"],["跟团游0","跟团游1","跟团游2","跟团游3"],["酒＋景0","酒＋景1","酒＋景2","酒＋景3"]]
+    var stringForRbutton = [["热门","划算","评价高","多人去"],["热门","划算","评价高","多人去"],["国内游0","国内游1","国内游2","国内游3"],["周围游0","周围游1","周围游2","周围游3"],["自助游0","自助游1","自助游2","自助游3"],["跟团游0","跟团游1","跟团游2","跟团游3"],["酒＋景0","酒＋景1","酒＋景2","酒＋景3"]]
     
     
     //tableview代理方法一大堆＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
@@ -150,8 +151,12 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
         tableview.dataSource = self
         
         //数据更新获取
-        hotDestination = ["海南","东南亚","欧洲","厦门","云南","日本","中东非洲","泰国","港澳"]
-        hotDestination0 = ["海南","东南亚","欧洲","厦门","云南","日本","中东非洲","泰国","港澳"]
+        
+        //CCCCCCCCCCCCCC1
+        hotDestination = ["东南亚","济南","欧洲","厦门","云南","日本","中东非洲","泰国","港澳"]
+        //CCCCCCCCCCCCCC1
+        
+        hotDestination0 = ["东南亚","济南","欧洲","厦门","云南","日本","中东非洲","泰国","港澳"]
         hotDestination1 = ["英国","美国","新加坡","欧洲","东南亚","俄罗斯","中东非洲","泰国","更多"]
         hotDestination2 = ["广州","上海","北京","深圳","重庆","济南","西安","三亚","更多"]
         hotDestination3 = ["周围1","周围2","周围3","周围4","周围5","周围6","周围7","周围8","更多"]
@@ -163,18 +168,20 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
         
         
         recommend = ["牛人专线","亲子游","爸妈游","朋派制定游","纯玩品质游","当季热玩","明星推荐","哪里值得玩"]
-        for i in 0..<6 {
-            imageForRecommend.append(UIImage(named: "image")!)
-        }
+        for i in 0..<6{imageForRecommend.append(UIImage(named: "image")!)}
         
         
         
         
         //scrollview的设置
+        //CCCCCCCCCCCCCC2
+        
+        var imageString3 = ["image1","puji1","zhangjia1","sanya1","shandong1","image4"]
         for i in 1...5 {
-            let img = UIImage(named: "image"+""+String(i))
+            let img = UIImage(named: imageString3[i-1])
             scollViewImages.append(img!)
         }
+        //CCCCCCCCCCCCCCC2
         loopPage = HELoopPageView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 210),images: scollViewImages)
         loopPage.delegate = self    //设置代理
         loopPage.pageIndicatorColor = UIColor.gray    //设置pageControl指示器的颜色
@@ -203,7 +210,7 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
     
     //点击各个按钮
     func tappedForDestination(_ button:UIButton){
-        var cbutton = String(describing: button.title(for: UIControlState()))
+        let cbutton = String(describing: button.title(for: UIControlState()))
         if(cbutton == "Optional(\"旅游\")"){
             hotDestination = hotDestination0
             updateViewForClassification(0)
@@ -260,6 +267,20 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
             updatetRecommend(6,b: 0)
             tableview.reloadData()
         }
+        //CCCCCCCCCCCCCCCCCCCCC3
+    
+       for i in 1...recommend.count {
+        if(cbutton == "Optional(\""+recommend[i-1]+"\")"){
+            delegate?.jumpToSearchResultView(recommend[i-1])
+        }
+        }
+        
+        if(button.tag>900){
+        let p = button.tag-900
+            delegate?.jumpToSearchResultView(hotDestination[p])
+        }
+        //CCCCCCCCCCCCCCCCCCCCCC3
+        
         print(String(describing: button.title(for: UIControlState())))
     }
     
@@ -345,18 +366,18 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
         viewForHotDestination = UIView(frame: CGRect(x:0,y:0,width: self.frame.width,height: 182))
         viewForHotDestination.backgroundColor = UIColor(red : 0xD9/255, green : 0xD9/255, blue : 0xD9/255, alpha : 1);
      
-        var littleround = UIView(frame: CGRect(x: 7, y: 13, width: 18, height: 18))
+        let littleround = UIView(frame: CGRect(x: 7, y: 13, width: 18, height: 18))
         littleround.backgroundColor = UIColor.orange
         littleround.layer.cornerRadius = 9
         
         
-        var label1 = UILabel(frame:CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
+        let label1 = UILabel(frame:CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
         label1.text = "       热门目搜索"
         label1.backgroundColor = UIColor.white
         
         for i in 0 ..< 3 {
             for j in 0 ..< 3 {
-                var button = UIButton(frame:CGRect(x:CGFloat(Double(j)*126+1), y: CGFloat(i*46+46), width:124 , height: CGFloat(44)))
+                let button = UIButton(frame:CGRect(x:CGFloat(Double(j)*126+1), y: CGFloat(i*46+46), width:124 , height: CGFloat(44)))
                 button.backgroundColor = UIColor.white
                 button.setTitle(hotDestination[3*i+j], for: UIControlState())
                 if(i == 0 && j == 0){ button.setTitleColor(UIColor(red : 217/255, green : 29/255, blue : 29/255, alpha : 1), for: UIControlState())}
@@ -364,11 +385,16 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
                 else if(i == 0 && j == 2){ button.setTitleColor(UIColor(red : 239/255, green : 207/255, blue : 58/255, alpha : 1), for: UIControlState())}
                 else{button.setTitleColor(UIColor.black, for: UIControlState())}
                 button.titleLabel!.font = UIFont.systemFont(ofSize: 14)
+          
+                //CCCCCCCCCCCCCCCCCCCCCCC4
+                button.tag = 900+3*i+j
+                //CCCCCCCCCCCCCCCCCCCCCCC4
+                
                 button.addTarget(self, action: #selector(MaintableView.tappedForDestination(_:)), for: UIControlEvents.touchUpInside)
                 viewForHotDestination.addSubview(button)}}
         
-        for o in 0 ..< 3{
-        var imageb = UIImageView(image: UIImage(named: "p"+String(o+1)))
+        for o in 0 ..< 3 {
+        let imageb = UIImageView(image: UIImage(named: "p"+String(o+1)))
             imageb.contentMode = .scaleAspectFit
             imageb.frame = CGRect(x: 124*o+18, y: 58, width: 20, height: 20)
             viewForHotDestination.addSubview(imageb)
@@ -383,11 +409,11 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
     func updateRecommend(){
         viewForRecommend = UIView(frame:CGRect(x: 0, y: 0, width: self.frame.width, height: 224))
         viewForRecommend.backgroundColor = UIColor(red : 0xD9/255, green : 0xD9/255, blue : 0xD9/255, alpha : 1);
-        var label2 = UILabel(frame:CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
+        let label2 = UILabel(frame:CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
         label2.text = "       热门推荐"
         label2.backgroundColor = UIColor.white
         
-        var littleround = UIView(frame: CGRect(x: 7, y: 13, width: 18, height: 18))
+        let littleround = UIView(frame: CGRect(x: 7, y: 13, width: 18, height: 18))
         littleround.backgroundColor = UIColor.orange
         littleround.layer.cornerRadius = 9
         
@@ -395,12 +421,12 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
             for j in 0 ..< 3 {
 
                 
-                var button = BGButton(frame:CGRect(x:CGFloat(1+126*j), y: CGFloat(46+i*90), width:124 , height: 88))
+                let button = BGButton(frame:CGRect(x:CGFloat(1+126*j), y: CGFloat(46+i*90), width:124 , height: 88))
                 button.backgroundColor = UIColor.white
                 button.addTarget(self, action: #selector(MaintableView.tappedForDestination(_:)), for: UIControlEvents.touchUpInside)
                 //var imagea = UIImage(named: "r"+String(3*i+j))
              
-                var imagea = UIImage(named: "r"+String(3*i+j+1
+                let imagea = UIImage(named: "r"+String(3*i+j+1
                     ))
                 
              
@@ -416,26 +442,32 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
         
         }
     
-    //推荐2
+//ccccccccccccccccccccc整个方法 推荐2
     func updatetRecommend(_ a:Int,b:Int){
         
-        ttitle = ["乱七八糟游1","乱七八糟游2","乱七八糟游3","乱七八糟游4"]
+        ttitle = ["普基诺富特4晚6日自助游","三亚蜈支洲天涯海角5日游","张家界—凤凰古城—天门山—黄龙洞","济南—曲阜—泰山—青岛—海阳"]
+        
         for i in 0..<4{
-            var a = i+1
-            timageForRecommend.append(UIImage(named: "image"+String(a))!)}
+        if(i == 0)
+        { timageForRecommend.append(UIImage(named: "puji1")!)}
+        else if(i == 1)
+        { timageForRecommend.append(UIImage(named: "sanya1")!)}
+        else if(i == 2)
+        { timageForRecommend.append(UIImage(named: "zhangjia1")!)}
+        else{   timageForRecommend.append(UIImage(named: "shandong1")!)}}
         
-        trecommend = ["1好好玩啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊","2好好玩啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊","3好好玩啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊","4好好玩啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"]
+        trecommend = ["酒店超赞，超大露天游泳池，酒店有1楼豪华房，阳台直通游泳池，很划算","行程非常不错。玩得很尽兴。也没有强制购物！三亚必游景点也都在行程内","游玩了景观秀丽、美不胜收的黄龙洞；感受了山水相对让人心旷神怡的天然大氧吧武陵山：无限风光","去了一直想去的几个城市，看了有山有水的大美山东，整体感觉不错，导游人很好，很细心很热情"]
         
-        tscore = [5.0,4.9,4.8,4.7]
+        tscore = [4.8,4.9,4.8,4.7]
         
-        tNumberOfGo = [1000,999,998,997]
+        tNumberOfGo = [884,741,2400,170]
         
-        tNumberOfLike = [1000,999,998,997]
+        tNumberOfLike = [154,98,802,58]
         
         viewFortRecommend = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: CGFloat(44+(102*trecommend.count))))
         viewFortRecommend.backgroundColor = UIColor(red : 0xD9/255, green : 0xD9/255, blue : 0xD9/255, alpha : 1);
         
-        var littleview2 = UIView(frame:CGRect(x: CGFloat(b)*self.frame.width/4, y: 42, width: self.frame.width/4, height: 2))
+        let littleview2 = UIView(frame:CGRect(x: CGFloat(b)*self.frame.width/4, y: 42, width: self.frame.width/4, height: 2))
         littleview2.backgroundColor = UIColor(red : 13/255, green : 168/255, blue : 133/255, alpha : 1)
         
         rbutton0 = UIButton(frame:CGRect(x: 0, y: 0, width: self.frame.width/4, height: 44))
@@ -482,49 +514,49 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
         viewFortRecommend.addSubview(littleview2)
         
         for i in 0 ..< ttitle.count {
-        var bigview = UIView(frame: CGRect(x: 0, y: CGFloat(48+102*i), width: self.frame.width, height: 98))
+        let bigview = UIView(frame: CGRect(x: 0, y: CGFloat(48+102*i), width: self.frame.width, height: 98))
         bigview.backgroundColor = UIColor.white
         viewFortRecommend.addSubview(bigview)
         
-        var imagek = UIImageView(image: timageForRecommend[i])
+        let imagek = UIImageView(image: timageForRecommend[i])
         imagek.frame = CGRect(x: 16, y: 10, width: 105, height: 80)
         
-        var titlek = UILabel(frame: CGRect(x: 136, y: 12, width:210 , height: 15))
+        let titlek = UILabel(frame: CGRect(x: 136, y: 12, width:210 , height: 15))
         titlek.text = ttitle[i]
         titlek.font = UIFont.systemFont(ofSize: 17)
             
-        var scorek = UILabel(frame: CGRect(x: self.frame.width-40, y: 12, width: 40, height: 15))
+        let scorek = UILabel(frame: CGRect(x: self.frame.width-40, y: 12, width: 40, height: 15))
         scorek.text = String(tscore[i])
         scorek.font = UIFont.systemFont(ofSize: 17)
         scorek.textColor = UIColor(red : 237/255, green : 127/255, blue : 30/255, alpha : 1)
             
-        var likek = UILabel(frame: CGRect(x: 136, y:42 , width: 100, height: 10))
+        let likek = UILabel(frame: CGRect(x: 136, y:42 , width: 100, height: 10))
         likek.text = String(tNumberOfLike[i])
         likek.font = UIFont.systemFont(ofSize: 15)
         likek.textColor = UIColor(red : 237/255, green : 127/255, blue : 30/255, alpha : 1)
             
-        var renxihuan = UILabel(frame: CGRect(x: 176, y:42 , width: 100, height: 10))
+        let renxihuan = UILabel(frame: CGRect(x: 176, y:42 , width: 100, height: 10))
         renxihuan.text = "人收藏"
         renxihuan.font = UIFont.systemFont(ofSize: 14)
         renxihuan.textColor = UIColor.black
             
-        var gok = UILabel(frame: CGRect(x: 236, y:42 , width: 100, height: 10))
+        let gok = UILabel(frame: CGRect(x: 236, y:42 , width: 100, height: 10))
         gok.text = String(tNumberOfGo[i])
         gok.font = UIFont.systemFont(ofSize: 15)
         gok.textColor = UIColor(red : 237/255, green : 127/255, blue : 30/255, alpha : 1)
             
-        var renchuyou = UILabel(frame: CGRect(x: 276, y:42 , width: 100, height: 10))
+        let renchuyou = UILabel(frame: CGRect(x: 276, y:42 , width: 100, height: 10))
         renchuyou.text = "人出游"
         renchuyou.font = UIFont.systemFont(ofSize: 14)
         renchuyou.textColor = UIColor.black
             
-        var commentk = UILabel(frame: CGRect(x: 136, y: 52, width: self.frame.width-136-5, height:50) )
+        let commentk = UILabel(frame: CGRect(x: 136, y: 52, width: self.frame.width-136-5, height:50) )
         commentk.text = trecommend[i]
         commentk.font = UIFont.systemFont(ofSize: 14)
         commentk.lineBreakMode = NSLineBreakMode.byWordWrapping
         commentk.numberOfLines = 0
             
-        var buttonk = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 98))
+        let buttonk = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 98))
         buttonk.backgroundColor = UIColor(red : 237/255, green : 127/255, blue : 30/255, alpha : 0)
         buttonk.addTarget(self, action: #selector(MaintableView.tappedForRecommend2(_:)), for: UIControlEvents.touchUpInside)
         buttonk.tag = i
@@ -554,7 +586,7 @@ class MaintableView: UIView,UITableViewDataSource,UITableViewDelegate,HELoopPage
     
     func tappedForRecommend2(_ button:UIButton){
     print("点了以下推荐: "+String(ttitle[button.tag]))
-        var title = String(ttitle[button.tag])
+        let title = String(ttitle[button.tag])
         delegate?.jumpToInformationView(title!)
     
     

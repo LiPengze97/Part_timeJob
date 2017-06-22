@@ -36,7 +36,7 @@ class myButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         // 设置imageView
-        imageView?.frame = CGRect(x: 34, y: 10, width: 22, height: 22)
+        imageView?.frame = CGRect(x: self.frame.width/2-11, y: 10, width: 22, height: 22)
         // 设置title
         titleLabel?.frame = CGRect(x: 0, y: 30, width: self.frame.width, height: self.frame.height-30)
     }

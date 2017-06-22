@@ -9,6 +9,7 @@
 import UIKit
 import ActionSheetPicker_3_0
 import MBProgressHUD
+import Alamofire
 
 //本类为发布寻找旅伴的页面
 class TPPosterTableViewController: UITableViewController,AMapLocationManagerDelegate,UITextViewDelegate,UITextFieldDelegate {
@@ -30,6 +31,24 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     //Textview及其上面的label
     @IBOutlet weak var textviewLabel: UILabel!
     @IBOutlet weak var detailText: UITextView!
+    
+    //参数
+    
+    var parameters: Parameters = [
+        "userId":"17864154582",
+        "departure":"",
+        "destination":"",
+        "planPeople":0,
+        "departureTime":"",
+        "returnTime":"",
+        "budget":"",
+        "transportation":"",
+        "detailed":"",
+        "longitude":"",
+        "latitude":""
+    ]
+
+    
     //datePicker日期选择器
     var datePicker = UIDatePicker.init()
     
@@ -41,6 +60,8 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     let keys = ["简要信息","详细信息","位置信息"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextFields()
+        setLocation()
         detailText.delegate = self
         datePicker.datePickerMode = .dateAndTime
         datePicker.minuteInterval = 1
@@ -67,15 +88,45 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         // Dispose of any resources that can be recreated.
     }
     
-    func setTime(datePicker:UIDatePicker){
-        let dateformat = DateFormatter.init()
-        let date = datePicker.date
-        dateformat.dateFormat = "yyyy-MM-dd HH:mm"
-        let str = dateformat.string(from: date)
+    
+    
+    //MARK:初始化页面需要的方法
+    
+    func setTextFields(){
+        self.fromText.tag = 0
+        self.destText.tag = 1
+        self.deptTimeText.tag = 2
+        self.backTimeText.tag = 3
+        self.havePeopleText.tag = 4
+        self.planPeopleText.tag = 5
+        self.budgetText.tag = 6
+        self.transportationText.tag = 7
+        self.userLoactionText.tag = 8
+        
+        self.planPeopleText.keyboardType = .numberPad
+        self.havePeopleText.keyboardType = .numberPad
+        self.budgetText.keyboardType = .numberPad
+        
+        self.fromText.delegate = self
+        self.destText.delegate = self
+        self.deptTimeText.delegate = self
+        self.backTimeText.delegate = self
+        self.havePeopleText.delegate = self
+        self.planPeopleText.delegate = self
+        self.budgetText.delegate = self
+        self.transportationText.delegate = self
+        self.userLoactionText.delegate = self
         
     }
     
-    //MARK:初始化页面需要的方法
+    func setTime(datePicker:UIDatePicker){
+//        let dateformat = DateFormatter.init()
+//        let date = datePicker.date
+//        dateformat.dateFormat = "yyyy-MM-dd HH:mm"
+//        let str = dateformat.string(from: date)
+        
+    }
+    
     func setLocation(){
         locationManager = AMapLocationManager()
         locationManager?.delegate = self
@@ -108,12 +159,14 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             
             if let location = location {
                 NSLog("🐶location:%@", location)
+                self?.parameters["longitude"] = location.coordinate.longitude.description
+                self?.parameters["latitude"] = location.coordinate.latitude.description
             }
             
             if let reGeocode = reGeocode {
                 NSLog("🐥reGeocode:%@", reGeocode)
                 self?.userLoactionText.text = reGeocode.aoiName
-                
+                self?.fromText.text = reGeocode.aoiName
             }
         })
     }
@@ -169,13 +222,76 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         }else{
             textviewLabel.isHidden = true
         }
-        
+        self.parameters["detailed"] = textView.text
         if text == "\n" {
             return false
         }
         return true
     }
     //MARK:TextfileDelegate
+
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        resignResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        resignResponder()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField.tag {
+            /*
+             self.fromText.tag = 0
+             self.destText.tag = 1
+             self.deptTimeText.tag = 2
+             self.backTimeText.tag = 3
+             self.havePeopleText.tag = 4
+             self.planPeopleText.tag = 5
+             self.budgetText.tag = 6
+             self.transportationText.tag = 7
+             self.userLoactionText.tag = 8
+             
+             var parameters: Parameters = [
+             "userId":"17864154582",
+             "departure":"",
+             "destination":"",
+             "planPeople":0,
+             "departureTime":"",
+             "returnTime":"",
+             "budget":"",
+             "transportation":"",
+             "detailed":"",
+             ]
+             */
+        case 0:
+            parameters["departure"] = textField.text
+        case 1:
+            parameters["destination"] = textField.text
+        case 2:
+            parameters["departureTime"] = textField.text
+        case 3:
+            parameters["returnTime"] = textField.text
+        case 4:
+            return
+        case 5:
+            parameters["planPeople"] = textField.text
+        case 6:
+            parameters["budget"] = textField.text
+        case 7:
+            parameters["transportation"] = textField.text
+        case 8:
+            return
+        default:
+            return
+        }
+    }
+    
+
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if(textField.tag != 2 || textField.tag != 3){
             if (self.datePicker.superview != nil){
@@ -206,10 +322,10 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     }
     
     @IBAction func postBtnTapped(_ sender: Any) {
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.mode = .determinate
-        hud.label.text = "发布成功"
-        
+        self.detailText.resignFirstResponder()
+        print(parameters)
+        UserManager.shared.postTour(para: parameters)
+        self.dismiss(animated: true, completion: nil)
     }
     //MARK: -Textfield弹出事件
     
@@ -218,6 +334,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         ActionSheetStringPicker.show(withTitle: "选择交通方式", rows: self.transArr, initialSelection: 1, doneBlock: {
             picker, index, value in
             self.transportationText.text = value as! String
+            self.parameters["transportation"] = self.transportationText.text
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: sender)
     }
@@ -228,6 +345,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             dateformat.dateFormat = "YYYY-MM-dd HH:mm"
             let str = dateformat.string(from: startDate!)
             self.deptTimeText.text = str
+            self.parameters["departureTime"] = str
         }
         w?.doneButtonColor = UIColor.orange
         w?.show()
@@ -240,6 +358,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             dateformat.dateFormat = "YYYY-MM-dd HH:mm"
             let str = dateformat.string(from: startDate!)
             self.backTimeText.text = str
+            self.parameters["returnTime"] = str
         }
         w?.doneButtonColor = UIColor.orange
         w?.show()

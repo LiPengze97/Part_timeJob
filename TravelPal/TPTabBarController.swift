@@ -83,30 +83,38 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
     }
 
     func setTabbar(){
-        let names = ["旅伴","出行","","消息","个人中心"]
+        let names = ["bticon_location_off","bticon_find_off","","bticon_message_off","bticon_person_off"]
+        let selectNames = ["bticon_location_on","bticon_find_on","","bticon_message_on","bticon_person_on"
+        ]
         let imgNames = ["伙伴","地图","","消息","个人中心"]
         let vc1 = TravelPalViewController()
         let vc2 = ViewController()
         let vc3 = empty()
-        let vc4 = IMListViewController()
+        let vc4 = TPIMListViewController()
         let vc5 = PersonalViewController()
         let vcs = [vc1,vc2,vc3,vc4,vc5]
         let arr:NSMutableArray = NSMutableArray.init()
         for i in 0..<names.count{
             let ctl = vcs[i]
             let navi:UINavigationController = UINavigationController.init(rootViewController: ctl)
-            if i == 4 {
-//                navi.navigationBar.frame = CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: 44)
-//                navi.navigationBar.setTitleVerticalPositionAdjustment(-40, for: UIBarMetrics.default)
-            }
-            ctl.navigationItem.title = names[i]
-            navi.tabBarItem.title = names[i]
+//            if i == 3 {
+//                vc4.tabBarItem.title = names[i]
+//                vc4.tabBarItem.image = UIImage.init(named: imgNames[i])
+//                arr.add(vc4)
+//            }else{
+                ctl.navigationItem.title = imgNames[i]
+                navi.tabBarItem.title = imgNames[i]
+                navi.navigationBar.barTintColor = UIColor.init(red: 35/255.0, green: 173/255.0, blue: 130/255.0, alpha: 1)
+                navi.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+                navi.navigationBar.tintColor = UIColor.white
+                let img = UIImage.init(named: names[i])
+                navi.tabBarItem.image = img
+                navi.tabBarItem.selectedImage = UIImage.init(named: selectNames[i])
+                arr.add(navi)
+
+//            }
             
-            arr.add(navi)
-            
-            let img = UIImage.init(named: imgNames[i])
-            navi.tabBarItem.image = img
-        }
+                   }
         self.viewControllers = arr as! [UIViewController]
     }
     /*

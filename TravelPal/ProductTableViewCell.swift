@@ -16,19 +16,18 @@ class ProductTableViewCell: UITableViewCell {
     var collectLabel: UILabel?
     var siteLabel:UILabel?
     
+    let screenwidth = UIScreen.main.applicationFrame.size.width
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // 设置选中cell时无高亮等效果
         self.selectionStyle = .none
-        imageview = UIImageView(frame: CGRect(x: 20, y: 10, width: 135, height: 80))
-        titleLabel = UILabel(frame: CGRect(x: 176, y: 20, width: 100, height: 20))
-        priceLabel = UILabel(frame: CGRect(x: 256, y: 30, width: 100, height: 40))
-        collectLabel = UILabel(frame: CGRect(x: 176, y: 30, width: 100, height: 40))
-        siteLabel = UILabel(frame: CGRect(x: 176, y: 50, width: 180, height: 40))
+        imageview = UIImageView(frame: CGRect(x: 15, y: 10, width: 135, height: 80))
+        titleLabel = UILabel(frame: CGRect(x: 165, y: 20, width: screenwidth, height: 20))
+        priceLabel = UILabel(frame: CGRect(x: 235, y: 30, width: screenwidth-235, height: 40))
+        collectLabel = UILabel(frame: CGRect(x: 165, y: 30, width: 100, height: 40))
+        siteLabel = UILabel(frame: CGRect(x: 165, y: 50, width: 186, height: 40))
 
-        //titleLabel?.textAlignment = .center
         titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        //priceLabel?.textAlignment = .center
         priceLabel?.font = UIFont.systemFont(ofSize: 12)
         collectLabel?.font = UIFont.systemFont(ofSize: 12)
         siteLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -51,7 +50,19 @@ class ProductTableViewCell: UITableViewCell {
     
     func setupUI(imageString:String,titleString:String,priceString:String,collectString:String,siteString:String){
         
-        self.imageview?.image=UIImage(named: imageString)
+        var url = imageString
+        var urlStr = NSURL(string: url)!
+        var nsd = NSData(contentsOf: urlStr as URL)
+        
+        var img: UIImage? = nil
+        if nsd != nil {
+            img = UIImage(data: nsd! as Data)!
+            self.imageview?.image=img
+        }
+        else{
+            self.imageview?.image = UIImage(named: "xiamen.jpg")
+        }
+        
         self.titleLabel?.text=titleString
         self.priceLabel?.text=priceString
         self.collectLabel?.text=collectString

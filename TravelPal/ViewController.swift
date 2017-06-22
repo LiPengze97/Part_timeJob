@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController,tableViewDelegate{
     
-    var location = String()
+   var location = String()
     
     var topView = UIView()
     var mainTableView: MaintableView!
@@ -20,19 +20,19 @@ class ViewController: UIViewController,tableViewDelegate{
         
         super.viewDidLoad()
         
-        location = "广州"
+        location = "济南"
         
-        var r = CGFloat(29)
+        let r = CGFloat(29)
         
         self.view.backgroundColor = UIColor(red : 242/255, green : 242/255, blue : 242/255, alpha : 1);
         
         //top view的初始化设置
-        var rect3 = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64)
+        let rect3 = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64)
         topView.frame = rect3
         topView.backgroundColor = UIColor(red : 13/255, green : 168/255, blue : 133/255, alpha : 1);
         
         
-        var topButton = UIButton(frame: CGRect(x: 11+2*r, y: 31-3.5, width: 250, height: r))
+        let topButton = UIButton(frame: CGRect(x: 11+2*r, y: 31-3.5, width: 250, height: r))
         topButton.backgroundColor = UIColor(red : 255/255, green : 255/255, blue : 255/255, alpha : 0.2);
         topButton.layer.cornerRadius = 29/2
         topButton.addTarget(self, action: #selector(ViewController.topButtonTap(_:)), for: UIControlEvents.touchUpInside)
@@ -41,24 +41,25 @@ class ViewController: UIViewController,tableViewDelegate{
         topButton.titleLabel?.textColor = UIColor.white
         topView.addSubview(topButton)
         
-        var rightButton = UIButton(frame:CGRect(x: 250+20+60, y: 31-3.5, width: r, height: r))
+        let rightButton = UIButton(frame:CGRect(x: 250+20+60, y: 31-3.5, width: r, height: r))
         rightButton.backgroundColor = UIColor.white
         rightButton.layer.cornerRadius = r/2
         topView.addSubview(rightButton)
         
-        var leftButton = UIButton(frame:CGRect(x: 11, y: 31-3.5, width: 2*r, height: r))
-        leftButton.backgroundColor = UIColor(red : 13/255, green : 168/255, blue : 133/255, alpha : 1);
+        let leftButton = UIButton(frame:CGRect(x: 11, y: 31-3.5, width: 2*r, height: r))
+        leftButton.backgroundColor = UIColor(red : 13/255, green : 168/255, blue : 133/255, alpha : 1)
         leftButton.setTitle(location, for: UIControlState())
         leftButton.titleLabel!.font = UIFont.systemFont(ofSize: 15)
         leftButton.titleLabel?.textColor = UIColor.white
         leftButton.addTarget(self, action: #selector(ViewController.leftButtonTap(_:)), for: UIControlEvents.touchUpInside)
         topView.addSubview(leftButton)
         
-        
+   
         
         mainTableView = MaintableView(frame: CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height-64))
         mainTableView.delegate = self
         
+        self.navigationController?.navigationBar.backgroundColor = UIColor.init(red: 35/255.0, green: 173/255.0, blue: 130/255.0, alpha: 1)
         
         self.view.addSubview(topView)
         self.view.addSubview(mainTableView)
@@ -67,17 +68,18 @@ class ViewController: UIViewController,tableViewDelegate{
     
     func topButtonTap(_ _button:UIButton){
         
-        let secondView = SearchViewController()
+       let secondView = SearchViewController()
         self.present(secondView, animated: true, completion: nil)
-        
+    
     }
     
     func leftButtonTap(_ _button:UIButton){
-        
-        
-        let secondView = SearchViewController()
-        secondView.a = location
+    
+  //CCCCCCCCCCCCCCCCC1
+        let secondView = SearchResultViewController()
+        secondView.result = location
         self.present(secondView, animated: true, completion: nil)
+//CCCCCCCCCCCCCCCCCC1
     }
     
     
@@ -87,33 +89,40 @@ class ViewController: UIViewController,tableViewDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    //maintableview里点击cell的代理方法
+//maintableview里点击cell的代理方法
     func didSelectCell(_ Section: Int, Row: Int) {
-        print("k0")
+        
     }
     func jumpToInformationView(_ title:String){
-        print("k1")
+        
         let secondView = InformationViewController()
         secondView.titlek = title
         self.present(secondView, animated: true, completion: nil)
         
     }
     
+    //CCCCCCCCCCCCCCCCCCCC2
+    func jumpToSearchResultView(_ title:String){
+        let secondView = SearchResultViewController()
+        secondView.result = title
+        self.present(secondView, animated: true, completion: nil)
     
-    //maintableview里scrollview用到的代理方法
+    
+    }
+    //CCCCCCCCCCCCCCCCCCC2
+    
+
+//maintableview里scrollview用到的代理方法
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("aa")
         //设置rollingEnable为true即可开启自动滚动功能
         mainTableView.loopPage.rollingEnable = true
     }
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         //需要在退出前停止自动滚动,否则会内存泄露
-
-        
+        print("bb")
         mainTableView.loopPage.rollingEnable = false
     }
     

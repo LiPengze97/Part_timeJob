@@ -33,6 +33,7 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         //self.navigationController?.navigationBar.backgroundColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 0)
         self.navigationController?.navigationBar.barTintColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 1)
         
@@ -102,6 +103,7 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
         self.tableView.bringSubview(toFront: coBtn!)
         self.tableView.bringSubview(toFront: frBtn!)
         
+        ctBtn?.addTarget(self, action: #selector(TravelPalDetailViewController.contactDidTapped), for: .touchUpInside)
 //        let ss = UIView.init(frame: CGRect.init(x: 10, y: 10, width: SCREEN_HEIGHT - 20, height: 48))
 //        ss.addSubview(ctBtn)
 //        ss.addSubview(coBtn)
@@ -124,6 +126,11 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
 //        let btnarr:[UIBarButtonItem] = [friendsBtn,collectBtn,contactBtn]
 //        self.toolbarItems = btnarr
         
+    }
+    
+    func contactDidTapped(){
+        let a = IMConversationViewController.init(conversationType: .ConversationType_PRIVATE, targetId: "13605361772")
+        self.navigationController?.pushViewController(a!, animated: true)
     }
     
     func createRightBtn(){
