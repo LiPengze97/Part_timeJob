@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+
 class CloseLvbanInfo{
     var id:String?
     var userId:String?
@@ -21,4 +24,26 @@ class CloseLvbanInfo{
     var type:String?
     var longitude:String?
     var latitude:String?
+    var valid:String?
+    
+    init(json : JSON) {
+        self.id = json["id"].stringValue
+        self.departureTime = json["departureTime"].stringValue
+        self.detailed = json["id"].stringValue
+        self.longitude = json["id"].stringValue
+        self.latitude = json["id"].stringValue
+        self.departure =  json["id"].stringValue
+        self.publishTime =  json["id"].stringValue
+        self.type =  json["id"].stringValue
+        self.returnTime = json["id"].stringValue
+        self.userId = json["id"].stringValue
+        self.destination =  json["id"].stringValue
+        self.valid =  json["id"].stringValue
+        self.planPeople = json["id"].stringValue
+        self.existPeople = json["id"].stringValue
+        
+    }
+
+    
+    
     }

@@ -2,19 +2,20 @@
 //  DemoCell.swift
 //  FoldingCell
 //
-//  Created by Alex K. on 25/12/15.
-//  Copyright © 2015 Alex K. All rights reserved.
-//
 
 import UIKit
 
 protocol RequestJumpDelegate {
-    func requestJump()
+    func requestJump(index: Int)
+    
 }
 
 class DemoCell: FoldingCell {
     var delegate: RequestJumpDelegate?
-    
+    //选择的行数
+    var selectnum = 0
+    //所属的tableview
+    var tableid = 0
   @IBOutlet weak var closeNumberLabel: UILabel!
   @IBOutlet weak var openNumberLabel: UILabel!
     @IBOutlet weak var requsetBtn: UIButton!
@@ -40,7 +41,8 @@ class DemoCell: FoldingCell {
   }
     
     @IBAction func requestTapped(_ sender: Any) {
-            delegate?.requestJump()
+        delegate?.requestJump(index: tableid)
+        
     }
 
 }

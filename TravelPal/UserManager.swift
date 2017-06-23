@@ -248,11 +248,13 @@ public class UserManager: Notifier {
                 }
                 let json = JSON(value)
                 print("🙏",json)
-                let array = NSArray.init(object: json["data"].arrayValue)
+                let array = NSArray.init(object: json["data"].arrayObject as! [Dictionary<String,String>])
                 let filePath = Bundle.main.path(forResource: "Tourism", ofType: "plist")
                 let url = URL.init(string: filePath!)
                 array.write(to: url!, atomically: true)
+                
                 guard let status = json["status"].int else { return }
+                
                 guard status == 200 else {
                     log(json, .error)
                     
@@ -385,16 +387,17 @@ public class UserManager: Notifier {
                     //   136     JBYpKy1rUGUvfsLIcmkv0kIhz9rAQWIHhUAxahX3SGc1aigJlG4K8V4jncyurMaQMPWhnkPdCquoAqUf48wh4zqLm/gKwSJw
                     //   178     IZZ+R6gxLCclMMV9L8tjWMfvrSIfMwqzri3X7DJoFvQB0gTNkJUlQ+UuXso/TnOYjO9zM7QhVnIqEhei5fI4dnVA7y0VlSVg
                     
-                    RCIM.shared().connect(withToken: USER_136_TOKEN, success: { (userid) in
+                    RCIM.shared().connect(withToken: USER_178_TOKEN, success: { (userid) in
                         print("登陆成功，userID为 ",userid)
-                        RCIM.shared().currentUserInfo = RCUserInfo.init(userId: "13605361772", name: "李若水", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/iuzjpt23kob-62870.jpg")
+                        RCIM.shared().currentUserInfo = RCUserInfo.init(userId: "17864154582", name: "李若水", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
                     }, error: { (status) in
                         print("登录失败",status)
                     }) {
                         print("Token出错")
                     }
 
-                    
+//                    http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg   178
+//                    http://img1.skqkw.cn:888/2014/12/06/08/iuzjpt23kob-62870.jpg 136
                     self.userDefaults.synchronize()
                 }
             })

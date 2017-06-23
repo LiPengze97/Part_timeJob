@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SwiftyJSON
 import Alamofire
 
 
 class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMapViewDelegate,TPCalloutViewDelegate {
     var vcArray = Array<MainTableViewController>()
     var tableViewArray = Array<UITableView>()
-    var tourismLvbanInfos:[[TourismLvbanInfo]]?
+    var tourismLvbanInfos = Array<TourismLvbanInfo>()
     var closeLvbanInfos:[[CloseLvbanInfo]]?
     var currentTabelView = UITableView()
     var locationManager:AMapLocationManager?
@@ -38,6 +39,10 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         self.view.addSubview(self.bottomScroll!)
         for i in 0..<headSegmentArray.count {
             let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController") as! MainTableViewController
+            if i==0{
+                ma.mark = 1
+            }
+            ma.tableid = i
             ma.view.frame = CGRect.init(x: SCREEN_WIDTH*CGFloat(i), y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
             ma.vview.backgroundColor = UIColor.clear
             ma.tableView.tableHeaderView = ma.vview
@@ -48,6 +53,7 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
             for j in 0..<ma.tableView.visibleCells.count {
                 
                 (ma.tableView.visibleCells[j] as! DemoCell).delegate = self
+                (ma.tableView.visibleCells[j] as! DemoCell).tableid = i
             }
             
             ma.tableView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
@@ -63,9 +69,59 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
         
-        UserManager.shared.getTourism()
+        getTourism()
+        
         
     }
+    
+    func getTourism(){
+        Alamofire.request(Router.getTourism).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                guard let value = response.result.value else{
+                    log("response.result.value is nil", .error)
+                    return
+                }
+                let json = JSON(value)
+                print("🙏",json)
+                
+                for (index,subJson):(String, JSON) in json["data"] {
+                    //Do something you want
+                    let a = TourismLvbanInfo.init(json: subJson)
+//                    print(a.departure,"😕")
+                    self.tourismLvbanInfos.append(a)
+                }
+                
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async {
+                        self.vcArray[0].tourismLvbanInfos = self.tourismLvbanInfos
+                        self.vcArray[0].tableView.reloadData()
+                        let ma = self.vcArray[0]
+                        for j in 0..<ma.tableView.visibleCells.count {
+                            
+                            (ma.tableView.visibleCells[j] as! DemoCell).delegate = self
+                        }
+                    }
+                }
+                
+                
+                guard let status = json["status"].int else { return }
+                
+                guard status == 200 else {
+//                    log(json, .error)
+                    
+                    return
+                }
+                return
+            case .failure(let error):
+                log(error, .error)
+                return
+            }
+            
+        }
+    }
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -286,14 +342,22 @@ extension TravelPalViewController: UIScrollViewDelegate{
 }
 
 extension TravelPalViewController: RequestJumpDelegate{
-    func requestJump() {
+
+    func requestJump(index: Int) {
         
         let tpd = TravelPalDetailViewController()
+        
+        if index == 0{
+            tpd.lvbaninfo = self.tourismLvbanInfos[self.vcArray[0].selectnum]
+            tpd.mark = 1
+        }
+        
         self.navigationController?.pushViewController(tpd, animated: true)
+
     }
 }
 
 fileprivate extension Selector{
-//    static let getTourismInfo = #selector()
+
 }
 

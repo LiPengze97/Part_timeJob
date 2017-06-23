@@ -7,21 +7,41 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class TourismLvbanInfo {
-    var id:String?
-    var userId:String?
-    var departure:String?
-    var destination:String?
-    var existPeople:String?
-    var planPeople:String?
-    var departureTime:String?
-    var returnTime:String?
-    var budget:String?
-    var transportation:String?
-    var publishTime:String?
-    var detailed:String?
-    var valid:String?
-    var longitude:String?
-    var latitude:String?
+    var id:String
+    var userId:String
+    var departure:String
+    var destination:String
+    var existPeople:String
+    var planPeople:String
+    var departureTime:String
+    var returnTime:String
+    var budget:String
+    var transportation:String
+    var publishTime:String
+    var detailed:String
+    var valid:String
+    var longitude:String
+    var latitude:String
+    
+    init(json : JSON) {
+        self.id = json["id"].stringValue
+        self.departureTime = json["departureTime"].stringValue
+        self.detailed = json["detailed"].stringValue
+        self.longitude = json["longitude"].stringValue
+        self.latitude = json["latitude"].stringValue
+        self.departure =  json["departure"].stringValue
+        self.publishTime =  json["publishTime"].stringValue
+        self.budget =  json["budget"].stringValue
+        self.returnTime = json["returnTime"].stringValue
+        self.userId = json["userId"].stringValue
+        self.destination =  json["destination"].stringValue
+        self.valid =  json["valid"].stringValue
+        self.planPeople = json["planPeople"].stringValue
+        self.transportation = json["transportation"].stringValue
+        self.existPeople = json["existPeople"].stringValue
+
+    }
 }

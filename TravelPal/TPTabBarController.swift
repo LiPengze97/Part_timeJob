@@ -86,7 +86,8 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
         let names = ["bticon_location_off","bticon_find_off","","bticon_message_off","bticon_person_off"]
         let selectNames = ["bticon_location_on","bticon_find_on","","bticon_message_on","bticon_person_on"
         ]
-        let imgNames = ["伙伴","地图","","消息","个人中心"]
+        let imgNames = ["伙伴","地图","","消息",""]
+        let itemNames = ["伙伴","地图","","消息","个人中心"]
         let vc1 = TravelPalViewController()
         let vc2 = ViewController()
         let vc3 = empty()
@@ -103,7 +104,7 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
 //                arr.add(vc4)
 //            }else{
                 ctl.navigationItem.title = imgNames[i]
-                navi.tabBarItem.title = imgNames[i]
+                navi.tabBarItem.title = itemNames[i]
                 navi.navigationBar.barTintColor = UIColor.init(red: 35/255.0, green: 173/255.0, blue: 130/255.0, alpha: 1)
                 navi.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
                 navi.navigationBar.tintColor = UIColor.white

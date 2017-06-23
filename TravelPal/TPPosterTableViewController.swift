@@ -166,6 +166,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
             if let reGeocode = reGeocode {
                 NSLog("🐥reGeocode:%@", reGeocode)
                 self?.userLoactionText.text = reGeocode.aoiName
+                self?.parameters["departure"] = self?.userLoactionText.text
                 self?.fromText.text = reGeocode.aoiName
             }
         })
@@ -324,6 +325,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     @IBAction func postBtnTapped(_ sender: Any) {
         self.detailText.resignFirstResponder()
         print(parameters)
+        self.parameters["departure"] = self.userLoactionText.text
         UserManager.shared.postTour(para: parameters)
         self.dismiss(animated: true, completion: nil)
     }

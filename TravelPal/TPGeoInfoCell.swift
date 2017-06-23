@@ -10,27 +10,37 @@ import UIKit
 
 class TPGeoInfoCell: UITableViewCell,AMapLocationManagerDelegate,MAMapViewDelegate {
 
-    let userLocation:CLLocationCoordinate2D? = nil
-    let targetLocation:CLLocationCoordinate2D? = nil
+    var userLocation:CLLocationCoordinate2D? = nil
+    var targetLocation:CLLocationCoordinate2D? = nil{
+        didSet{
+            AddAnno()
+        }
+    }
+    var mapview:MAMapView?
     override func awakeFromNib() {
         super.awakeFromNib()
-        let mapview = MAMapView.init(frame: self.bounds)
-        mapview.delegate = self
-        self.addSubview(mapview)
+        mapview = MAMapView.init(frame: self.bounds)
+        mapview!.delegate = self
+        mapview!.setZoomLevel(14, animated: true)
+        self.addSubview(mapview!)
         
-        mapview.isShowsUserLocation = true
-        mapview.userTrackingMode = .follow
+        mapview!.isShowsUserLocation = true
+        mapview!.userTrackingMode = .follow
         
         
-        if let location = userLocation{
+                // Initialization code
+    }
+    
+    func AddAnno(){
+        if let location = targetLocation{
             let anno = MAPointAnnotation.init()
             anno.coordinate = location
             anno.title = "Ta在这里！"
-            mapview.addAnnotation(anno)
-            
+            mapview!.addAnnotation(anno)
         }
-        // Initialization code
+
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

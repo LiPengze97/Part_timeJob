@@ -9,7 +9,7 @@
 import UIKit
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
-
+    
     var phoneText : UITextField!
     var passwordText : UITextField!
     var surepasswordText : UITextField!
@@ -35,13 +35,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             self.noticeOnlyText("两次密码不相同")
             return
         }
-//        UserManager.shared.exists(tel: phoneText.text!)
-//        UserManager.shared.signup(tel: phoneText.text!,password: passwordText.text!)
-//        
         //ggggggggggggggggggggggggg
         UserManager.shared.signup(tel: phoneText.text!,password: passwordText.text!)
+        
     }
-
+    
     func closeButtonTapped() {
         
         if !UserManager.shared.isExist {
@@ -67,7 +65,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = "注册"
         self.view.backgroundColor = kRGBColorFromHex(rgbValue: 0xf2f2f2)
         
@@ -102,14 +100,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(passwordText)
         self.view.addSubview(surepasswordText)
         self.view.addSubview(registBtn)
-}
-
+    }
+    
     //ccccccccccccccccccccccccccccccccccccc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UserManager.shared.exists(tel: phoneText.text!)
-        UserManager.shared.signup(tel: phoneText.text!,password: passwordText.text!)
         UserManager.addObserver(observer: self, selector: .userDidSignup, notification: .didSignup)
         UserManager.addObserver(observer: self, selector: .userDidSignupFailure, notification: .didSignupFailure)
     }

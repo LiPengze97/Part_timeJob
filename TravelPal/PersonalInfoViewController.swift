@@ -10,19 +10,26 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate {
-
+class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImagePickerControllerDelegate,UITableViewDelegate,UINavigationControllerDelegate {
+    
     var tableview : UITableView!
     var headView : UIView!
     var touxiangBtn : UIButton!
+    var username : String!
     
     let screenwidth = UIScreen.main.applicationFrame.size.width
     let screenheight = UIScreen.main.applicationFrame.size.height
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(0, for: UIBarMetrics.default)
+        username = UserManager.shared.username
+        self.tableview.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = "个人资料"
         //上部个人头像
         headView = UIView(frame: CGRect(x: 0, y: 64, width: screenwidth, height: 194))
@@ -30,8 +37,6 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITable
         //根据是否登录显示两种界面
         touxiangBtn = UIButton(frame: CGRect(x: screenwidth/2-44, y: 40, width: 88, height: 88))
         headView.addSubview(touxiangBtn)
-        
-        touxiangBtn.setImage(UIImage(named: "personal_person"), for: .normal)
         touxiangBtn.contentMode = .scaleAspectFill
         touxiangBtn.layer.borderWidth=2
         touxiangBtn.layer.borderColor = kRGBColorFromHex(rgbValue: 0x656565).cgColor
@@ -49,13 +54,59 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITable
         tableview.bounces = false
         tableview.register(PersonalInfoTableViewCell.self, forCellReuseIdentifier: "personalinfocell")
         
+        //根据是否登录显示两种界面
+        //        if UserManager.shared.isLogIn {
+        //            //用url显示头像
+        //            var url = UserManager.shared.image
+        //            //var url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
+        //            var imagehead : UIImageView!
+        //            var urlStr = NSURL(string: url)!
+        //            var nsd = NSData(contentsOf: urlStr as URL)
+        //
+        //            var img: UIImage? = nil
+        //            if nsd != nil {
+        //                imagehead = UIImageView()
+        //                img = UIImage(data: nsd! as Data)!
+        //                imagehead.image = img
+        //                touxiangBtn.setImage(img, for: .normal)
+        //            }
+        //            else{
+        //                touxiangBtn.setImage(UIImage(named: "personal_person"), for: .normal)
+        //            }
+        //
+        //        }
+        //ggggggggggggggggggggggg
+        if UserManager.shared.Image != nil {
+            touxiangBtn.setImage(UserManager.shared.Image, for: .normal)
+        }
+        else{
+            touxiangBtn.setImage(UIImage(named: "personal_person"), for: .normal)
+        }
+        
         self.view.addSubview(headView)
         self.view.addSubview(tableview)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return tits.count
         return 2
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let secondViewController = modifyViewController()
+            secondViewController.tit = "昵称"
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        case 1:
+            let secondViewController = modifyViewController()
+            secondViewController.tit = "所在地"
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        default:
+            let secondViewController = modifyViewController()
+            secondViewController.tit = "昵称"
+            self.navigationController?.pushViewController(secondViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +133,7 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -160,25 +211,28 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITable
             //得到选择后沙盒中图片的完整路径
             let filePath: String = String(format: "%@%@", documentPath, "/image.png")
             print("filePath:" + filePath)
-//            Alamofire.upload("http://192.168.3.16:9060/client/updateHeadUrl",method: .post,multipartFormData: { multipartFormData in
-//                let lastData = NSData(contentsOfFile: filePath)
-//                
-//                multipartFormData.appendBodyPart(data: lastData!, name: "image")
-//                
-//            }, encodingCompletion: { response in
-//                picker.dismissViewControllerAnimated(true, completion: nil)
-//                switch response {
-//                case .Success(let upload, _, _):
-//                    upload.responseJSON(completionHandler: { (response) in
-//                        print(response)
-//                        self.touxiangBtn.setImage(UIImage(data: data!), for: .normal)
-//                })
-//                    
-//                case .Failure(let encodingError):
-//                    print(encodingError)
-//                }
-//                
-//            })
+            picker.dismiss(animated: true, completion: nil)
+            UserManager.shared.Image = UIImage(data: data!)
+            self.touxiangBtn.setImage(UIImage(data: data!), for: .normal)
+            //            Alamofire.upload("http://192.168.3.16:9060/client/updateHeadUrl",method: .post,multipartFormData: { multipartFormData in
+            //                let lastData = NSData(contentsOfFile: filePath)
+            //
+            //                multipartFormData.appendBodyPart(data: lastData!, name: "image")
+            //
+            //            }, encodingCompletion: { response in
+            //                picker.dismissViewControllerAnimated(true, completion: nil)
+            //                switch response {
+            //                case .Success(let upload, _, _):
+            //                    upload.responseJSON(completionHandler: { (response) in
+            //                        print(response)
+            //                        self.touxiangBtn.setImage(UIImage(data: data!), for: .normal)
+            //                })
+            //
+            //                case .Failure(let encodingError):
+            //                    print(encodingError)
+            //                }
+            //
+            //            })
             
             
         }
@@ -235,10 +289,10 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UITable
         let img: UIImage = UIImage(cgImage: cgimg)
         return img
     }
-
+    
     
     func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
         return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
     }
-
+    
 }

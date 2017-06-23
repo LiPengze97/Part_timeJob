@@ -1,29 +1,21 @@
 //
 //  MainTableViewController.swift
 //
-// Copyright (c) 21/12/15. Ramotion Inc. (http://ramotion.com)
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 
 import UIKit
 
 class MainTableViewController: UITableViewController {
+    
+    //0代表一般，1代表特殊
+    var mark = 0
+    //选择的行数
+    var selectnum = 0
+    
+    //这是tableviewarray里面第几个
+    var tableid = 0
+    
+    
+    
     
     let kCloseCellHeight: CGFloat = 179
     let kOpenCellHeight: CGFloat = 488
@@ -33,6 +25,8 @@ class MainTableViewController: UITableViewController {
     
     var cellHeights = [CGFloat]()
 
+    var tourismLvbanInfos = Array<TourismLvbanInfo>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = kCloseCellHeight
@@ -53,7 +47,15 @@ class MainTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if mark == 0 {
+            return 10
+        }else{
+            if tourismLvbanInfos == nil {
+                return 0
+            }else{
+                return tourismLvbanInfos.count
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -74,8 +76,21 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! DemoCell
+        if mark == 1{
+        cell.fromLabel.text = tourismLvbanInfos[indexPath.row].departure
+        cell.fromlabel1.text = tourismLvbanInfos[indexPath.row].departure
+        cell.toLabel.text = tourismLvbanInfos[indexPath.row].destination
+        cell.tolabel1.text = tourismLvbanInfos[indexPath.row].destination
+        cell.postTimeLabel.text =  tourismLvbanInfos[indexPath.row].publishTime
+        cell.peoplenumLabel.text =  tourismLvbanInfos[indexPath.row].planPeople
+        cell.peoplenumLabel1.text = tourismLvbanInfos[indexPath.row].planPeople
+        cell.deptTimeLabel.text = tourismLvbanInfos[indexPath.row].departureTime
+        cell.typeLabel.text = "远途旅伴"
+        cell.typeLabel1.text = "远途旅伴"
+        cell.budgetLabel.text = tourismLvbanInfos[indexPath.row].budget
+        cell.budgetLabel1.text = tourismLvbanInfos[indexPath.row].budget
+        }
         return cell
     }
     
@@ -109,6 +124,7 @@ class MainTableViewController: UITableViewController {
             tableView.endUpdates()
         }, completion: nil)
 
+        selectnum = indexPath.row
         
     }
 

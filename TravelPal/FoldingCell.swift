@@ -34,8 +34,23 @@ open class FoldingCell: UITableViewCell {
   @IBOutlet weak open var foregroundView: RotatedView!
   @IBOutlet weak open var foregroundViewTop: NSLayoutConstraint!
   var animationView: UIView?
+    //UI
+    @IBOutlet weak var fromLabel: UILabel!
+    @IBOutlet weak var toLabel: UILabel!
+    
+    @IBOutlet weak var fromlabel1: UILabel!
+    @IBOutlet weak var tolabel1: UILabel!
+    
+    @IBOutlet weak var postTimeLabel: UILabel!
   
+    @IBOutlet weak var budgetLabel1: UILabel!
+    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var peoplenumLabel: UILabel!
+    @IBOutlet weak var peoplenumLabel1: UILabel!
+    @IBOutlet weak var deptTimeLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
   ///  the number of folding elements. Default 2
+    @IBOutlet weak var typeLabel1: UILabel!
   @IBInspectable open var itemCount: NSInteger = 2
   
   /// The color of the back cell

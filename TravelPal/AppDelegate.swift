@@ -11,7 +11,7 @@ import CoreData
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
+class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource,InBtnDelegate {
 
     var window: UIWindow?
 
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
 //        高德地图
         
         //判断是否第一次打开app
-        /*
+        
         var started = UserDefaults.standard.value(forKey: "started") as? String
         if started == nil {
             let vcc = TPWelcomeViewController()
@@ -31,11 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
             vcc.startClosure = {
                 ()-> Void in
                 self.startApp()
-                UserDefaults.standard.setValue("start", forKey: "started")
-                UserDefaults.standard.synchronize()
+//                UserDefaults.standard.setValue("start", forKey: "started")
+//                UserDefaults.standard.synchronize()
             }
         }
-        */
+        
         AMapServices.shared().apiKey = "30e945acb2834ca1fb6e8de43ffefa4b"
         //网易云信
         RCIM.shared().initWithAppKey("8w7jv4qb78a3y")
@@ -68,15 +68,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
         
         let qq = TPIMListViewController()
         let na = UINavigationController.init(rootViewController: qq)
-        self.window?.rootViewController = vc
+        
+        let ssss = TPWelcomeViewController()
+        self.window?.rootViewController = ssss
         
         return true
     }
+    
+    func InBtnTapped() {
+        let tt = TPTabBarController()
+        
+    }
+    
     func startApp() {
         let rootVc = TPTabBarController()
         // 给viewController配置导航控制器
 //        let navi = UINavigationController(rootViewController: rootVc)
-        self.window?.rootViewController = rootVc
+//        self.window?.rootViewController = rootVc
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -152,7 +160,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RCIMUserInfoDataSource {
     
     func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
         if userId == "13605361772" {
-            let user = RCUserInfo.init(userId: userId, name: "思敏", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
+            let user = RCUserInfo.init(userId: userId, name: "思敏", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/iuzjpt23kob-62870.jpg")
+            return completion(user)
+        }
+        else if userId == "17864154582"{
+            let user = RCUserInfo.init(userId: userId, name: "李若水", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
             return completion(user)
         }
         return completion(nil)

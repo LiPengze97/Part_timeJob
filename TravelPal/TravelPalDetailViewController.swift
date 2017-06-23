@@ -15,9 +15,22 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
     var coBtn:UIButton?
     var frBtn:UIButton?
     var overlayController:OverlayController!
+    //特殊标记，0为一般，1位特殊
+    var mark = 0
+    
+    var lvbaninfo:TourismLvbanInfo?{
+        didSet{
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if mark == 1 {
+            print("😈"+(lvbaninfo?.destination)!)
+        }
+        
         self.view.backgroundColor = UIColor.white
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -60,11 +73,23 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
             cell = tableView.dequeueReusableCell(withIdentifier: "person", for: indexPath) as! TPPersonInfoCell
             
         }else if indexPath.section == 1{
-            cell = tableView.dequeueReusableCell(withIdentifier: "travel", for: indexPath) as! TPTravelInfoCell        }else if indexPath.section == 2{
+            cell = tableView.dequeueReusableCell(withIdentifier: "travel", for: indexPath) as! TPTravelInfoCell
+            (cell as! TPTravelInfoCell).deptTimeLabel.text = self.lvbaninfo?.departureTime
+            (cell as! TPTravelInfoCell).destnationLabel.text = lvbaninfo?.destination
+            (cell as! TPTravelInfoCell).transportationLabel.text = lvbaninfo?.transportation
+            (cell as! TPTravelInfoCell).planpeopleLabel.text = "\((lvbaninfo?.planPeople)!)人"
+        }else if indexPath.section == 2{
             cell = tableView.dequeueReusableCell(withIdentifier: "detail", for: indexPath) as! TPDetailInfoCell
+            if mark == 1 {
+                (cell as! TPDetailInfoCell).detailLabel.text = lvbaninfo?.detailed
+            }
         }else{
-            cell = tableView.dequeueReusableCell(withIdentifier: "geo", for: indexPath) as! TPGeoInfoCell        }
-        cell.isUserInteractionEnabled = false
+            cell = tableView.dequeueReusableCell(withIdentifier: "geo", for: indexPath) as! TPGeoInfoCell
+            if mark == 1 {
+                (cell as! TPGeoInfoCell).targetLocation = CLLocationCoordinate2D.init(latitude: CLLocationDegrees.init((lvbaninfo?.latitude)!)!, longitude: CLLocationDegrees.init((lvbaninfo?.longitude)!)!)
+            }
+        }
+//        cell.isUserInteractionEnabled = false
         return cell
    }
     
@@ -129,7 +154,8 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
     }
     
     func contactDidTapped(){
-        let a = IMConversationViewController.init(conversationType: .ConversationType_PRIVATE, targetId: "13605361772")
+        let a = RCConversationViewController.init(conversationType: .ConversationType_PRIVATE, targetId: "13605361772")
+        
         self.navigationController?.pushViewController(a!, animated: true)
     }
     
@@ -138,23 +164,50 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
         let btn = UIBarButtonItem.init(image: UIImage.init(named: "分享"), style: .plain, target: self, action: #selector(TravelPalDetailViewController.ds))
         btn.tintColor = UIColor.white
         self.navigationItem.rightBarButtonItem = btn
+        
+        
+        
+    }
+    
+    func sheetFast(itemSize: CGSize, hasClose: Bool, items array: Array<String>, prefixName: String) -> TPFabuView {
+        var items: [BannerItem] = []
+        for (_, name) in array.enumerated() {
+            let item = BannerItem()
+            item.title = name
+            if let img = UIImage(named: prefixName.appending(name)) { item.image = img }
+            items.append(item)
+        }
+        let sheet = TPFabuView()
+        sheet.width = UIScreen.width
+        sheet.items = items
+        sheet.close.isHidden = hasClose
+        sheet.bannerTouchClosure = {(anyObj: Any, index: Int) -> Void in
+            let sheetView = anyObj as! TPFabuView
+            print(index)
+            //index是选择的哪一个按钮
+            if let text = sheetView.bannerViews[index].label.text { print(text) }
+            
+        }
+        return sheet
+    }
+    
+    func ds(){
         let array = [
-            "微信好友", "朋友圈", "新浪微博", "QQ好友", "跳转"
+            "微信好友", "朋友圈", "新浪微博", "QQ好友"
         ]
-        let view = UIView.init(frame: .init(x: 0, y: 0, width: SCREEN_WIDTH, height: 300))
-        view.backgroundColor = UIColor.orange
-        self.overlayController = OverlayController.init(aView: view, overlayStyle: .BlackTranslucent)
+        let size = CGSize(width: 80, height: 100)
+        let sheetView = sheetFast(itemSize: size, hasClose: true, items: array, prefixName: "")
+        sheetView.height += 45;
+        
+        overlayController = OverlayController(aView: sheetView, overlayStyle: .BlackTranslucent)
         overlayController.presentationStyle = .Bottom
         overlayController.isAllowDrag = true
         overlayController.isUsingElastic = true
         overlayController.delegate = self;
-        
-    }
-    
-    
-    func ds(){
         overlayController.present(animated: true)
+
     }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         ctBtn?.frame = CGRect.init(x: SCREEN_WIDTH * 256.0/483, y: SCREEN_HEIGHT-factor+self.tableView.contentOffset.y, width: SCREEN_WIDTH * 227.0/483, height: 48)
     

@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol InBtnDelegate {
+    func InBtnTapped()
+}
+
 class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
 
+    
     //闭包属性 用于跳转页面
     var startClosure: (() ->Void)?
     //创建scorllView
@@ -17,6 +22,7 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
     //创建pageController
     let pageControl = UIPageControl()
     
+    var delegate:InBtnDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +40,20 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
         pageControl.numberOfPages = 4
         pageControl.addTarget(self, action: #selector(TPWelcomeViewController.scrollViewDidEndDecelerating), for: .valueChanged)
         //添加背景图片
-        for i in 0..<3 {
-            let image = UIImage(named: "\(i+1)")
+        for i in 0..<4 {
+            let image = UIImage(named: "initial\(i+1)")
             let imageView = UIImageView.init(frame: self.view.frame)
             imageView.image = image
             var frame = imageView.frame
             frame.origin.x = CGFloat(i)*SCREEN_WIDTH
             imageView.frame = frame
             if i == 3{
-                let btn = UIButton.init(frame: CGRect.init(x: self.view.frame.width/2 - 60, y: self.view.frame.height/2 + 100, width: 120, height: 40))
+                let btn = UIButton.init(frame: CGRect.init(x: self.view.frame.width/2 - 85, y: self.view.frame.height/2 + 160, width: 250, height: 80))
                 btn.layer.cornerRadius = 10
-                btn.backgroundColor = UIColor.green
-                btn.setTitle("进人", for: .normal)
-                btn.setTitleColor(UIColor.white, for: .normal)
-                btn.setTitleColor(UIColor.red, for: .highlighted)
+                btn.backgroundColor = UIColor.clear
+//                btn.setTitle("进人", for: .normal)
+//                btn.setTitleColor(UIColor.white, for: .normal)
+//                btn.setTitleColor(UIColor.red, for: .highlighted)
                 btn.addTarget(self, action: #selector(TPWelcomeViewController.startAction), for: .touchUpInside)
                 imageView.addSubview(btn)
                 imageView.isUserInteractionEnabled = true
@@ -56,6 +62,7 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
         }
         
         self.view.addSubview(scrollView)
+        pageControl.isHidden = true
         self.view.addSubview(pageControl)
         // Do any additional setup after loading the view.
     }
@@ -69,7 +76,9 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
     }
     
     func startAction(sender:UIButton){
-        startClosure!()
+        let tp = TPTabBarController()
+        self.present(tp, animated: true, completion: nil)
+//        delegate?.InBtnTapped()
     }
     
     override func didReceiveMemoryWarning() {

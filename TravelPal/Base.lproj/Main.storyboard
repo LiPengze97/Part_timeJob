@@ -495,7 +495,7 @@
                                                                     <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="0.49546030410000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-06-27 18：30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl7-F0-WeH">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-06-27 18：30" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl7-F0-WeH">
                                                                     <rect key="frame" x="0.0" y="24" width="246.5" height="18"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
                                                                     <color key="textColor" red="0.20392156859999999" green="0.23921568630000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -637,13 +637,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="budgetLabel" destination="xac-HG-lRo" id="mGN-AQ-EcF"/>
+                                    <outlet property="budgetLabel1" destination="USJ-Pm-HS3" id="orD-OY-0Tu"/>
                                     <outlet property="closeNumberLabel" destination="h4q-Od-nSK" id="Ilp-8B-ldC"/>
                                     <outlet property="containerView" destination="ZfH-xP-8wH" id="bG4-gy-ucg"/>
                                     <outlet property="containerViewTop" destination="JtM-dd-quF" id="yWI-eA-UAV"/>
+                                    <outlet property="deptTimeLabel" destination="rl7-F0-WeH" id="X55-mm-rPq"/>
                                     <outlet property="foregroundView" destination="zfk-4u-96R" id="eAA-nv-E7U"/>
                                     <outlet property="foregroundViewTop" destination="ESf-BX-JQ3" id="br8-Nn-Gh1"/>
+                                    <outlet property="fromLabel" destination="LZv-7H-Isu" id="Cei-Bw-ScX"/>
+                                    <outlet property="fromlabel1" destination="8kj-JR-hqn" id="pAb-KC-14g"/>
                                     <outlet property="openNumberLabel" destination="kTb-uE-nwp" id="hvb-3o-3x0"/>
+                                    <outlet property="peoplenumLabel" destination="edg-n3-qrD" id="oxP-ak-Jd7"/>
+                                    <outlet property="peoplenumLabel1" destination="D45-DX-0Pe" id="Jn5-dt-j14"/>
+                                    <outlet property="postTimeLabel" destination="6xj-mG-d8V" id="YyW-VE-4Qj"/>
                                     <outlet property="requsetBtn" destination="PNR-5y-NZ4" id="srR-f3-PU3"/>
+                                    <outlet property="toLabel" destination="iOn-qo-CdY" id="ecb-Du-Rg2"/>
+                                    <outlet property="tolabel1" destination="eVu-R8-2Tb" id="y5H-Ah-H00"/>
+                                    <outlet property="typeLabel" destination="xX0-Is-ZcT" id="1Xb-au-S5U"/>
+                                    <outlet property="typeLabel1" destination="bqP-Qt-0cT" id="Fec-fK-03A"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -819,13 +831,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7f-So-hoC">
-                                                    <rect key="frame" x="245" y="15" width="90" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                </textField>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="coO-dN-sTt">
                                                     <rect key="frame" x="98" y="15" width="90" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -840,6 +845,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7f-So-hoC">
+                                                    <rect key="frame" x="277" y="14" width="90" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -968,7 +980,7 @@
                                         <rect key="frame" x="0.0" y="683" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6jr-RL-ldj" id="vkk-aL-w9v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tma-jN-sll">

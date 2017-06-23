@@ -138,6 +138,7 @@ class DetailDingDanViewController: UIViewController,UITableViewDataSource,UITabl
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        
     }
     //cccccccccccccccccccccccccccccccc
     override func didReceiveMemoryWarning() {

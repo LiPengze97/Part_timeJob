@@ -9,7 +9,11 @@
 import UIKit
 
 class TPTravelInfoCell: UITableViewCell {
+    @IBOutlet weak var deptTimeLabel: UILabel!
 
+    @IBOutlet weak var transportationLabel: UILabel!
+    @IBOutlet weak var planpeopleLabel: UILabel!
+    @IBOutlet weak var destnationLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
