@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class CloseLvbanInfo{
     var id:String?
+    var budget:String?
     var userId:String?
     var departure:String?
     var destination:String?
@@ -28,19 +29,20 @@ class CloseLvbanInfo{
     
     init(json : JSON) {
         self.id = json["id"].stringValue
+        self.budget = json["budget"].stringValue
         self.departureTime = json["departureTime"].stringValue
-        self.detailed = json["id"].stringValue
-        self.longitude = json["id"].stringValue
-        self.latitude = json["id"].stringValue
-        self.departure =  json["id"].stringValue
-        self.publishTime =  json["id"].stringValue
-        self.type =  json["id"].stringValue
-        self.returnTime = json["id"].stringValue
-        self.userId = json["id"].stringValue
-        self.destination =  json["id"].stringValue
-        self.valid =  json["id"].stringValue
-        self.planPeople = json["id"].stringValue
-        self.existPeople = json["id"].stringValue
+        self.detailed = json["detailed"].stringValue
+        self.longitude = json["longitude"].stringValue
+        self.latitude = json["latitude"].stringValue
+        self.departure =  json["departure"].stringValue
+        self.publishTime =  json["publishTime"].stringValue
+        self.type =  json["type"].stringValue
+//        self.returnTime = json["id"].stringValue
+        self.userId = json["userId"].stringValue
+        self.destination =  json["destination"].stringValue
+        self.valid =  json["valid"].stringValue
+        self.planPeople = json["planPeople"].stringValue
+        self.existPeople = json["existPeople"].stringValue
         
     }
 

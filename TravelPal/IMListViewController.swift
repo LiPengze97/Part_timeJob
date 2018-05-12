@@ -23,17 +23,10 @@ class IMListViewController: RCConversationListViewController {
         self.setCollectionConversationType([
         RCConversationType.ConversationType_DISCUSSION.rawValue,
         RCConversationType.ConversationType_GROUP.rawValue])
-
-        // Do any additional setup after loading the view.
+ 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+ 
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
         //打开会话界面
         let chat = IMConversationViewController(conversationType: model.conversationType, targetId: model.targetId)
@@ -46,15 +39,5 @@ class IMListViewController: RCConversationListViewController {
         self.tabBarController?.tabBar.isHidden = false
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
 }

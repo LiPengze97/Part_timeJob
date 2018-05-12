@@ -165,14 +165,16 @@ class HELoopPageView: UIView, UIScrollViewDelegate{
     }
     //开始滚动
     fileprivate func startTimer() {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
-            self.timer = Timer.scheduledTimer(timeInterval: self.rollingTime, target: self, selector: #selector(HELoopPageView.next as (HELoopPageView) -> () -> ()), userInfo: nil, repeats: true)
-            RunLoop.current.run()
-        }
+ 
+        self.timer = Timer.scheduledTimer(timeInterval: self.rollingTime, target: self, selector: #selector(HELoopPageView.next as (HELoopPageView) -> () -> ()), userInfo: nil, repeats: true)
+       timer?.fire()
+ 
     }
     //停止滚动
     fileprivate func stopTimer() {
-        timer!.invalidate()
+        if (timer != nil) {
+            timer!.invalidate()
+        }
         timer = nil
     }
     

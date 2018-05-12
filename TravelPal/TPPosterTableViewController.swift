@@ -76,19 +76,9 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
         tableView.separatorStyle = .none
         postBtn.layer.cornerRadius = 10
         cancelBtn.layer.cornerRadius = 10
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
+ 
     
     //MARK:初始化页面需要的方法
     
@@ -245,29 +235,7 @@ class TPPosterTableViewController: UITableViewController,AMapLocationManagerDele
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
-            /*
-             self.fromText.tag = 0
-             self.destText.tag = 1
-             self.deptTimeText.tag = 2
-             self.backTimeText.tag = 3
-             self.havePeopleText.tag = 4
-             self.planPeopleText.tag = 5
-             self.budgetText.tag = 6
-             self.transportationText.tag = 7
-             self.userLoactionText.tag = 8
-             
-             var parameters: Parameters = [
-             "userId":"17864154582",
-             "departure":"",
-             "destination":"",
-             "planPeople":0,
-             "departureTime":"",
-             "returnTime":"",
-             "budget":"",
-             "transportation":"",
-             "detailed":"",
-             ]
-             */
+  
         case 0:
             parameters["departure"] = textField.text
         case 1:

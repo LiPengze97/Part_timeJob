@@ -49,8 +49,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
         
         
   //加载信息
-        
-     //CCCCCCCCCCCCCC3
+     
         shouchang1 = 0
         arrangement = "吃饭睡觉打豆豆吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃"
         cost = "\n费用不包含：\n\n1）小交通：当地机场到酒店的往返接送服务。\n\n2）签证：个人旅游签证费，报名时与团费一起支付。  \n\n3）其它：所在地到出发地的往返交通费请自理 \n\n4）出入境个人物品海关征税，超重行李的托运费、保管费 \n\n5）升级舱位、升级酒店、升级房型等造成的差价 \n\n6）因交通延迟、罢工、天气、飞机故障、航班取消或更改时间等不可抗力因素所引起的额外费用 \n\n7）酒店内洗衣、理发、电话、传真、收费电视、饮品、烟酒等个人消费  \n\n＊建议购买旅游人身意外保险，永成保险境外旅游意外保险 美亚保险境外旅游意外保险"
@@ -378,8 +377,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
         return cell
     }
 
-//scollview代理方法一大堆＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-    
+//scollview代理
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //设置rollingEnable为true即可开启自动滚动功能
@@ -397,25 +395,25 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
     }
     
     
-    //点击按钮的方法********************************************************************************************
+    //点击按钮的方法
     func tapped(_ button:UIButton){
         let cbutton = String(describing: button.title(for: UIControlState()))
-    
+        
         if(cbutton == "Optional(\"客服\")"){
-        print("点了客服")
+            print("点了客服")
         }
-       
- //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC11
+        
+        //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC11
         if(cbutton == "Optional(\"加入收藏\")"){
             print("点了加入收藏")
-
-         let alert = UIAlertController(title: "收藏成功", message: "在收藏夹中可获取", preferredStyle: .alert)
-         let yes = UIAlertAction(title: "确定", style: .default, handler: nil)
-        alert.addAction(yes)
-        shouchang1 = 1
-        button.setTitle("取消收藏", for: UIControlState())
-        button.reloadInputViews()
-         self.present(alert, animated: true, completion: nil)
+            UserManager.shared
+            let alert = UIAlertController(title: "收藏成功", message: "在收藏夹中可获取", preferredStyle: .alert)
+            let yes = UIAlertAction(title: "确定", style: .default, handler: nil)
+            alert.addAction(yes)
+            shouchang1 = 1
+            button.setTitle("取消收藏", for: UIControlState())
+            button.reloadInputViews()
+            self.present(alert, animated: true, completion: nil)
         }
         
         if(cbutton == "Optional(\"取消收藏\")"){
@@ -429,12 +427,12 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
             button.reloadInputViews()
             self.present(alert, animated: true, completion: nil)
         }
-            
-            
-//CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC11
+        
+        
+        //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC11
         
         if(cbutton == "Optional(\"立即预订\")"){
-//CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC12
+            //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC12
             print("点了立即预订")
             let secondView = PayViewController()
             secondView.picture = images[0]
@@ -443,9 +441,8 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
             secondView.cc = cost
             secondView.nn = notify
             secondView.name = titlek
+            pushWithoutTab(secondView)
             
-            self.present(secondView, animated: true, completion: nil)
-//CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC12
         }
         if(cbutton == "Optional(\"行程安排\")"){
             self.updateMainView(0)
@@ -457,27 +454,28 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
             self.updateMainView(2)
         }
         if(button.tag == 100){
-          print("点了修改日期")
+            print("点了修改日期")
         }
         if(button.tag == 101){
-            self.dismiss(animated: true, completion: nil)
+            navigationController?.popViewController(animated: true)
+            //self.dismiss(animated: true, completion: nil)
         }
-    
-    //CCCCCCCCCCCCCCCCCCC13
+        
+        
         if(button.tag > 200 && button.tag < 250){
-        print("点了"+elseName[button.tag-200-1])
+            print("点了"+elseName[button.tag-200-1])
             let secondView = InformationViewController()
             secondView.titlek = elseName[button.tag-200-1]
-            self.present(secondView, animated: true, completion: nil)
+            pushWithoutTab(secondView);
+            //self.present(secondView, animated: true, completion: nil)
             
         }
-    //CCCCCCCCCCCCCCCCCCC13
-    
+        
     }
-    //一个更新界面的方法********************************************************************************************
+    
     func updateMainView(_ a:Int){
-    mainview = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 500))
-    mainview.backgroundColor = UIColor(red : 242/255, green : 242/255, blue : 242/255, alpha : 1);
+        mainview = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 500))
+        mainview.backgroundColor = UIColor(red : 242/255, green : 242/255, blue : 242/255, alpha : 1);
         
         let arrangementb = UIButton()
         arrangementb.frame = CGRect(x: 0, y: 0, width: self.view.frame.width/3, height: 44)
@@ -488,7 +486,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
             arrangementb.setTitleColor(UIColor(red : 13/255, green : 168/255, blue : 133/255, alpha : 1), for: UIControlState())
         }
         else{
-        arrangementb.setTitleColor(UIColor.black, for: UIControlState())
+            arrangementb.setTitleColor(UIColor.black, for: UIControlState())
         }
         arrangementb.addTarget(self, action: #selector(InformationViewController.tapped(_:)), for: UIControlEvents.touchUpInside)
         mainview.addSubview(arrangementb)
@@ -528,7 +526,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
         
         var message = String()
         if(a == 0){
-        message = arrangement
+            message = arrangement
         }
         if(a == 1){
             message = cost
@@ -537,7 +535,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
             message = notify
         }
         
-       let vv = UIView()
+        let vv = UIView()
         vv.frame = CGRect(x: 0, y: 46, width: self.view.frame.width, height: 500-46)
         vv.backgroundColor = UIColor.white
         
@@ -551,7 +549,7 @@ class InformationViewController: UIViewController,UITableViewDelegate,HELoopPage
         mainview.addSubview(vv)
         tableview.reloadData()
         
-    
+        
     }
     
     

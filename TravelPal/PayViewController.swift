@@ -23,8 +23,8 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftbutton = UIButton(frame: CGRect(x: 11, y: 27, width:22 , height: 36))
-        leftbutton.backgroundColor = UIColor.orange
+        let leftbutton = UIButton(frame: CGRect(x: 11, y: 30, width:24 , height: 24))
+        leftbutton.setBackgroundImage(#imageLiteral(resourceName: "back"), for: .normal)
         leftbutton.addTarget(self, action: #selector(SearchResultViewController.tappedLeft(_:)), for: UIControlEvents.touchUpInside)
         
         let topView = UIView()
@@ -67,11 +67,11 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     }
     
     
-    func tableView(_ tableView: UITableView!, numberOfRowsInSection section:Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return 1
     }
     
-    func tableView(_ tableView: UITableView!, heightForRowAt indexPath:IndexPath) ->CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) ->CGFloat{
         
         if(indexPath.section == 0){return 120}
         if(indexPath.section == 1){return 450}
@@ -87,39 +87,39 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
         return   3
     }
     
-    func tableView(_ tableView: UITableView!, cellForRowAt indexPath:IndexPath) -> UITableViewCell!{
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell!{
         
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "aaa")
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         if(indexPath.section == 0){
-        let ii = UIImageView(image: picture)
-        ii.frame = CGRect(x: 8, y: 8, width: 150, height: 120-16)
-        cell.addSubview(ii)
+            let ii = UIImageView(image: picture)
+            ii.frame = CGRect(x: 8, y: 8, width: 150, height: 120-16)
+            cell.addSubview(ii)
             
             
-        let ll = UILabel()
-        ll.frame = CGRect(x: 170, y: 16, width:self.view.frame.width-186 , height: 50)
-        ll.text = name
-        ll.textColor = UIColor.black
-        ll.font = UIFont.systemFont(ofSize: 17)
-        ll.lineBreakMode = NSLineBreakMode.byWordWrapping
-        ll.numberOfLines = 0
-        ll.textAlignment = NSTextAlignment.center
-        cell.addSubview(ll)
+            let ll = UILabel()
+            ll.frame = CGRect(x: 170, y: 16, width:self.view.frame.width-186 , height: 50)
+            ll.text = name
+            ll.textColor = UIColor.black
+            ll.font = UIFont.systemFont(ofSize: 17)
+            ll.lineBreakMode = NSLineBreakMode.byWordWrapping
+            ll.numberOfLines = 0
+            ll.textAlignment = NSTextAlignment.center
+            cell.addSubview(ll)
             
-        let pp = UILabel()
-        pp.frame = CGRect(x: 170, y: 76, width:self.view.frame.width-186 , height: 30)
-        pp.text = "￥"+String(cost)
-        pp.textColor = UIColor.orange
-        pp.font = UIFont.systemFont(ofSize: 23)
-        pp.textAlignment = NSTextAlignment.right
-        cell.addSubview(pp)
-        
+            let pp = UILabel()
+            pp.frame = CGRect(x: 170, y: 76, width:self.view.frame.width-186 , height: 30)
+            pp.text = "￥"+String(cost)
+            pp.textColor = UIColor.orange
+            pp.font = UIFont.systemFont(ofSize: 23)
+            pp.textAlignment = NSTextAlignment.right
+            cell.addSubview(pp)
+            
         }
         
         if(indexPath.section == 1){
-    
+            
             let kk = UILabel()
             kk.frame = CGRect(x: 16, y: 20, width: 200, height: 30)
             
@@ -127,7 +127,7 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             kk.textColor = UIColor.black
             kk.font = UIFont.systemFont(ofSize: 18)
             cell.addSubview(kk)
-                
+            
             let dd = UILabel()
             dd.frame = CGRect(x: 16, y: 50, width: self.view.frame.width-16*2, height: 360)
             dd.text = cc
@@ -135,7 +135,7 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             dd.lineBreakMode = NSLineBreakMode.byWordWrapping
             dd.numberOfLines = 0
             cell.addSubview(dd)
-                
+            
             
         }
         
@@ -147,38 +147,27 @@ class PayViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             pp.font = UIFont.systemFont(ofSize: 24)
             pp.textAlignment = NSTextAlignment.right
             cell.addSubview(pp)
-        
+            
             let ss = UILabel()
-            ss.frame = CGRect(x: 200, y: 35, width:50, height: 30)
+            ss.frame = CGRect(x: 160, y: 35, width:50, height: 30)
             ss.text = "总价: "
             ss.textColor = UIColor.black
             ss.font = UIFont.systemFont(ofSize: 18)
-           // ss.textAlignment = NSTextAlignment.Right
+            // ss.textAlignment = NSTextAlignment.Right
             cell.addSubview(ss)
         }
-    
-    
-    
-    return cell
+        
+        
+        
+        return cell
     }
 
     
     
     func tappedLeft(_ button:UIButton){
-        
-        
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+       // self.dismiss(animated: true, completion: nil)
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-
-
-
+ 
 }

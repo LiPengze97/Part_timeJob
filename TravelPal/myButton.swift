@@ -26,6 +26,7 @@ class myButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 12)
         titleLabel?.textColor = kRGBColorFromHex(rgbValue: 0x7a7a7a)
         setTitleColor(kRGBColorFromHex(rgbValue: 0x7a7a7a), for: UIControlState.normal)
+        isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,8 +42,6 @@ class myButton: UIButton {
         titleLabel?.frame = CGRect(x: 0, y: 30, width: self.frame.width, height: self.frame.height-30)
     }
     
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+     
 
 }

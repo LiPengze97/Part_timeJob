@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TPTabBarController: UITabBarController,OverlayControllerDelegate{
+class TPTabBarController: UITabBarController, OverlayControllerDelegate{
     var btn:UIButton?
     var stb:UIStoryboard?
 
@@ -83,49 +83,34 @@ class TPTabBarController: UITabBarController,OverlayControllerDelegate{
     }
 
     func setTabbar(){
-        let names = ["bticon_location_off","bticon_find_off","","bticon_message_off","bticon_person_off"]
-        let selectNames = ["bticon_location_on","bticon_find_on","","bticon_message_on","bticon_person_on"
+        let names = ["bticon_location_off","bticon_find_off","","推荐","bticon_person_off"]
+        let selectNames = ["bticon_location_on","bticon_find_on","","推荐","bticon_person_on"
         ]
-        let imgNames = ["伙伴","地图","","消息",""]
-        let itemNames = ["伙伴","地图","","消息","个人中心"]
+        //let imgNames = ["伙伴","地图","","推荐",""]
+        let itemNames = ["伙伴","旅游","","猜您喜欢","个人中心"]
         let vc1 = TravelPalViewController()
         let vc2 = ViewController()
         let vc3 = empty()
-        let vc4 = TPIMListViewController()
+        let vc4 = RecommendTableViewController()
         let vc5 = PersonalViewController()
         let vcs = [vc1,vc2,vc3,vc4,vc5]
-        let arr:NSMutableArray = NSMutableArray.init()
+        let arr = NSMutableArray()
         for i in 0..<names.count{
             let ctl = vcs[i]
+            ctl.navigationItem.title = itemNames[i]
             let navi:UINavigationController = UINavigationController.init(rootViewController: ctl)
-//            if i == 3 {
-//                vc4.tabBarItem.title = names[i]
-//                vc4.tabBarItem.image = UIImage.init(named: imgNames[i])
-//                arr.add(vc4)
-//            }else{
-                ctl.navigationItem.title = imgNames[i]
-                navi.tabBarItem.title = itemNames[i]
-                navi.navigationBar.barTintColor = UIColor.init(red: 35/255.0, green: 173/255.0, blue: 130/255.0, alpha: 1)
-                navi.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
-                navi.navigationBar.tintColor = UIColor.white
-                let img = UIImage.init(named: names[i])
-                navi.tabBarItem.image = img
-                navi.tabBarItem.selectedImage = UIImage.init(named: selectNames[i])
-                arr.add(navi)
-
-//            }
-            
-                   }
-        self.viewControllers = arr as! [UIViewController]
+            navi.tabBarItem.title = itemNames[i]
+            navi.navigationBar.barTintColor = UIColor.init(red: 35/255.0, green: 173/255.0, blue: 130/255.0, alpha: 1)
+            navi.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+            navi.navigationBar.tintColor = UIColor.white
+            let img = UIImage.init(named: names[i])
+            navi.tabBarItem.image = img
+            navi.tabBarItem.selectedImage = UIImage.init(named: selectNames[i])
+            arr.add(navi)
+ 
+        }
+        self.viewControllers = arr as? [UIViewController]
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+ 
 }

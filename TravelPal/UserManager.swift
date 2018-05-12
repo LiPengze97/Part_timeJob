@@ -85,6 +85,8 @@ public class UserManager: Notifier {
     var collects8: [String] = []
     var describe8: [String] = []
     
+    
+    
     public enum Notification : String {
         case didGetMessage
         case didGetMessageFailure
@@ -100,26 +102,29 @@ public class UserManager: Notifier {
         case didSetUserInfoFailure
         case didGetUserInfo
         case didGetUserInfoFailure
-        case didtap1
-        case didtap1Failure
-        case didtap2
-        case didtap2Failure
-        case didtap3
-        case didtap3Failure
-        case didtap4
-        case didtap4Failure
-        case didtap5
-        case didtap5Failure
-        case didtap6
-        case didtap6Failure
-        case didtap7
-        case didtap7Failure
-        case didtap8
-        case didtap8Failure
+        case didGetAllOrder
+        case didGetAllOrderFailure
+        case didGetUnpaidOrder
+        case didGetUnpaidOrderFailure
+        case didGetSuccessOrder
+        case didGetSuccessOrderFailure
+        case didGetCollected
+        case didGetCollectedFailure
+        case didGetEnlistInfo
+        case didGetEnlistInfoFailure
+        case didGetMyPal
+        case didGetMyPalFailure
+        case didGetWantGo
+        case didGetWantGoFailure
+        case didGetEverGone
+        case didGetEverGoneFailure
         case didtour
         case didtourFailure
         case didGetTourism
+        case didGetTrip
+        case didGetTripFailure
         case didGetTourismFailure
+        case shouldReloadData
     }
     
     private enum Action {
@@ -131,14 +136,15 @@ public class UserManager: Notifier {
         case setUserInfo
         case getUserInfo
         case getCarInfo
-        case tap1
-        case tap2
-        case tap3
-        case tap4
-        case tap5
-        case tap6
-        case tap7
-        case tap8
+        case getAllOrder
+        case getTrips
+        case getUnpaidOrder
+        case getSuccessOrder
+        case getCollected
+        case getEnlistInfo
+        case getMyPal
+        case getWantGo
+        case getEverGone
         //获取商品
         case tour
         case getTourism
@@ -151,19 +157,22 @@ public class UserManager: Notifier {
          .logIn: (.didLogin, .didLoginFailure),
          .setUserInfo: (.didSetUserInfo, .didSetUserInfoFailure),
          .getUserInfo: (.didGetUserInfo, .didGetUserInfoFailure),
-         .tap1: (.didtap1, .didtap1Failure),
-         .tap2: (.didtap2, .didtap2Failure),
-         .tap3: (.didtap3, .didtap3Failure),
-         .tap4: (.didtap4, .didtap4Failure),
-         .tap5: (.didtap5, .didtap5Failure),
-         .tap6: (.didtap6, .didtap6Failure),
-         .tap7: (.didtap7, .didtap7Failure),
-         .tap8: (.didtap8, .didtap8Failure),
+         .getAllOrder: (.didGetAllOrder, .didGetAllOrderFailure),
+         .getUnpaidOrder: (.didGetUnpaidOrder, .didGetUnpaidOrderFailure),
+         .getSuccessOrder: (.didGetSuccessOrder, .didGetSuccessOrderFailure),
+         .getCollected: (.didGetCollected, .didGetCollectedFailure),
+         .getEnlistInfo: (.didGetEnlistInfo, .didGetEnlistInfoFailure),
+         .getMyPal: (.didGetMyPal, .didGetMyPalFailure),
+         .getWantGo: (.didGetWantGo, .didGetWantGoFailure),
+         .getEverGone: (.didGetEverGone, .didGetEverGoneFailure),
          .tour: (.didtour, .didtourFailure),
-         .getTourism: (.didGetTourism,.didGetTourismFailure)
+         .getTourism: (.didGetTourism,.didGetTourismFailure),
+         .getTrips: (.didGetTrip, .didGetTripFailure)
+            
          ]
     
     private func handleResult(_ action: Action, _ response: DataResponse<Any>, completionHandler: (JSON) -> ()) {
+       
         switch response.result {
         case .success:
             guard let value = response.result.value else {
@@ -172,17 +181,16 @@ public class UserManager: Notifier {
             }
             let json = JSON(value)
             guard let status = json["status"].int else { return }
+            
+            let (successNoti, failureNoti) = actionDict[action]!
             guard status == 200 else {
                 log(json, .error)
-                
-                let (_, failureNoti) = actionDict[action]!
                 UserManager.postNotification(failureNoti)
-                
                 return
             }
-            let (successNoti, _) = actionDict[action]!
             completionHandler(json)
             UserManager.postNotification(successNoti)
+
             return
         case .failure(let error):
             log(error, .error)
@@ -220,19 +228,22 @@ public class UserManager: Notifier {
         })
     }
     
-    func exists(tel: String) {
+    func exists(tel: String, canRegisterHandler: @escaping (()->Void)) {
         Alamofire.request(Router.exists(tel)).responseJSON { response in
             self.handleResult(.exists, response, completionHandler: { (json) in
                 //log(json, .json)
                 print(json["data"]["success"].int!)
                 if json["data"]["success"].int!==1{
                     self.isExist = true
+                    self.canRegister = false
                     print("存在")
                 }
                 else{
                     self.isExist = false
                     print("不存在")
+                    canRegisterHandler()
                 }
+                
             })
         }
     }
@@ -321,33 +332,26 @@ public class UserManager: Notifier {
     }
     
     func signup(tel: String, password: String) {
-        //gggggggggggggggggggggggggggggg
-        self.exists(tel: tel)
-        if self.isExist {
-            canRegister = false
-        }
-        else{
+    
+        self.exists(tel: tel) {
+        
             Alamofire.request(Router.signUp(tel, password)).responseJSON { response in
                 self.handleResult(.signUp, response, completionHandler: { (json) in
-                    //log(json, .json)
+                   
                     print(json)
-                    if json["status"].int!==200{
+                    if json["status"].int! == 200{
                         self.canRegister = true
                         self.isLogIn = true
                         self.tel = tel
                         self.password = tel
                         //用url显示头像
-                        var url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
-                        var imagehead : UIImageView!
-                        var urlStr = NSURL(string: url)!
-                        var nsd = NSData(contentsOf: urlStr as URL)
-                        
-                        var img: UIImage? = nil
-                        if nsd != nil {
-                            imagehead = UIImageView()
-                            self.Image = UIImage(data: nsd! as Data)!
+                        let url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
+                    
+                        let urlStr = URL(string: url)!
+                        if let nsd = NSData(contentsOf: urlStr) {
+                            self.Image = UIImage(data: nsd as Data)!
                         }
-                        
+       
                         self.userDefaults.set(true, forKey: "didLogInLastTIme")
                         self.userDefaults.set(self.tel, forKey: "tel")
                         self.userDefaults.set(self.password, forKey: "password")
@@ -361,20 +365,19 @@ public class UserManager: Notifier {
     func login(tel: String, password: String) {
         Alamofire.request(Router.logIn(tel, password)).responseJSON { response in
             self.handleResult(.logIn, response, completionHandler: { (json) in
-                //log(json, .json)
-                //print(json["status"].int!)
+       
                 if json["status"].int! == 200{
                     self.isLogIn = true
                     self.tel = tel
                     self.password = password
-                    
+              
                     //用url显示头像
                     let url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
-                    var imagehead : UIImageView!
+                    let imagehead : UIImageView
                     let urlStr = NSURL(string: url)!
                     let nsd = NSData(contentsOf: urlStr as URL)
                     
-                    var img: UIImage? = nil
+                    //var img: UIImage? = nil
                     if nsd != nil {
                         imagehead = UIImageView()
                         self.Image = UIImage(data: nsd! as Data)!
@@ -387,9 +390,9 @@ public class UserManager: Notifier {
                     //   136     JBYpKy1rUGUvfsLIcmkv0kIhz9rAQWIHhUAxahX3SGc1aigJlG4K8V4jncyurMaQMPWhnkPdCquoAqUf48wh4zqLm/gKwSJw
                     //   178     IZZ+R6gxLCclMMV9L8tjWMfvrSIfMwqzri3X7DJoFvQB0gTNkJUlQ+UuXso/TnOYjO9zM7QhVnIqEhei5fI4dnVA7y0VlSVg
                     
-                    RCIM.shared().connect(withToken: USER_178_TOKEN, success: { (userid) in
-                        print("登陆成功，userID为 ",userid)
-                        RCIM.shared().currentUserInfo = RCUserInfo.init(userId: "17864154582", name: "李若水", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
+                    RCIM.shared().connect(withToken: USER_136_TOKEN, success: { (userid) in
+                        print("登陆成功，userID为 ",userid as Any)
+                        RCIM.shared().currentUserInfo = RCUserInfo.init(userId: "17864154582", name: "BohemianRey", portrait: "http://img1.skqkw.cn:888/2014/12/06/08/21ofdtyslqn-62877.jpg")
                     }, error: { (status) in
                         print("登录失败",status)
                     }) {
@@ -430,23 +433,82 @@ public class UserManager: Notifier {
         }
     }
     
-    func tap1() {
+    func getTrips() {
+        
+        self.images4 = []
+        self.tits4 = []
+        self.price4 = []
+        self.collects4 = []
+        self.describe4 = []
+        Alamofire.request(Router.getTrip()).responseJSON { response in
+            
+            self.handleResult(.getTrips,response, completionHandler: { (json) in
+         
+                if json["status"].int!==200{
+                    for i in 0..<json["data"].count
+                    {
+                        if json["data"][i]["id"].int == nil{
+                            self.images4.append("")
+                        }else{
+                            self.images4.append("http://118.190.69.5:65530/trip/"+"\(json["data"][i]["id"].int!)"+"-1")
+                        }
+                        if json["data"][i]["name"].string == nil{
+                            //print(1111111111)
+                            self.tits4.append("")
+                        }else{
+                            //print(22222222222)
+                            self.tits4.append(json["data"][i]["stroke"].string!)
+                        }
+                        if json["data"][i]["price"].int == nil{
+                            self.price4.append("")
+                        }else{
+                            self.price4.append("\(json["data"][i]["price"].int!)")
+                        }
+                        if json["data"][i]["collection"].int == nil{
+                            self.collects4.append("")
+                        }else{
+                            self.collects4.append("\(json["data"][i]["collection"].int!)")
+                        }
+                        if json["data"][i]["describe"].string == nil{
+                            self.describe4.append("")
+                        }else{
+                            self.describe4.append(json["data"][i]["describe"].string! + json["data"][i]["know"].string!)
+                        }
+                    }
+                }
+                else{
+                    print("不存在")
+                }
+               
+            })
+        }
+        //print(self.names.count)
+    }
+    
+    
+    func allOrder() {
         self.names1 = []
         self.describes1 = []
         self.prices1 = []
         self.dates1 = []
         self.strokes1 = []
-        Alamofire.request(Router.tap1()).responseJSON { response in
-            self.handleResult(.tap1,response, completionHandler: { (json) in
+        Alamofire.request(Router.getAllOrder()).responseJSON { response in
+            
+            self.handleResult(.getAllOrder,response, completionHandler: { (json) in
                 //得到全部订单，传给下一页
-                if json["status"].int!==200{
-                    for i in 0..<json["data"].count
-                    {
-                        //self.tour(tripId: json["data"][i]["tripId"].int!)
-                        Alamofire.request(Router.tour(json["data"][i]["tripId"].int!)).responseJSON { response in
+                var successCount = 0;
+                let jsDataCount = json["data"].count
+             
+                
+                if json["status"].int! == 200{
+                    for i in 0..<jsDataCount {
+                       
+                        Alamofire.request(Router.getTripById(json["data"][i]["tripId"].int!)).responseJSON { response in
                             self.handleResult1(response, completionHandler: { (json) in
-                                //print(json)
-                                //没放进去
+                                successCount += 1;
+                                if successCount == jsDataCount {
+                                    self.postNotification(notification: .shouldReloadData)
+                                }
                                 if json["status"].int!==200{
                                     if json["data"]["name"].string == nil{
                                         self.names1.append("")
@@ -490,21 +552,30 @@ public class UserManager: Notifier {
         }
         //print(self.names.count)
     }
-    func tap2() {
+    
+    
+    
+    func unPaidOrder() {
         self.names2 = []
         self.describes2 = []
         self.prices2 = []
         self.dates2 = []
         self.strokes2 = []
-        Alamofire.request(Router.tap2()).responseJSON { response in
-            self.handleResult(.tap2,response, completionHandler: { (json) in
+        Alamofire.request(Router.getUnpaidOrder()).responseJSON { response in
+            self.handleResult(.getUnpaidOrder,response, completionHandler: { (json) in
                 //得到全部订单，传给下一页
                 if json["status"].int!==200{
-                    for i in 0..<json["data"].count
+                    var successCount = 0;
+                    let jsDataCount = json["data"].count
+                    for i in 0..<jsDataCount
                     {
-                        Alamofire.request(Router.tour(json["data"][i]["tripId"].int!)).responseJSON { response in
+                        Alamofire.request(Router.getTripById(json["data"][i]["tripId"].int!)).responseJSON { response in
                             self.handleResult1(response, completionHandler: { (json) in
                                 print(json)
+                                successCount += 1;
+                                if successCount == jsDataCount {
+                                    self.postNotification(notification: UserManager.Notification(rawValue: "ShouldReload")!)
+                                }
                                 //没放进去
                                 if json["status"].int!==200{
                                     if json["data"]["name"].string == nil{
@@ -551,20 +622,20 @@ public class UserManager: Notifier {
         }
 
     }
-    func tap3() {
+    func successOrder() {
         self.names3 = []
         self.describes3 = []
         self.prices3 = []
         self.dates3 = []
         self.strokes3 = []
-        Alamofire.request(Router.tap3()).responseJSON { response in
-            self.handleResult(.tap3,response, completionHandler: { (json) in
+        Alamofire.request(Router.getSuccessOrder()).responseJSON { response in
+            self.handleResult(.getSuccessOrder,response, completionHandler: { (json) in
                 //得到全部订单，传给下一页
                 if json["status"].int!==200{
                     for i in 0..<json["data"].count
                     {
                         //self.tour(tripId: json["data"][i]["tripId"].int!)
-                        Alamofire.request(Router.tour(json["data"][i]["tripId"].int!)).responseJSON { response in
+                        Alamofire.request(Router.getTripById(json["data"][i]["tripId"].int!)).responseJSON { response in
                             self.handleResult1(response, completionHandler: { (json) in
                                 //print(json)
                                 //没放进去
@@ -611,14 +682,14 @@ public class UserManager: Notifier {
         }
 
     }
-    func tap4() {
+    func collected() {
         self.images4 = []
         self.tits4 = []
         self.price4 = []
         self.collects4 = []
         self.describe4 = []
-        Alamofire.request(Router.tap4()).responseJSON { response in
-            self.handleResult(.tap4,response, completionHandler: { (json) in
+        Alamofire.request(Router.getCollected()).responseJSON { response in
+            self.handleResult(.getCollected,response, completionHandler: { (json) in
                 print(json)
                 if json["status"].int!==200{
                     for i in 0..<json["data"].count
@@ -659,16 +730,16 @@ public class UserManager: Notifier {
         }
         
     }
-    func tap5() {
+    func enlist() {
         self.images5 = []
         self.tits5 = []
         self.price5 = []
         self.collects5 = []
         self.describe5 = []
-        Alamofire.request(Router.tap5()).responseJSON { response in
-            self.handleResult(.tap5,response, completionHandler: { (json) in
+        Alamofire.request(Router.getEnlistInfo()).responseJSON { response in
+            self.handleResult(.getEnlistInfo,response, completionHandler: { (json) in
                 print(json)
-                if json["status"].int!==200{
+                if json["status"].int! == 200 {
                     for i in 0..<json["data"].count
                     {
                         if json["data"][i]["id"].int == nil{
@@ -676,27 +747,32 @@ public class UserManager: Notifier {
                         }else{
                             self.images5.append("http://118.190.69.5:65530/trip/"+"\(json["data"][i]["id"].int!)"+"-1")
                         }
-                        if json["data"][i]["name"].string == nil{
-                            //print(1111111111)
+                        if json["data"][i]["departure"].string == nil{
+                            
                             self.tits5.append("")
                         }else{
-                            //print(22222222222)
-                            self.tits5.append(json["data"][i]["name"].string!)
+                            self.tits5.append(json["data"][i]["departure"].string! + " - " + json["data"][i]["destination"].string! + " - " + json["data"][i]["transportation"].string!)
                         }
-                        if json["data"][i]["price"].int == nil{
-                            self.price5.append("")
-                        }else{
-                            self.price5.append("\(json["data"][i]["price"].int!)")
+                        if let bud = json["data"][i]["budget"].string {
+                   
+                            self.price5.append("预算" + bud)
+                        } else {
+                            self.price5 .append("")
                         }
-                        if json["data"][i]["collection"].int == nil{
-                            self.collects5.append("")
-                        }else{
-                            self.collects5.append("\(json["data"][i]["collection"].int!)")
+                        if let str1 = json["data"][i]["existPeople"].int {
+                            var s = ""
+                            if let t = json["data"][i]["departureTime"].string {
+                                let end = t.index(t.startIndex,offsetBy:10)
+                                s = t.substring(to: end)
+                            }
+                            self.collects5.append("\(str1)"+"/"+"\(json["data"][i]["planPeople"].int!)人"+" 截至"+s)
+                        } else {
+                            self.collects5 .append("")
                         }
-                        if json["data"][i]["describe"].string == nil{
-                            self.describe5.append("")
-                        }else{
-                            self.describe5.append(json["data"][i]["describe"].string!)
+                        if let str = json["data"][i]["detailed"].string {
+                            self.describe5.append(str)
+                        } else {
+                            self.describe5 .append("")
                         }
                     }
                 }
@@ -707,17 +783,69 @@ public class UserManager: Notifier {
         }
 
     }
-    func tap6() {
+    
+    func myPal() {
+        self.images6 = []
+        self.tits6 = []
+        self.price6 = []
+        self.collects6 = []
+        self.describe6 = []
+        Alamofire.request(Router.getMyPal()).responseJSON { response in
+            self.handleResult(.getMyPal,response) { (json) in
+                print(json)
+                if json["status"].int!==200{
+                    for i in 0..<json["data"].count
+                    {
+                        if json["data"][i]["id"].int == nil{
+                            self.images6.append("")
+                        }else{
+                            self.images6.append("http://118.190.69.5:65530/trip/"+"\(json["data"][i]["id"].int!)"+"-1")
+                        }
+                        if json["data"][i]["departure"].string == nil{
+                            
+                            self.tits6.append("")
+                        }else{
+                            self.tits6.append(json["data"][i]["departure"].string! + " - " + json["data"][i]["destination"].string! + " - " + json["data"][i]["transportation"].string!)
+                        }
+                        if let bud = json["data"][i]["budget"].string {
+                            
+                            self.price6.append("预算" + bud)
+                        } else {
+                            self.price6 .append("")
+                        }
+                        if let str1 = json["data"][i]["existPeople"].int {
+                            var s = ""
+                            if let t = json["data"][i]["departureTime"].string {
+                                let end = t.index(t.startIndex,offsetBy:10)
+                                s = t.substring(to: end)
+                            }
+                            self.collects6.append("\(str1)"+"/"+"\(json["data"][i]["planPeople"].int!)人"+" 截至"+s)
+                        } else {
+                            self.collects6 .append("")
+                        }
+                        if let str = json["data"][i]["detailed"].string {
+                            self.describe6.append(str)
+                        } else {
+                            self.describe6 .append("")
+                        }
+                    }
+                } else{
+                    print("不存在")
+                }
+            }
+        }
         
+    
     }
-    func tap7() {
+    
+    func wannaGo() {
         self.images7 = []
         self.tits7 = []
         self.price7 = []
         self.collects7 = []
         self.describe7 = []
-        Alamofire.request(Router.tap7()).responseJSON { response in
-            self.handleResult(.tap7,response, completionHandler: { (json) in
+        Alamofire.request(Router.getWantGo()).responseJSON { response in
+            self.handleResult(.getWantGo,response, completionHandler: { (json) in
                 print(json)
                 if json["status"].int!==200{
                     for i in 0..<json["data"].count
@@ -758,14 +886,14 @@ public class UserManager: Notifier {
         }
 
     }
-    func tap8() {
+    func everGone() {
         self.images8 = []
         self.tits8 = []
         self.price8 = []
         self.collects8 = []
         self.describe8 = []
-        Alamofire.request(Router.tap8()).responseJSON { response in
-            self.handleResult(.tap8,response, completionHandler: { (json) in
+        Alamofire.request(Router.getEverGone()).responseJSON { response in
+            self.handleResult(.getEverGone,response, completionHandler: { (json) in
                 print(json)
                 if json["status"].int!==200{
                     for i in 0..<json["data"].count
@@ -880,7 +1008,7 @@ public class UserManager: Notifier {
         userDefaults.set("", forKey: "tel")
         userDefaults.set("", forKey: "password")
         userDefaults.synchronize()
-        
+        postNotification(notification: .didLogout)
     }
     
     
@@ -888,8 +1016,7 @@ public class UserManager: Notifier {
         if userDefaults.bool(forKey: "didLogInLastTIme") {
             let tel = userDefaults.string(forKey: "tel")
             let password = userDefaults.string(forKey: "password")
-            log(tel, .happy)
-            log(password, .happy)
+       
             self.login(tel: tel!, password: password!)
         }
     }

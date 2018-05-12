@@ -26,6 +26,7 @@ class MainTableViewController: UITableViewController {
     var cellHeights = [CGFloat]()
 
     var tourismLvbanInfos = Array<TourismLvbanInfo>()
+    var closeLvbanInfos:[CloseLvbanInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +48,10 @@ class MainTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mark == 0 {
-            return 10
+        if mark == 0{
+            return closeLvbanInfos.count
         }else{
-            if tourismLvbanInfos == nil {
-                return 0
-            }else{
-                return tourismLvbanInfos.count
-            }
+            return tourismLvbanInfos.count
         }
     }
 
@@ -90,6 +87,20 @@ class MainTableViewController: UITableViewController {
         cell.typeLabel1.text = "远途旅伴"
         cell.budgetLabel.text = tourismLvbanInfos[indexPath.row].budget
         cell.budgetLabel1.text = tourismLvbanInfos[indexPath.row].budget
+        }else{
+            cell.fromLabel.text = closeLvbanInfos[indexPath.row].departure
+            cell.fromlabel1.text = closeLvbanInfos[indexPath.row].departure
+            cell.toLabel.text = closeLvbanInfos[indexPath.row].destination
+            cell.tolabel1.text = closeLvbanInfos[indexPath.row].destination
+            cell.postTimeLabel.text =  closeLvbanInfos[indexPath.row].publishTime
+            cell.peoplenumLabel.text =  closeLvbanInfos[indexPath.row].planPeople
+            cell.peoplenumLabel1.text = closeLvbanInfos[indexPath.row].planPeople
+            cell.deptTimeLabel.text = closeLvbanInfos[indexPath.row].departureTime
+            cell.typeLabel.text = "远途旅伴"
+            cell.typeLabel1.text = "远途旅伴"
+            cell.budgetLabel.text = closeLvbanInfos[indexPath.row].budget
+            cell.budgetLabel1.text = closeLvbanInfos[indexPath.row].budget
+            cell.tableid = self.tableid
         }
         return cell
     }

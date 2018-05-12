@@ -12,206 +12,208 @@ import SwiftyJSON
 
 class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
-    //cccccccccc
-    var tit = ""
+ 
+    var pushingTitle = ""
     
     var collectionview : UICollectionView!
-    var headView : UIView!
-    var btn : UIButton!
-    let screenwidth = UIScreen.main.applicationFrame.size.width
-    let screenheight = UIScreen.main.applicationFrame.size.height
+    var headView : HeadView!
+    var opensetting = false
     let notification = NotificationCenter.default
-    func tapped1(){
-        self.tit = "全部订单"
-        closeButtonTapped1()
-    }
-    func tapped2(){
-        self.tit = "待付款"
-        closeButtonTapped1()
-    }
-    func tapped3(){
-        self.tit = "已成功"
-        closeButtonTapped1()
-    }
-    func tapped4(){
-        //得到全部收藏，传给下一页
-        self.tit = "收藏商品"
-        closeButtonTapped2()
-    }
-    func tapped5(){
-        //得到全部报名，传给下一页
-        self.tit = "报名旅游信息"
-        closeButtonTapped2()
-    }
-    func tapped6(){
-        self.tit = "我的旅伴"
-        closeButtonTapped2()
-    }
-    func tapped7(){
-        self.tit = "想去目的地"
-        closeButtonTapped2()
-    }
-    func tapped8(){
-        self.tit = "曾经去过"
-        closeButtonTapped2()
-    }
-    func tappedlogin(){
-        let secondViewController = SignViewController()
-        self.navigationController?.pushViewController(secondViewController, animated: true)
-    }
-    //设置按钮
     
-    func tapped9(){
-        UserManager.shared.getUserInfo()
+    func allOrder(){
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "全部订单"
+            orderButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
     }
+    func unPaidOrder(){
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "待付款"
+             
+            orderButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+        
+    }
+    func successfulOrders(){
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "已成功"
+            orderButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    func collected(){
+        //得到全部收藏，传给下一页
+  
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "收藏商品"
+            toolsButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    func enlist(){
+        //得到全部报名，传给下一页
+        if UserManager.shared.isLogIn {
+            self.pushingTitle = "报名旅游信息"
+            toolsButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    func myPal(){
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "我的旅伴"
+            toolsButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    func wannaGo(){
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "想去目的地"
+            toolsButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    func everGone(){
+        
+        
+        if UserManager.shared.isLogIn{
+            self.pushingTitle = "曾经去过"
+            toolsButtonTapped()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    //MARK: - sign in
+    func tappedlogin(){
+        if UserManager.shared.isLogIn {
+            settings()
+        } else {
+            let signIn = SignViewController()
+            pushWithoutTab(signIn)
+        }
+        
+    }
+    
+    //设置按钮
+    func settings(){
+    
+        if UserManager.shared.isLogIn {
+            opensetting = true
+            UserManager.shared.getUserInfo()
+        }else{
+            self.noticeError("您还未登录")
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        opensetting = false
+    }
+    
+    
+    deinit {
         notification.removeObserver(self)
-        UserManager.removeObserver(observer: self, notification: .didGetUserInfo)
-        UserManager.removeObserver(observer: self, notification: .didGetUserInfoFailure)
     }
+    
+    
     func userDidGetUserInfo(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
-            self.closeButtonTapped()
-        })
+ 
+        self.settingsButtonTapped()
+        
     }
+    
     func userDidGetUserInfoFailure(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
-            self.closeButtonTapped()
-        })
+ 
     }
-    func closeButtonTapped() {
-        let secondViewController = PersonalInfoViewController()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-        })
+    
+    func settingsButtonTapped() {
+        if opensetting {
+            let personInfo = PersonalInfoViewController()
+            self.pushWithoutTab(personInfo, animated: true)
+        }
+        headView.fillContents(nil)
+        
     }
+    
     //订单
-    func closeButtonTapped1() {
+    func orderButtonTapped() {
         let secondViewController = DetailDingDanViewController()
-        secondViewController.navigationTitle = self.tit
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-        })
+        secondViewController.navigationTitle = self.pushingTitle
+        self.pushWithoutTab(secondViewController, animated: true)
+
     }
+    
     //细节
-    func closeButtonTapped2() {
+    func toolsButtonTapped() {
         let secondViewController = DetailViewController()
-        secondViewController.titleString = self.tit
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
-            self.navigationController?.pushViewController(secondViewController, animated: true)
-        })
+        secondViewController.titleString = self.pushingTitle
+        self.pushWithoutTab(secondViewController)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+       // self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(0, for: UIBarMetrics.default)
+        navigationController?.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "personal_bg.jpg")!)
         
-        self.tabBarController?.tabBar.isHidden = false
-        
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 20, width: screenwidth, height: 44)
-        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(-40, for: UIBarMetrics.default)
-        self.headView.reloadInputViews()
-        
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
-        self.navigationController?.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "personal_bg.jpg")!)
-        UserManager.addObserver(observer: self, selector: .userDidGetUserInfo, notification: .didGetUserInfo)
-        UserManager.addObserver(observer: self, selector: .userDidGetUserInfoFailure, notification: .didGetUserInfoFailure)
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
-    //cccccccccccc
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+        //navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(PersonalViewController.settings))
+       
+        headView = HeadView(frame: CGRect(x: 0, y: -170, width: SCREEN_WIDTH, height: 170))
         
-        //隐藏返回按钮
-        self.navigationItem.hidesBackButton = true
-        //左侧设置按钮
-        let item=UIBarButtonItem(title: "设置", style: UIBarButtonItemStyle.plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = item
-        self.navigationItem.rightBarButtonItem?.action = #selector(PersonalViewController.tapped9)
-        
-        //上部个人信息
-        headView = UIView(frame: CGRect(x: 0, y: 64, width: screenwidth, height: 170))
-        headView.backgroundColor = UIColor(patternImage: UIImage(named: "personal_bg.jpg")!)
-        
-        //ccccccccccccccccc
-        //根据是否登录显示两种界面
-        if UserManager.shared.isLogIn {
-            //用url显示头像
-            //改info的样子
-            var url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
-            var imagehead : UIImageView!
-            var urlStr = NSURL(string: url)!
-            var nsd = NSData(contentsOf: urlStr as URL)
-            
-            var img: UIImage? = nil
-            if nsd != nil {
-                imagehead = UIImageView()
-                img = UIImage(data: nsd! as Data)!
-                imagehead.image = img
-            }
-            else{
-                imagehead = UIImageView(image: UIImage(named: "personal_person"))
-            }
-            imagehead.frame = CGRect(x:screenwidth/2-40, y:30, width:80, height:80)
-            imagehead.contentMode = .scaleAspectFill
-            imagehead.layer.borderWidth=2
-            imagehead.layer.borderColor = kRGBColorFromHex(rgbValue: 0x656565).cgColor
-            //设置遮罩
-            imagehead.layer.masksToBounds = true
-            //设置圆角半径(宽度的一半)，显示成圆形。
-            imagehead.layer.cornerRadius = imagehead.frame.width/2
-            headView.addSubview(imagehead)
-            var username = UILabel(frame: CGRect(x: screenwidth/2-60, y: 120, width: 120, height: 20))
-            username.text = UserManager.shared.tel
-            username.textColor = UIColor.white
-            headView.addSubview(imagehead)
-            headView.addSubview(username)
-        }
-        else{
-            let imagehead = UIImageView(image: UIImage(named: "personal_person"))
-            imagehead.frame = CGRect(x:screenwidth/2-40, y:30, width:80, height:80)
-            imagehead.contentMode = .scaleAspectFill
-            imagehead.layer.borderWidth=2
-            imagehead.layer.borderColor = kRGBColorFromHex(rgbValue: 0x656565).cgColor
-            //设置遮罩
-            imagehead.layer.masksToBounds = true
-            //设置圆角半径(宽度的一半)，显示成圆形。
-            imagehead.layer.cornerRadius = imagehead.frame.width/2
-            headView.addSubview(imagehead)
-            var loginBtn = UIButton(frame: CGRect(x: screenwidth/2-50, y: 120, width: 100, height: 20))
-            loginBtn.setTitle("点击登录", for: .normal)
-            loginBtn.addTarget(self, action: #selector(tappedlogin), for: .touchUpInside)
-            headView.addSubview(loginBtn)
-            headView.addSubview(imagehead)
-        }
-        //cccccccccccccccccccccccccccccccc
-        
-        self.view.addSubview(headView)
-        
-        //下部的collectionview
+        headView.textButton .addTarget(self, action: #selector(tappedlogin), for: .touchUpInside)
+        headView.fillContents(nil)
+  
         let layout = UICollectionViewFlowLayout()
-        collectionview = UICollectionView(frame:CGRect(x:0, y:234, width:screenwidth, height:screenheight-234), collectionViewLayout: layout)
-        
-        //注册一个cell
+        collectionview = UICollectionView(frame:CGRect(x: 0, y: 0, width:SCREEN_WIDTH, height:SCREEN_HEIGHT), collectionViewLayout: layout)
+ 
         collectionview.register(DingDanCell.self, forCellWithReuseIdentifier:"cell")
-
-        //注册两个section的headView
+ 
         collectionview.register(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "DingDanheaderView")
         collectionview.register(UICollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "GongJuheaderView")
-        collectionview.delegate = self as? UICollectionViewDelegate
-        collectionview.dataSource = self as? UICollectionViewDataSource
-        
+        collectionview.delegate = self
+        collectionview.dataSource = self
+        collectionview.isScrollEnabled = true
         collectionview.backgroundColor = kRGBColorFromHex(rgbValue: 0xf2f2f2)
-        
+        collectionview.alwaysBounceVertical = true
+        collectionview.addSubview(headView)
+        collectionview.contentInset = UIEdgeInsets(top: 170, left: 0, bottom: 0, right: 0)
         self.view.addSubview(collectionview)
+        UserManager.addObserver(observer: self, selector: #selector(someoneLogin), notification: .didLogin)
+        UserManager.addObserver(observer: self, selector: #selector(userDidGetUserInfo(notification:)), notification: .didGetUserInfo)
+        UserManager.addObserver(observer: self, selector: #selector(userDidGetUserInfoFailure(notification:)), notification: .didGetUserInfoFailure)
+        UserManager.addObserver(observer: self, selector: #selector(settingsButtonTapped), notification: .didSignup)
+        UserManager.addObserver(observer: self, selector: #selector(settingsButtonTapped), notification: .didLogout)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  
+    @objc func someoneLogin () {
+        UserManager.shared.getUserInfo()
     }
     
+    func netWorkFailed() {
+        noticeError("请求失败")
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y < -234) {
+            scrollView.contentOffset.y = -234
+        }
+        
+    }
+ 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -248,23 +250,23 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         //每一个cell的大小
         if(indexPath.section==0){
-            return CGSize(width: (screenwidth-16)/3, height: 65)
+            return CGSize(width: (SCREEN_WIDTH-16)/3, height: 65)
         }
         else{
-            return CGSize(width: (screenwidth-16)/4, height: 55)
+            return CGSize(width: (SCREEN_WIDTH-16)/4, height: 55)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
     {
         // 设置sectionHeader的size
-        return CGSize(width: screenwidth, height: 40)
+        return CGSize(width: SCREEN_WIDTH, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
         //设置sectionHeader
         if(indexPath.section==0){
             let headerView=collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "DingDanheaderView", for: indexPath as IndexPath)
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: screenwidth, height: 40))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
             label.text=" 我的订单"
             label.textColor = kRGBColorFromHex(rgbValue: 0x323232)
             label.font = UIFont.systemFont(ofSize: 14)
@@ -274,7 +276,7 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
         }
         else{
             let headerView=collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "GongJuheaderView", for: indexPath as IndexPath)
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: screenwidth, height: 40))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 40))
             label.text=" 常用工具"
             label.textColor = kRGBColorFromHex(rgbValue: 0x323232)
             label.font = UIFont.systemFont(ofSize: 14)
@@ -283,83 +285,82 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
             return headerView
         }
     }
-    //ccccccccccccccccccccccccc
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DingDanCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? DingDanCell
         
         switch indexPath.section{
         case 0:
             switch indexPath.item {
             case 0:
-                cell?.frame = CGRect(x: 0, y: 42, width: (screenwidth-16)/3, height: 65)
+                cell?.frame = CGRect(x: 0, y: 42, width: (SCREEN_WIDTH-16)/3, height: 65)
                 cell?.btnText = "全部订单"
                 cell?.btnImage = "use.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped1), for: .touchUpInside)
-                UserManager.shared.tap1()
-                
+                UserManager.addObserver(observer: self, selector: #selector(allOrder), notification: UserManager.Notification.didGetAllOrder)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetAllOrderFailure)
             case 1:
-                cell?.frame = CGRect(x: screenwidth/3, y: 42, width: (screenwidth-16)/3, height: 65)
+                cell?.frame = CGRect(x: SCREEN_WIDTH/3, y: 42, width: (SCREEN_WIDTH-16)/3, height: 65)
                 cell?.btnText = "待付款"
                 cell?.btnImage = "pay.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped2), for: .touchUpInside)
-                UserManager.shared.tap2()
+                UserManager.addObserver(observer: self, selector: #selector(unPaidOrder), notification: UserManager.Notification.didGetUnpaidOrder)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetUnpaidOrderFailure)
 
             case 2:
-                cell?.frame = CGRect(x: 2*screenwidth/3, y: 42, width: (screenwidth-16)/3, height: 65)
+                cell?.frame = CGRect(x: 2*SCREEN_WIDTH/3, y: 42, width: (SCREEN_WIDTH-16)/3, height: 65)
                 cell?.btnText = "已成功"
                 cell?.btnImage = "after.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped3), for: .touchUpInside)
-                UserManager.shared.tap3()
-
+                UserManager.addObserver(observer: self, selector: #selector(successfulOrders), notification: UserManager.Notification.didGetSuccessOrder)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetSuccessOrderFailure)
+                
             default: break
             }
         case 1:
             switch indexPath.item {
             case 0:
-                cell?.frame = CGRect(x: 0, y: 157, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 0, y: 157, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = "收藏商品"
                 cell?.btnImage = "personal_collect.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped4), for: .touchUpInside)
-                UserManager.shared.tap4()
+                UserManager.addObserver(observer: self, selector: #selector(collected), notification: UserManager.Notification.didGetCollected)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetCollectedFailure)
             case 1:
-                cell?.frame = CGRect(x: screenwidth/4, y: 157, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: SCREEN_WIDTH/4, y: 157, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = "报名旅游信息"
                 cell?.btnImage = "personal_info.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped5), for: .touchUpInside)
-                UserManager.shared.tap5()
+                UserManager.addObserver(observer: self, selector: #selector(enlist), notification: UserManager.Notification.didGetEnlistInfo)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetEnlistInfoFailure)
 
             case 2:
-                cell?.frame = CGRect(x: 2*screenwidth/4, y: 157, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 2*SCREEN_WIDTH/4, y: 157, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = "我的旅伴"
                 cell?.btnImage = "personal_friend.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped6), for: .touchUpInside)
-                UserManager.shared.tap6()
+                UserManager.addObserver(observer: self, selector: #selector(myPal), notification: UserManager.Notification.didGetMyPal)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetMyPalFailure)
 
             case 3:
-                cell?.frame = CGRect(x: 3*screenwidth/4, y: 157, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 3*SCREEN_WIDTH/4, y: 157, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = "想去目的地"
                 cell?.btnImage = "personal_destination.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped7), for: .touchUpInside)
-                UserManager.shared.tap7()
+                UserManager.addObserver(observer: self, selector: #selector(wannaGo), notification: UserManager.Notification.didGetWantGo)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetWantGoFailure)
 
             case 4:
-                cell?.frame = CGRect(x: 0, y: 212, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 0, y: 212, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = "曾经去过"
                 cell?.btnImage = "personal_demand.png"
-                cell?.btn?.addTarget(self, action: #selector(tapped8), for: .touchUpInside)
-                UserManager.shared.tap8()
+                UserManager.addObserver(observer: self, selector: #selector(everGone), notification: UserManager.Notification.didGetEverGone)
+                UserManager.addObserver(observer: self, selector: #selector(netWorkFailed), notification: UserManager.Notification.didGetEverGoneFailure)
                 
             case 5:
-                cell?.frame = CGRect(x: screenwidth/4, y: 212, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: SCREEN_WIDTH/4, y: 212, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = ""
                 cell?.btnImage = ""
 
             case 6:
-                cell?.frame = CGRect(x: 2*screenwidth/4, y: 212, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 2*SCREEN_WIDTH/4, y: 212, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = ""
 
             case 7:
-                cell?.frame = CGRect(x: 3*screenwidth/4, y: 212, width: screenwidth/4, height: 55)
+                cell?.frame = CGRect(x: 3*SCREEN_WIDTH/4, y: 212, width: SCREEN_WIDTH/4, height: 55)
                 cell?.btnText = ""
                 
             default: break
@@ -368,14 +369,56 @@ class PersonalViewController: UIViewController,UICollectionViewDelegate,UICollec
         }
         return cell!
     }
-    //ccccccccccccccccccccccc
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
+ 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.item {
+            case 0:
+                
+                UserManager.shared.allOrder()
+                
+            case 1:
+                UserManager.shared.unPaidOrder()
+                
+            case 2:
+             
+                UserManager.shared.successOrder()
+                
+            default: break
+            }
+        case 1:
+            switch indexPath.item {
+            case 0:
+                UserManager.shared.getTrips()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.1) {
+                    self.collected()
+                }
+                
+            case 1:
+          
+                UserManager.shared.enlist()
+                
+            case 2:
+           
+                UserManager.shared.myPal()
+                
+            case 3:
+       
+                UserManager.shared.wannaGo()
+                
+            case 4:
+           
+                UserManager.shared.everGone()
+                
+      
+            default: break
+          
+            }
+            
+        default: break
+        }
     }
+ 
 }
 
-//ccccccccccccccccccccccccccccccc
-fileprivate extension Selector {
-    static let userDidGetUserInfo = #selector(PersonalViewController.userDidGetUserInfo(notification:))
-    static let userDidGetUserInfoFailure = #selector(PersonalViewController.userDidGetUserInfoFailure(notification:))
-}

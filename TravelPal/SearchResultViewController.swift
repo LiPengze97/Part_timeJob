@@ -108,21 +108,17 @@ class SearchResultViewController: UIViewController ,UITableViewDelegate,UITableV
     
 
     
-    func tableView(_ tableView: UITableView!, numberOfRowsInSection section:Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int{
         return 1
     }
     
-    func tableView(_ tableView: UITableView!, heightForRowAt indexPath:IndexPath) ->CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath:IndexPath) ->CGFloat{
        
         return CGFloat(elseName.count*102)
     }
+
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-  
-        return   1
-    }
-    
-    func tableView(_ tableView: UITableView!, cellForRowAt indexPath:IndexPath) -> UITableViewCell!{
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell{
         
         let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "aaa")
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -199,16 +195,16 @@ class SearchResultViewController: UIViewController ,UITableViewDelegate,UITableV
     
     
     func tappedLeft(_ button:UIButton){
-      
-        
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        //self.dismiss(animated: true, completion: nil)
     }
     
     func tapped(_ button:UIButton){
         _ = String(describing: button.title(for: UIControlState()))
         let secondView = InformationViewController()
         secondView.titlek = elseName[button.tag-200-1]
-        self.present(secondView, animated: true, completion: nil)
+        pushWithoutTab(secondView)
+        //self.present(secondView, animated: true, completion: nil)
 
     }
     

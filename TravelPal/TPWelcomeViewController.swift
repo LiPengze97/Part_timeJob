@@ -7,23 +7,14 @@
 //
 
 import UIKit
-
-protocol InBtnDelegate {
-    func InBtnTapped()
-}
-
+ 
 class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
-
-    
-    //闭包属性 用于跳转页面
-    var startClosure: (() ->Void)?
+ 
     //创建scorllView
     let scrollView = UIScrollView()
     //创建pageController
     let pageControl = UIPageControl()
-    
-    var delegate:InBtnDelegate?
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -47,13 +38,10 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
             var frame = imageView.frame
             frame.origin.x = CGFloat(i)*SCREEN_WIDTH
             imageView.frame = frame
-            if i == 3{
+            if i == 3 {
                 let btn = UIButton.init(frame: CGRect.init(x: self.view.frame.width/2 - 85, y: self.view.frame.height/2 + 160, width: 250, height: 80))
                 btn.layer.cornerRadius = 10
                 btn.backgroundColor = UIColor.clear
-//                btn.setTitle("进人", for: .normal)
-//                btn.setTitleColor(UIColor.white, for: .normal)
-//                btn.setTitleColor(UIColor.red, for: .highlighted)
                 btn.addTarget(self, action: #selector(TPWelcomeViewController.startAction), for: .touchUpInside)
                 imageView.addSubview(btn)
                 imageView.isUserInteractionEnabled = true
@@ -78,23 +66,9 @@ class TPWelcomeViewController: UIViewController,UIScrollViewDelegate {
     func startAction(sender:UIButton){
         let tp = TPTabBarController()
         self.present(tp, animated: true, completion: nil)
-//        delegate?.InBtnTapped()
+ 
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

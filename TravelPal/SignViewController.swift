@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+ 
 class SignViewController: UIViewController, UITextFieldDelegate {
 
     var phoneText : UITextField!
@@ -19,10 +19,8 @@ class SignViewController: UIViewController, UITextFieldDelegate {
     var weixinBtn : UIButton!
     var weiboBtn : UIButton!
     var qqBtn : UIButton!
-    let screenwidth = UIScreen.main.applicationFrame.size.width
-    let screenheight = UIScreen.main.applicationFrame.size.height
+    var dissmissBtn:UIButton!
     
-    //cccccccccccccccccccccccccc
     let notification = NotificationCenter.default
     
     // MARK: - Button Action
@@ -32,38 +30,40 @@ class SignViewController: UIViewController, UITextFieldDelegate {
             self.noticeOnlyText("请输入合法手机号")
             return
         }
-        
         textFieldResignFirstResponder()
-        
         UserManager.shared.login(tel: phoneText.text!,password: passwordText.text!)
-
     }
     
     func closeButtonTapped() {
         
         if UserManager.shared.isLogIn {
             self.noticeSuccess("登录成功")
-            //跳转到主页面
-            let secondViewController = PersonalViewController()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                self.navigationController?.pushViewController(secondViewController, animated: true)
-            })
+          
+            dissmissVC()
         }else{
-            //提示无法登陆
-            print(1)
+           
             self.noticeError("登录失败")
         }
     }
     
     func showSignupButtonTapped(_ sender: UIButton) {
-        let registViewController = RegisterViewController()
-        self.navigationController?.pushViewController(registViewController, animated: true)
-    }
-    //cccccccccccccccccccc
     
+        if true {
+            let regist = RegisterViewController()
+            pushWithoutTab(regist)
+        } else {
+//            let phoneNumController = PhoneNumberController()
+//            let nav = UINavigationController(rootViewController: phoneNumController)
+//            nav.navigationBar.barTintColor = UIColor(patternImage: UIImage(named: "personal_bg.jpg")!)
+//            present(nav, animated: true, completion: nil)
+//            
+        }
+    }
+   
     func forget(){
-        let secondViewController = forgetViewController()
-        self.navigationController!.pushViewController(secondViewController, animated: true)
+        //let RstC = ResetPsdController()
+        let RstC = forgetViewController()
+        pushWithoutTab(RstC)
     }
     func weibo(){
         
@@ -71,18 +71,19 @@ class SignViewController: UIViewController, UITextFieldDelegate {
     func weixin(){
         
     }
+    
     func qq(){
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.isNavigationBarHidden = true
+        fd_prefersNavigationBarHidden = true
+   
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "sign_bg")!)
         self.view.contentMode = .scaleAspectFill
         
-        phoneText = UITextField(frame: CGRect(x: 50, y: 240, width: screenwidth-100, height: 40))
+        phoneText = UITextField(frame: CGRect(x: 50, y: 240, width: SCREEN_WIDTH-100, height: 40))
         phoneText.attributedPlaceholder=NSAttributedString(string: "手机号", attributes: [NSForegroundColorAttributeName: kRGBColorFromHex(rgbValue: 0x656565)])
         phoneText.textColor = kRGBColorFromHex(rgbValue: 0xffffff)
         phoneText.layer.borderWidth=1
@@ -98,7 +99,7 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         phoneText.leftView = phoneLeftView
         phoneText.leftViewMode=UITextFieldViewMode.always;
         
-        passwordText = UITextField(frame: CGRect(x: 50, y: 300, width: screenwidth-100, height: 40))
+        passwordText = UITextField(frame: CGRect(x: 50, y: 300, width: SCREEN_WIDTH-100, height: 40))
         passwordText.isSecureTextEntry = true
         passwordText.attributedPlaceholder=NSAttributedString(string: "密码", attributes: [NSForegroundColorAttributeName: kRGBColorFromHex(rgbValue: 0x656565)])
         passwordText.textColor = kRGBColorFromHex(rgbValue: 0xffffff)
@@ -114,39 +115,43 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         passwordText.leftView = passwordLeftView
         passwordText.leftViewMode=UITextFieldViewMode.always;
         
-        loginBtn = UIButton(frame: CGRect(x: 50, y: 380, width: screenwidth-100, height: 40))
+        loginBtn = UIButton(frame: CGRect(x: 50, y: 380, width: SCREEN_WIDTH-100, height: 40))
         loginBtn.setTitle("登录", for: .normal)
         loginBtn.backgroundColor = UIColor(red: 49/255.0, green: 181/255.0, blue: 142/255.0, alpha: 1.0)
         loginBtn.layer.cornerRadius=10;
         loginBtn.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
-        forgetBtn = UIButton(frame: CGRect(x: screenwidth/2-70, y: 440, width: 70, height: 40))
+        forgetBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2-70, y: 440, width: 70, height: 40))
         forgetBtn.setTitle("忘记密码", for: .normal)
         forgetBtn.titleLabel?.textColor=kRGBColorFromHex(rgbValue: 0x656565)
         forgetBtn.titleLabel?.font=UIFont.systemFont(ofSize: 14)
         forgetBtn.addTarget(self, action: #selector(forget), for: .touchUpInside)
         
-        registBtn = UIButton(frame: CGRect(x: screenwidth/2, y: 440, width: 70, height: 40))
+        registBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2, y: 440, width: 70, height: 40))
         registBtn.setTitle("立即注册", for: .normal)
         registBtn.titleLabel?.textColor=kRGBColorFromHex(rgbValue: 0x656565)
         registBtn.titleLabel?.font=UIFont.systemFont(ofSize: 14)
         registBtn.addTarget(self, action: #selector(showSignupButtonTapped(_:)), for: .touchUpInside)
         
-        weiboBtn = UIButton(frame: CGRect(x: screenwidth/2-100, y: 575, width: 50, height: 50))
+        dissmissBtn = UIButton.init(frame: CGRect.init(x: 12, y: 36, width: 15, height: 21))
+        dissmissBtn.setImage(UIImage.init(named: "返回"), for: .normal)
+        dissmissBtn.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
+        
+        weiboBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2-100, y: 575, width: 50, height: 50))
         weiboBtn.setImage(UIImage(named: "weibo_icon_png.png"), for: .normal)
         weiboBtn.contentMode = .scaleAspectFill
         weiboBtn.layer.masksToBounds = true
         //设置圆角半径(宽度的一半)，显示成圆形。
         weiboBtn.layer.cornerRadius = weiboBtn.frame.width/2
         weiboBtn.addTarget(self, action: #selector(weibo), for: .touchUpInside)
-        weixinBtn = UIButton(frame: CGRect(x: screenwidth/2-25, y: 575, width: 50, height: 50))
+        weixinBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2-25, y: 575, width: 50, height: 50))
         weixinBtn.setImage(UIImage(named: "wechat_icon_png.png"), for: .normal)
         weixinBtn.contentMode = .scaleAspectFill
         weixinBtn.layer.masksToBounds = true
         //设置圆角半径(宽度的一半)，显示成圆形。
         weixinBtn.layer.cornerRadius = weixinBtn.frame.width/2
         weixinBtn.addTarget(self, action: #selector(weixin), for: .touchUpInside)
-        qqBtn = UIButton(frame: CGRect(x: screenwidth/2+50, y: 575, width: 50, height: 50))
+        qqBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2+50, y: 575, width: 50, height: 50))
         qqBtn.setImage(UIImage(named: "qq_icon_png.png"), for: .normal)
         qqBtn.contentMode = .scaleAspectFill
         qqBtn.layer.masksToBounds = true
@@ -154,7 +159,7 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         qqBtn.layer.cornerRadius = qqBtn.frame.width/2
         qqBtn.addTarget(self, action: #selector(qq), for: .touchUpInside)
         
-        loginLable = UILabel(frame: CGRect(x: 50, y: 530, width: screenwidth-100, height: 20))
+        loginLable = UILabel(frame: CGRect(x: 50, y: 530, width: SCREEN_WIDTH-100, height: 20))
         loginLable.textAlignment = .center
         loginLable.text = "—————  第三方登录  —————"
         loginLable.textColor = kRGBColorFromHex(rgbValue: 0xffffff)
@@ -167,9 +172,14 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(loginLable)
         self.view.addSubview(weiboBtn)
         self.view.addSubview(weixinBtn)
+        self.view.addSubview(dissmissBtn)
         self.view.addSubview(qqBtn)
     }
 
+    func dissmissVC(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //ccccccccccccccccccccccccccccccccccccccccc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -186,24 +196,18 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         UserManager.removeObserver(observer: self, notification: .didLoginFailure)
         textFieldResignFirstResponder()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
 
     // MARK: - Notifier Action
     
     func userDidLogin(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.closeButtonTapped()
-        })
+        self.closeButtonTapped()
     }
     
     func userDidLoginFailure(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.closeButtonTapped()
-        })
+      
+        self.closeButtonTapped()
+       
     }
     
     // MARK: - TextField Delegate
@@ -241,14 +245,9 @@ class SignViewController: UIViewController, UITextFieldDelegate {
         
         return phoneTest.evaluate(with: phone)
     }
-    //ccccccccccccccccccccccccccc
-    
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+   
 }
-
-//ccccccccccccccccccccccccccccccc
+ 
 fileprivate extension Selector {
     static let login = #selector(SignViewController.loginButtonTapped(_:))
     static let userDidLogin = #selector(SignViewController.userDidLogin(notification:))

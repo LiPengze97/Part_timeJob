@@ -14,8 +14,9 @@ import Alamofire
 class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMapViewDelegate,TPCalloutViewDelegate {
     var vcArray = Array<MainTableViewController>()
     var tableViewArray = Array<UITableView>()
+    //0-远途旅伴 1-近程游玩 2-拼车 3-饮食 4-电影 5-购物
     var tourismLvbanInfos = Array<TourismLvbanInfo>()
-    var closeLvbanInfos:[[CloseLvbanInfo]]?
+    var closeLvbanInfos:[[CloseLvbanInfo]] = []
     var currentTabelView = UITableView()
     var locationManager:AMapLocationManager?
     var stb = UIStoryboard.init(name: "Main", bundle: nil)
@@ -36,6 +37,7 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
 //        self.nv = UINavigationController.init(rootViewController: self)
         setLocation()
         self.automaticallyAdjustsScrollViewInsets = false
+        view.backgroundColor = UIColor.white
         self.view.addSubview(self.bottomScroll!)
         for i in 0..<headSegmentArray.count {
             let ma = stb.instantiateViewController(withIdentifier: "MainTableViewController") as! MainTableViewController
@@ -70,7 +72,7 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         self.tabBarController?.tabBar.isHidden = false
         
         getTourism()
-        
+        getClose()
         
     }
     
@@ -83,33 +85,33 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
                     return
                 }
                 let json = JSON(value)
-                print("🙏",json)
+                print(" ",json)
                 
-                for (index,subJson):(String, JSON) in json["data"] {
-                    //Do something you want
+                self.tourismLvbanInfos = []
+                
+                for (_, subJson):(String, JSON) in json["data"] {
+          
                     let a = TourismLvbanInfo.init(json: subJson)
-//                    print(a.departure,"😕")
+ 
                     self.tourismLvbanInfos.append(a)
                 }
                 
-                DispatchQueue.global().async {
-                    DispatchQueue.main.async {
+                //DispatchQueue.global().async {
+                 //   DispatchQueue.main.async {
                         self.vcArray[0].tourismLvbanInfos = self.tourismLvbanInfos
                         self.vcArray[0].tableView.reloadData()
                         let ma = self.vcArray[0]
                         for j in 0..<ma.tableView.visibleCells.count {
-                            
                             (ma.tableView.visibleCells[j] as! DemoCell).delegate = self
                         }
-                    }
-                }
+                 //   }
+                //}
                 
                 
                 guard let status = json["status"].int else { return }
                 
                 guard status == 200 else {
 //                    log(json, .error)
-                    
                     return
                 }
                 return
@@ -117,16 +119,55 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
                 log(error, .error)
                 return
             }
-            
         }
     }
 
+    func getClose(){
+        Alamofire.request(Router.getClose).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                guard let value = response.result.value else{
+                    log("response.result.value is nil", .error)
+                    return
+                }
+                let json = JSON(value)
+                print("📺",json)
+                 
+                self.closeLvbanInfos = []
+                for _ in 0..<5{
+                    let a:[CloseLvbanInfo] = []
+                    self.closeLvbanInfos.append(a)
+                }
+                
+                for (_, subJson):(String, JSON) in json["data"] {
+          
+                    let a = CloseLvbanInfo.init(json: subJson)
+                    let indexa = Int(a.type!)
+                    self.closeLvbanInfos[indexa!-1].append(a)
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+                }
+                
+                //DispatchQueue.global().async {
+                 //   DispatchQueue.main.async {
+                        for i in 1..<self.vcArray.count{
+                            self.vcArray[i].closeLvbanInfos = self.closeLvbanInfos[i-1]
+                            self.vcArray[i].tableView.reloadData()
+                            let ma = self.vcArray[i]
+                            for j in 0..<ma.tableView.visibleCells.count {
+                                (ma.tableView.visibleCells[j] as! DemoCell).delegate = self
+                            }
+                        }
+                 //   }
+                //}
+               
+            case .failure(let error):
+                log(error, .error)
+                return
+            }
+            
+        }
     }
+ 
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let tableView = object as! UITableView
@@ -199,7 +240,18 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
         //print("🤞",userLocation?.coordinate)
         mm.title = "ssss"
         mm.subtitle = "wwww"
-        mapView.addAnnotation(mm)
+        //36.6354400000,117.2697700000商职
+        let lons = [117.15017,117.13017,117.13517,117.14700,117.26897,117.26947,117.27077,117.26900,117.26877]
+        let lats = [36.66494,36.67694,36.66894,36.66594,36.63544,36.63644,36.63444,36.63244,36.63500]
+        var annos:[MAPointAnnotation] = []
+        for i in 0..<lons.count{
+            let m = MAPointAnnotation.init()
+            //当前经纬度：36.66694,117.14017
+            m.coordinate = CLLocationCoordinate2D.init(latitude: lats[i], longitude: lons[i])
+            annos.append(m)
+        }
+        annos.append(mm)
+        mapView.addAnnotations(annos)
     }
     //MARK:初始化页面需要的方法
     func setLocation(){
@@ -254,7 +306,7 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
                 self?.addAnnotation()
             }
             
-            if let reGeocode = reGeocode {
+            if reGeocode != nil {
                // NSLog("🐥reGeocode:%@", reGeocode)
                 
                 
@@ -266,6 +318,12 @@ class TravelPalViewController: UIViewController,AMapLocationManagerDelegate,MAMa
     
     //MARK: - Set up UI
     func setupUI(){
+        
+        for _ in 0..<5{
+            let a:[CloseLvbanInfo] = []
+            self.closeLvbanInfos.append(a)
+        }
+        
         self.headSegmentView = HeadSegmentView.init(frame: CGRect.init(x: 0, y: 200, width: SCREEN_WIDTH, height: 40))
         self.headSegmentView?.delegate = self
         
@@ -350,6 +408,9 @@ extension TravelPalViewController: RequestJumpDelegate{
         if index == 0{
             tpd.lvbaninfo = self.tourismLvbanInfos[self.vcArray[0].selectnum]
             tpd.mark = 1
+        }else{
+            tpd.closeinfo = self.closeLvbanInfos[index-1][self.vcArray[index].selectnum]
+            tpd.mark = 0
         }
         
         self.navigationController?.pushViewController(tpd, animated: true)

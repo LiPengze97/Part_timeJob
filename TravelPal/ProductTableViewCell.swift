@@ -15,16 +15,15 @@ class ProductTableViewCell: UITableViewCell {
     var priceLabel: UILabel?
     var collectLabel: UILabel?
     var siteLabel:UILabel?
-    
-    let screenwidth = UIScreen.main.applicationFrame.size.width
+  
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // 设置选中cell时无高亮等效果
         self.selectionStyle = .none
         imageview = UIImageView(frame: CGRect(x: 15, y: 10, width: 135, height: 80))
-        titleLabel = UILabel(frame: CGRect(x: 165, y: 20, width: screenwidth, height: 20))
-        priceLabel = UILabel(frame: CGRect(x: 235, y: 30, width: screenwidth-235, height: 40))
-        collectLabel = UILabel(frame: CGRect(x: 165, y: 30, width: 100, height: 40))
+        titleLabel = UILabel(frame: CGRect(x: 165, y: 20, width: SCREEN_WIDTH, height: 20))
+        priceLabel = UILabel(frame: CGRect(x: 260, y: 30, width: SCREEN_WIDTH-260, height: 40))
+        collectLabel = UILabel(frame: CGRect(x: 165, y: 30, width: 95, height: 40))
         siteLabel = UILabel(frame: CGRect(x: 165, y: 50, width: 186, height: 40))
 
         titleLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -50,9 +49,9 @@ class ProductTableViewCell: UITableViewCell {
     
     func setupUI(imageString:String,titleString:String,priceString:String,collectString:String,siteString:String){
         
-        var url = imageString
-        var urlStr = NSURL(string: url)!
-        var nsd = NSData(contentsOf: urlStr as URL)
+        let url = imageString
+        let urlStr = NSURL(string: url)!
+        let nsd = NSData(contentsOf: urlStr as URL)
         
         var img: UIImage? = nil
         if nsd != nil {
@@ -79,8 +78,6 @@ class ProductTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+  
 
 }

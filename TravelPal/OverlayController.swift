@@ -1,6 +1,5 @@
 //
 //  OverlayController.swift
-//  <https://github.com/snail-z/OverlayController-Swift.git>
 //
 //  Created by zhanghao on 2017/2/22.
 //  Copyright © 2017年 zhanghao. All rights reserved.
@@ -56,7 +55,7 @@ public enum TransitionStyle {
 
 // MARK: - OverlayController class implementation -
 
-class OverlayController: NSObject, UIGestureRecognizerDelegate{
+class OverlayController: NSObject, UIGestureRecognizerDelegate {
 
     weak var delegate: OverlayControllerDelegate?
     

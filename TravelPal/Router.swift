@@ -16,35 +16,47 @@ enum Router: URLRequestConvertible {
     
     // MARK: - 用户模块
     
-    //用户名是否存在
+    ///用户名是否存在
     case exists(String)
-    //注册
+    ///注册
     case signUp(String, String)
-    //登录
+    case sendMsg(String)
+    ///登录
     case logIn(String, String)
-    //获取用户信息
+    ///获取用户信息
     case getUserInfo()
-    //设置用户信息
+    ///设置用户信息
     case setUserInfo(String,String)
-    //上传用户头像
+    ///上传用户头像
     case setUserAvatar()
-    case tap1()
-    case tap2()
-    case tap3()
-    case tap4()
-    case tap5()
-    case tap6()
-    case tap7()
-    case tap8()
-    //获取商品
-    case tour(Int)
-    
-    //上传远途旅伴
+    ///所有订单
+    case getAllOrder()
+    ///未支付订单
+    case getUnpaidOrder()
+    ///已成功
+    case getSuccessOrder()
+    ///收藏
+    case getCollected()
+    ///报名旅游信息
+    case getEnlistInfo()
+    ///我的旅伴
+    case getMyPal()
+    ///想去目的地
+    case getWantGo()
+    ///曾经去过的地方
+    case getEverGone()
+    ///获取商品
+    case getTrip()
+    ///根据id获取商品
+    case getTripById(Int)
+    ///上传远途旅伴
     case postTour(Parameters)
-    //上传近程玩伴
+    ///上传近程玩伴
     case postNearby(Parameters)
-    //获取旅游消息
+    ///获取旅游消息
     case getTourism
+    ///获取进程游玩信息case
+    case getClose
     
     
     var method: Alamofire.HTTPMethod {
@@ -61,24 +73,26 @@ enum Router: URLRequestConvertible {
             return .post
         case .setUserAvatar:
             return .post
-        case .tap1:
+        case .getAllOrder:
             return .get
-        case .tap2:
+        case .getUnpaidOrder:
             return .get
-        case .tap3:
+        case .getSuccessOrder:
             return .get
-        case .tap4:
+        case .getCollected:
             return .get
-        case .tap5:
+        case .getEnlistInfo:
             return .get
-        case .tap6:
+        case .getMyPal:
             return .get
-        case .tap7:
+        case .getWantGo:
             return .get
-        case .tap8:
+        case .getEverGone:
             return .get
         //获取商品
-        case .tour:
+        case .getTrip:
+            return .get
+        case .getTripById:
             return .get
         case .postTour:
             return .post
@@ -86,6 +100,10 @@ enum Router: URLRequestConvertible {
             return .post
         //旅游信息
         case .getTourism:
+            return .get
+        case .getClose:
+            return .get
+        case .sendMsg:
             return .get
         }
     }
@@ -104,23 +122,25 @@ enum Router: URLRequestConvertible {
             return "/user/userInfo"
         case .setUserAvatar:
             return "/user/i/photo"
-        case .tap1:
+        case .getAllOrder:
             return "/user/myOrder"
-        case .tap2:
+        case .getUnpaidOrder:
             return "/user/notPay"
-        case .tap3:
+        case .getSuccessOrder:
             return "/user/hasPay"
-        case .tap4:
+        case .getCollected:
             return "/user/myCollection"
-        case .tap5:
+        case .getEnlistInfo:
             return "/user/userTourism"
-        case .tap6:
+        case .getMyPal:
             return "/user/userTourism"
-        case .tap7:
+        case .getWantGo:
             return "/user/hasGone"
-        case .tap8:
+        case .getEverGone:
             return "/user/hasGone"
-        case .tour:
+        case .getTrip:
+            return "/common/getTrip"
+        case .getTripById:
             return "/common/getTripById"
         case .postTour:
             return "/user/addTourism"
@@ -128,6 +148,10 @@ enum Router: URLRequestConvertible {
             return "/user/addClose"
         case .getTourism:
             return "/common/getTourism"
+        case .getClose:
+            return "/common/getClose"
+        case .sendMsg:
+            return "/common/sendMessage"
         }
     }
     
@@ -153,31 +177,34 @@ enum Router: URLRequestConvertible {
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
         case .setUserAvatar():
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: nil)
-        case .tap1():
+        case .getAllOrder():
             let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap2():
+        case .getUnpaidOrder():
             let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap3():
+        case .getSuccessOrder():
             let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap4():
-            let params = ["page": 1,"rows": 2]
+        case .getCollected():
+            let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap5():
-            let params = ["page": 1,"rows": 2]
+        case .getEnlistInfo():
+            let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap6():
-            let params = ["page": 1,"rows": 2]
+        case .getMyPal():
+            let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap7():
-            let params = ["page": 1,"rows": 2]
+        case .getWantGo():
+            let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tap8():
-            let params = ["page": 1,"rows": 2]
+        case .getEverGone():
+            let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-        case .tour(let id):
+        case .getTrip():
+            let p = ["page": 1, "rows": 10]
+            return try Alamofire.URLEncoding.default.encode(urlRequest, with: p)
+        case .getTripById(let id):
             let params = ["id": id]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
         case .postTour(let para):
@@ -187,7 +214,12 @@ enum Router: URLRequestConvertible {
         case .getTourism():
             let params = ["page": 1,"rows": 10]
             return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
-            
+        case .getClose():
+            let params = ["page": 1,"rows": 10]
+            return try Alamofire.URLEncoding.default.encode(urlRequest, with: params)
+        case .sendMsg(let phone):
+            let p = ["mobile": phone]
+            return try Alamofire.URLEncoding.default.encode(urlRequest, with: p)
         }
     }
 }

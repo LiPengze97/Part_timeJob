@@ -14,10 +14,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     var passwordText : UITextField!
     var surepasswordText : UITextField!
     var registBtn : UIButton!
-    let screenwidth = UIScreen.main.applicationFrame.size.width
-    let screenheight = UIScreen.main.applicationFrame.size.height
+     var dissmissBtn:UIButton!
     
-    //cccccccccccccccccccccccccccccc
     let notification = NotificationCenter.default
     
     // MARK: - Button Action
@@ -35,7 +33,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             self.noticeOnlyText("两次密码不相同")
             return
         }
-        //ggggggggggggggggggggggggg
+        
         UserManager.shared.signup(tel: phoneText.text!,password: passwordText.text!)
         
     }
@@ -45,61 +43,81 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         if !UserManager.shared.isExist {
             if UserManager.shared.canRegister {
                 self.noticeSuccess("注册成功")
-                //跳转到主页面
-                let secondViewController = PersonalViewController()
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.navigationController?.pushViewController(secondViewController, animated: true)
-                })
-            }
-            else{
+ 
+                self.navigationController?.popToRootViewController(animated: true)
+                
+            } else{
                 self.noticeError("注册失败")
             }
-            
-        }
-        else{
+        } else {
             //提示用户名已经存在
             self.noticeError("用户名已存在")
         }
     }
-    //ccccccccccccccccccccccccccccccccccccccccc
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "注册"
+        title = "注册"
         self.view.backgroundColor = kRGBColorFromHex(rgbValue: 0xf2f2f2)
         
-        phoneText = UITextField(frame: CGRect(x: 50, y: 115, width: screenwidth-100, height: 40))
+        phoneText = UITextField(frame: CGRect(x: 35, y: 115, width: SCREEN_WIDTH-70, height: 44))
         phoneText.placeholder = "请输入手机号"
         phoneText.layer.cornerRadius=25;
         phoneText.borderStyle = UITextBorderStyle.roundedRect
         phoneText.clearButtonMode=UITextFieldViewMode.whileEditing;
         phoneText.keyboardType = UIKeyboardType.numberPad
         
-        passwordText = UITextField(frame: CGRect(x: 50, y: 180, width: screenwidth-100, height: 40))
+        passwordText = UITextField(frame: CGRect(x: 35, y: 189, width: SCREEN_WIDTH-70, height: 44))
         passwordText.placeholder = "请输入密码"
         passwordText.layer.cornerRadius=25;
         passwordText.borderStyle = UITextBorderStyle.roundedRect
         passwordText.clearButtonMode=UITextFieldViewMode.whileEditing;
         passwordText.isSecureTextEntry = true
         
-        surepasswordText = UITextField(frame: CGRect(x: 50, y: 245, width: screenwidth-100, height: 40))
+        surepasswordText = UITextField(frame: CGRect(x: 35, y: 260, width: SCREEN_WIDTH-70, height: 44))
         surepasswordText.placeholder = "再次确认密码"
         surepasswordText.layer.cornerRadius=25;
         surepasswordText.borderStyle = UITextBorderStyle.roundedRect
         surepasswordText.clearButtonMode=UITextFieldViewMode.whileEditing;
         surepasswordText.isSecureTextEntry = true
         
-        registBtn = UIButton(frame: CGRect(x: 50, y: 540, width: screenwidth-100, height: 50))
-        registBtn.setTitle("注册", for: .normal)
+        registBtn = UIButton(frame: CGRect(x: 50, y: 540, width: SCREEN_WIDTH-100, height: 50))
+        registBtn.setTitle("立即注册", for: .normal)
         registBtn.backgroundColor = UIColor(red: 49/255.0, green: 181/255.0, blue: 142/255.0, alpha: 1.0)
         registBtn.layer.cornerRadius=25;
         registBtn.addTarget(self, action: #selector(signupButtonTapped(_:)), for: .touchUpInside)
         
+        let agreements = UILabel(frame: CGRect(x: 0, y: 540-35, width: SCREEN_WIDTH, height: 30))
+
+        let str1 = "已阅读并同意使用条款和隐私政策"
+        let attStr = NSMutableAttributedString(string: str1)
+        func myRange(_ a: Int, _ b: Int) -> NSRange {
+            return NSMakeRange(a, b)
+        }
+        attStr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 12), range: myRange(0,15))
+        attStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: myRange(0,6))
+        attStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue.withAlphaComponent(0.8), range: myRange(6, 4))
+        attStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: myRange(10, 1))
+        attStr.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue.withAlphaComponent(0.8), range: myRange(11, 4))
+        agreements.attributedText = attStr;
+        agreements.textAlignment = .center
+        
+        
+        dissmissBtn = UIButton.init(frame: CGRect.init(x: 12, y: 36, width: 15, height: 21))
+        dissmissBtn.setImage(UIImage.init(named: "返回"), for: .normal)
+        dissmissBtn.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
+        
         self.view.addSubview(phoneText)
         self.view.addSubview(passwordText)
         self.view.addSubview(surepasswordText)
+        self.view.addSubview(dissmissBtn)
         self.view.addSubview(registBtn)
+        view.addSubview(agreements)
+    }
+    
+    func dissmissVC(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     //ccccccccccccccccccccccccccccccccccccc
@@ -114,21 +132,21 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         notification.removeObserver(self)
         UserManager.removeObserver(observer: self, notification: .didSignup)
         UserManager.removeObserver(observer: self, notification: .didSignupFailure)
-        textFieldResignFirstResponder()
+ 
     }
-    
+ 
     // MARK: - Notifier Action
     
     func userDidSignup(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.closeButtonTapped()
-        })
+ 
+        self.closeButtonTapped()
     }
     
     func userDidSignupFailure(notification: NSNotification) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            self.closeButtonTapped()
-        })
+       
+        
+        self.closeButtonTapped()
+      
     }
     
     // MARK: - TextField Delegate
@@ -139,26 +157,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textFieldResignFirstResponder() {
-        [phoneText,passwordText,surepasswordText].forEach {
-            $0.resignFirstResponder()
-        }
+ 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
-    
-    /** 点击其他区域隐藏键盘*/
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        textFieldResignFirstResponder()
-    }
-    //cccccccccccccccccccccccc
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+  
     
     //cccccccccccccccccccccccccccc
     //判断手机号码是否合法
@@ -174,10 +177,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     //判断密码是否合法
     func isValidPassword(password: String?,surepassword: String) -> Bool {
-        if !(password != nil) || !(surepassword != nil) {
+        if (password == nil) {
             return false
         }
-        var a = password?.compare(surepassword).rawValue
+        let a = password?.compare(surepassword).rawValue
         if a == 0 {
             return true
         }

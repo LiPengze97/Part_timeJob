@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		055FD87BC57AAF6988F78381 /* Pods_TravelPal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CE7437F83FD8A51101D46C /* Pods_TravelPal.framework */; };
+		072BD54E204C12830055E23C /* ResetPsdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072BD54D204C12830055E23C /* ResetPsdController.swift */; };
+		0766E44C204BFC900017880E /* PhoneVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E448204BFC900017880E /* PhoneVerifyController.swift */; };
+		0766E44D204BFC900017880E /* PSDVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E449204BFC900017880E /* PSDVerifyController.swift */; };
+		0766E44E204BFC900017880E /* SignUpBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E44A204BFC900017880E /* SignUpBaseController.swift */; };
+		0766E44F204BFC900017880E /* CodeVerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E44B204BFC900017880E /* CodeVerifyController.swift */; };
+		0766E451204BFD8D0017880E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E450204BFD890017880E /* Config.swift */; };
+		0766E457204C02100017880E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766E454204C02100017880E /* Extensions.swift */; };
+		07F8B6AF207E092A00ADE910 /* HeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8B6AE207E092A00ADE910 /* HeadView.swift */; };
 		8E05F6C41EFB448400D3ECB7 /* TPIMListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E05F6C31EFB448400D3ECB7 /* TPIMListViewController.swift */; };
 		8E05F6C71EFB53B000D3ECB7 /* TPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E05F6C61EFB53B000D3ECB7 /* TPWelcomeViewController.swift */; };
 		8E05F6C91EFB6DC600D3ECB7 /* Tourism.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E05F6C81EFB6DC600D3ECB7 /* Tourism.plist */; };
 		8E10915D1EB71774006E4CCD /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10915C1EB71774006E4CCD /* Consts.swift */; };
 		8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10915E1EB717CF006E4CCD /* HeadSegmentView.swift */; };
-		8E1091611EB718C6006E4CCD /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1091601EB718C6006E4CCD /* UIView+Ext.swift */; };
+		8E1091611EB718C6006E4CCD /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1091601EB718C6006E4CCD /* extensions.swift */; };
 		8E3285A11EDF0EF200178785 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859B1EDF0EF200178785 /* NSDate+Extension.m */; };
 		8E3285A21EDF0EF200178785 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859D1EDF0EF200178785 /* UIView+Extension.m */; };
 		8E3285A31EDF0EF200178785 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E32859F1EDF0EF200178785 /* WSDatePickerView.m */; };
@@ -52,6 +60,9 @@
 		8E7A4D561EEFF15B00C77DCE /* TourismLvbanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */; };
 		8E7A4D581EF0087100C77DCE /* TPCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A4D571EF0087100C77DCE /* TPCalloutView.swift */; };
 		8E7BA4861ED18C9D00969F3C /* TPPosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */; };
+		8E8458BD1F8EF216009BEF5E /* RecommendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8458BC1F8EF216009BEF5E /* RecommendTableViewController.swift */; };
+		8E8458C21F8EF30A009BEF5E /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8458C01F8EF30A009BEF5E /* RecommendTableViewCell.swift */; };
+		8E8458C31F8EF30A009BEF5E /* RecommendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E8458C11F8EF30A009BEF5E /* RecommendTableViewCell.xib */; };
 		8E91455B1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */; };
 		8EA4C0701EB9E939003047E7 /* TravelPalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */; };
 		8EA4C0721EB9EAB6003047E7 /* TravelPalTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */; };
@@ -68,7 +79,6 @@
 		8EEBAAC61EE8223E00AA1313 /* TPFabuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBAAC51EE8223E00AA1313 /* TPFabuView.swift */; };
 		8EEBAAC81EE8346D00AA1313 /* TPBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */; };
 		8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */; };
-		8EFF6E0E1EF9295E008FABA6 /* allDingDan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF6E061EF9295E008FABA6 /* allDingDan.swift */; };
 		8EFF6E101EF9295E008FABA6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF6E081EF9295E008FABA6 /* DetailViewController.swift */; };
 		8EFF6E111EF9295E008FABA6 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF6E091EF9295E008FABA6 /* SignViewController.swift */; };
 		8EFF6E121EF9295E008FABA6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF6E0A1EF9295E008FABA6 /* RegisterViewController.swift */; };
@@ -91,6 +101,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		072BD54D204C12830055E23C /* ResetPsdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPsdController.swift; sourceTree = "<group>"; };
+		0766E448204BFC900017880E /* PhoneVerifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerifyController.swift; sourceTree = "<group>"; };
+		0766E449204BFC900017880E /* PSDVerifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSDVerifyController.swift; sourceTree = "<group>"; };
+		0766E44A204BFC900017880E /* SignUpBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpBaseController.swift; sourceTree = "<group>"; };
+		0766E44B204BFC900017880E /* CodeVerifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeVerifyController.swift; sourceTree = "<group>"; };
+		0766E450204BFD890017880E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		0766E454204C02100017880E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		07F8B6AE207E092A00ADE910 /* HeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadView.swift; sourceTree = "<group>"; };
 		47CE7437F83FD8A51101D46C /* Pods_TravelPal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelPal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C993913E750029AD8FBE27C /* Pods-TravelPal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelPal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal.debug.xcconfig"; sourceTree = "<group>"; };
 		8E05F6C31EFB448400D3ECB7 /* TPIMListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPIMListViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +116,7 @@
 		8E05F6C81EFB6DC600D3ECB7 /* Tourism.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tourism.plist; sourceTree = "<group>"; };
 		8E10915C1EB71774006E4CCD /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		8E10915E1EB717CF006E4CCD /* HeadSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadSegmentView.swift; sourceTree = "<group>"; };
-		8E1091601EB718C6006E4CCD /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		8E1091601EB718C6006E4CCD /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		8E32859A1EDF0EF200178785 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Extension.h"; path = "WSDaePickerView/NSDate+Extension.h"; sourceTree = "<group>"; };
 		8E32859B1EDF0EF200178785 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Extension.m"; path = "WSDaePickerView/NSDate+Extension.m"; sourceTree = "<group>"; };
 		8E32859C1EDF0EF200178785 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extension.h"; path = "WSDaePickerView/UIView+Extension.h"; sourceTree = "<group>"; };
@@ -140,6 +158,9 @@
 		8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourismLvbanInfo.swift; sourceTree = "<group>"; };
 		8E7A4D571EF0087100C77DCE /* TPCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPCalloutView.swift; sourceTree = "<group>"; };
 		8E7BA4851ED18C9D00969F3C /* TPPosterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPosterTableViewController.swift; sourceTree = "<group>"; };
+		8E8458BC1F8EF216009BEF5E /* RecommendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewController.swift; sourceTree = "<group>"; };
+		8E8458C01F8EF30A009BEF5E /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
+		8E8458C11F8EF30A009BEF5E /* RecommendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendTableViewCell.xib; sourceTree = "<group>"; };
 		8E91455A1EDDB0A1006EA2DB /* TPPoster2TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPPoster2TableViewController.swift; sourceTree = "<group>"; };
 		8EA4C06F1EB9E939003047E7 /* TravelPalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalViewController.swift; sourceTree = "<group>"; };
 		8EA4C0711EB9EAB6003047E7 /* TravelPalTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelPalTabelViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +177,6 @@
 		8EEBAAC51EE8223E00AA1313 /* TPFabuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPFabuView.swift; sourceTree = "<group>"; };
 		8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPBannerView.swift; sourceTree = "<group>"; };
 		8EF018811EB234B700AA6BEB /* IMConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMConversationViewController.swift; sourceTree = "<group>"; };
-		8EFF6E061EF9295E008FABA6 /* allDingDan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allDingDan.swift; sourceTree = "<group>"; };
 		8EFF6E081EF9295E008FABA6 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8EFF6E091EF9295E008FABA6 /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
 		8EFF6E0A1EF9295E008FABA6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +211,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074E3674204C08DA00E920A4 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				8E48FD1C1EADA78900EA132C /* AppDelegate.swift */,
+				8E48FD201EADA78900EA132C /* Main.storyboard */,
+				8E48FD281EADA78900EA132C /* LaunchScreen.storyboard */,
+				8E48FD2B1EADA78900EA132C /* Info.plist */,
+				8E6C50231EF7F42C00EE3B96 /* Assets.xcassets */,
+				8E48FD231EADA78900EA132C /* TravelPal.xcdatamodeld */,
+			);
+			name = support;
+			sourceTree = "<group>";
+		};
+		0766E447204BFC830017880E /* liu */ = {
+			isa = PBXGroup;
+			children = (
+				0766E454204C02100017880E /* Extensions.swift */,
+				0766E450204BFD890017880E /* Config.swift */,
+				0766E44B204BFC900017880E /* CodeVerifyController.swift */,
+				0766E449204BFC900017880E /* PSDVerifyController.swift */,
+				072BD54D204C12830055E23C /* ResetPsdController.swift */,
+				0766E448204BFC900017880E /* PhoneVerifyController.swift */,
+				0766E44A204BFC900017880E /* SignUpBaseController.swift */,
+			);
+			path = liu;
+			sourceTree = "<group>";
+		};
 		451BF75C0306E909813C94BB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +276,7 @@
 				8E3285991EDF0EEA00178785 /* date */,
 				8E3E350E1EAE1C930005C942 /* TravelPal-Bridging-Header.h */,
 				8E10915C1EB71774006E4CCD /* Consts.swift */,
-				8E1091601EB718C6006E4CCD /* UIView+Ext.swift */,
+				8E1091601EB718C6006E4CCD /* extensions.swift */,
 				8EEBAAC71EE8346D00AA1313 /* TPBannerView.swift */,
 				8EE52EF21EEC2E3C003C0116 /* empty.swift */,
 				8E05F6C81EFB6DC600D3ECB7 /* Tourism.plist */,
@@ -291,19 +338,15 @@
 		8E48FD1B1EADA78900EA132C /* TravelPal */ = {
 			isa = PBXGroup;
 			children = (
-				8E05F6C51EFB539E00D3ECB7 /* Start */,
-				8EE1F2901EE1A16900B0DD1E /* Personnal */,
-				8EE1F2851EE1A0F400B0DD1E /* Travel */,
 				8E1091621EB72AC2006E4CCD /* Tabbar */,
 				8E10915B1EB713E2006E4CCD /* IM */,
-				8E10915A1EB713D6006E4CCD /* Tools */,
+				8E8458B81F8EF1DF009BEF5E /* Recommend */,
+				8E05F6C51EFB539E00D3ECB7 /* Start */,
 				8E1091591EB713BC006E4CCD /* TravelPal */,
-				8E48FD1C1EADA78900EA132C /* AppDelegate.swift */,
-				8E48FD201EADA78900EA132C /* Main.storyboard */,
-				8E48FD281EADA78900EA132C /* LaunchScreen.storyboard */,
-				8E48FD2B1EADA78900EA132C /* Info.plist */,
-				8E6C50231EF7F42C00EE3B96 /* Assets.xcassets */,
-				8E48FD231EADA78900EA132C /* TravelPal.xcdatamodeld */,
+				8EE1F2901EE1A16900B0DD1E /* Personnal */,
+				8EE1F2851EE1A0F400B0DD1E /* Travel */,
+				8E10915A1EB713D6006E4CCD /* Tools */,
+				074E3674204C08DA00E920A4 /* support */,
 			);
 			path = TravelPal;
 			sourceTree = "<group>";
@@ -315,6 +358,40 @@
 				8E7A4D551EEFF15B00C77DCE /* TourismLvbanInfo.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8E8458B81F8EF1DF009BEF5E /* Recommend */ = {
+			isa = PBXGroup;
+			children = (
+				8E8458BB1F8EF203009BEF5E /* C */,
+				8E8458BA1F8EF1FA009BEF5E /* V */,
+				8E8458B91F8EF1F2009BEF5E /* M */,
+			);
+			name = Recommend;
+			sourceTree = "<group>";
+		};
+		8E8458B91F8EF1F2009BEF5E /* M */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = M;
+			sourceTree = "<group>";
+		};
+		8E8458BA1F8EF1FA009BEF5E /* V */ = {
+			isa = PBXGroup;
+			children = (
+				8E8458C01F8EF30A009BEF5E /* RecommendTableViewCell.swift */,
+				8E8458C11F8EF30A009BEF5E /* RecommendTableViewCell.xib */,
+			);
+			name = V;
+			sourceTree = "<group>";
+		};
+		8E8458BB1F8EF203009BEF5E /* C */ = {
+			isa = PBXGroup;
+			children = (
+				8E8458BC1F8EF216009BEF5E /* RecommendTableViewController.swift */,
+			);
+			name = C;
 			sourceTree = "<group>";
 		};
 		8EA4C0651EB9E6BC003047E7 /* View */ = {
@@ -361,11 +438,11 @@
 				8E6C50111EF7F22100EE3B96 /* ViewController.swift */,
 				8E6C50121EF7F22100EE3B96 /* HELoopPageView.swift */,
 				8E6C50131EF7F22100EE3B96 /* tableview.swift */,
-				8E6C50141EF7F22100EE3B96 /* SearchViewController.swift */,
 				8EFF6E241EF92990008FABA6 /* myButton.swift */,
 				8EFF6E251EF92990008FABA6 /* myLayout.swift */,
 				8E6C50151EF7F22100EE3B96 /* BGButton.swift */,
 				8E6C50161EF7F22100EE3B96 /* InformationViewController.swift */,
+				8E6C50141EF7F22100EE3B96 /* SearchViewController.swift */,
 				8E6C50171EF7F22100EE3B96 /* SearchResultViewController.swift */,
 				8E6C50181EF7F22100EE3B96 /* PayViewController.swift */,
 			);
@@ -375,6 +452,7 @@
 		8EE1F2901EE1A16900B0DD1E /* Personnal */ = {
 			isa = PBXGroup;
 			children = (
+				0766E447204BFC830017880E /* liu */,
 				8EE1F2A11EE1A2EC00B0DD1E /* V */,
 				8EE1F2941EE1A2CF00B0DD1E /* C */,
 			);
@@ -384,7 +462,6 @@
 		8EE1F2941EE1A2CF00B0DD1E /* C */ = {
 			isa = PBXGroup;
 			children = (
-				8EFF6E061EF9295E008FABA6 /* allDingDan.swift */,
 				8EFF6E081EF9295E008FABA6 /* DetailViewController.swift */,
 				8EFF6E091EF9295E008FABA6 /* SignViewController.swift */,
 				8EFF6E0A1EF9295E008FABA6 /* RegisterViewController.swift */,
@@ -400,6 +477,7 @@
 		8EE1F2A11EE1A2EC00B0DD1E /* V */ = {
 			isa = PBXGroup;
 			children = (
+				07F8B6AE207E092A00ADE910 /* HeadView.swift */,
 				8EFF6E161EF92973008FABA6 /* DingDanCell.swift */,
 				8EFF6E171EF92973008FABA6 /* ProductTableViewCell.swift */,
 				8EFF6E181EF92973008FABA6 /* PersonalInfoTableViewCell.swift */,
@@ -449,12 +527,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = INGSwifters;
 				TargetAttributes = {
 					8E48FD181EADA78900EA132C = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7NHUNFTCZQ;
+						DevelopmentTeam = 98RSU49GZT;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -490,6 +568,7 @@
 			files = (
 				8E46AED51EC8488D004A95D5 /* TPPersonInfoCell.xib in Resources */,
 				8E46AED91EC84F78004A95D5 /* TPTravelInfoCell.xib in Resources */,
+				8E8458C31F8EF30A009BEF5E /* RecommendTableViewCell.xib in Resources */,
 				8E05F6C91EFB6DC600D3ECB7 /* Tourism.plist in Resources */,
 				8E46AEE31EC8534C004A95D5 /* TPGeoInfoCell.xib in Resources */,
 				8E48FD2A1EADA78900EA132C /* LaunchScreen.storyboard in Resources */,
@@ -509,9 +588,24 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/OverlayController/OverlayController.framework",
+				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OverlayController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -524,13 +618,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TravelPal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D5B5994C8566C86C44074F43 /* [CP] Copy Pods Resources */ = {
@@ -539,9 +636,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TravelPal/Pods-TravelPal-resources.sh",
+				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RongCloud.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Emoji.plist",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCConfig.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -560,8 +670,11 @@
 				8EFF6E2F1EF929B3008FABA6 /* Log.swift in Sources */,
 				8EEBAAC81EE8346D00AA1313 /* TPBannerView.swift in Sources */,
 				8EFF6E2E1EF929B3008FABA6 /* UserManager.swift in Sources */,
+				0766E44C204BFC900017880E /* PhoneVerifyController.swift in Sources */,
 				8EFF6E211EF92973008FABA6 /* QuanBuTableViewCell.swift in Sources */,
+				8E8458BD1F8EF216009BEF5E /* RecommendTableViewController.swift in Sources */,
 				8EFF6E111EF9295E008FABA6 /* SignViewController.swift in Sources */,
+				8E8458C21F8EF30A009BEF5E /* RecommendTableViewCell.swift in Sources */,
 				8E3285A71EDF101700178785 /* WSDatePickerView.h in Sources */,
 				8EEBAAC61EE8223E00AA1313 /* TPFabuView.swift in Sources */,
 				8E3285A21EDF0EF200178785 /* UIView+Extension.m in Sources */,
@@ -574,6 +687,7 @@
 				8EFF6E231EF92973008FABA6 /* ChengGongTableViewCell.swift in Sources */,
 				8EFF6E261EF92990008FABA6 /* myButton.swift in Sources */,
 				8E46AEE21EC8534C004A95D5 /* TPGeoInfoCell.swift in Sources */,
+				0766E44F204BFC900017880E /* CodeVerifyController.swift in Sources */,
 				8EC842951ED5C6B10078D674 /* TPFindPalTableViewController.swift in Sources */,
 				8EE5FC5A1EFAA39A00103F54 /* modifyViewController.swift in Sources */,
 				8EA4C0721EB9EAB6003047E7 /* TravelPalTabelViewController.swift in Sources */,
@@ -590,15 +704,18 @@
 				8E6C50201EF7F22100EE3B96 /* PayViewController.swift in Sources */,
 				8E6C501E1EF7F22100EE3B96 /* InformationViewController.swift in Sources */,
 				8EEBAAC41EE821F900AA1313 /* TPTabBarController.swift in Sources */,
+				0766E457204C02100017880E /* Extensions.swift in Sources */,
 				8E6C501B1EF7F22100EE3B96 /* tableview.swift in Sources */,
 				8EFF6E101EF9295E008FABA6 /* DetailViewController.swift in Sources */,
 				8ECBDF5F1EC747680025579E /* TPDetailToolBar.swift in Sources */,
 				8E10915F1EB717CF006E4CCD /* HeadSegmentView.swift in Sources */,
+				0766E44E204BFC900017880E /* SignUpBaseController.swift in Sources */,
 				8E7A4D561EEFF15B00C77DCE /* TourismLvbanInfo.swift in Sources */,
 				8EFF6E121EF9295E008FABA6 /* RegisterViewController.swift in Sources */,
 				8EFF6E131EF9295E008FABA6 /* forgetViewController.swift in Sources */,
 				8E48FD1D1EADA78900EA132C /* AppDelegate.swift in Sources */,
-				8E1091611EB718C6006E4CCD /* UIView+Ext.swift in Sources */,
+				072BD54E204C12830055E23C /* ResetPsdController.swift in Sources */,
+				8E1091611EB718C6006E4CCD /* extensions.swift in Sources */,
 				8E46AED11EC8430B004A95D5 /* CloseLvbanInfo.swift in Sources */,
 				8EE5FC5E1EFAA40F00103F54 /* PersonalViewController.swift in Sources */,
 				8EFF6E1E1EF92973008FABA6 /* ProductTableViewCell.swift in Sources */,
@@ -611,7 +728,6 @@
 				8ED95C041EF0DC3A00D078A8 /* TPAnnotationView.swift in Sources */,
 				8EF018821EB234B700AA6BEB /* IMConversationViewController.swift in Sources */,
 				8EB6C7741EB0DA900069578A /* IMListViewController.swift in Sources */,
-				8EFF6E0E1EF9295E008FABA6 /* allDingDan.swift in Sources */,
 				8E6C501A1EF7F22100EE3B96 /* HELoopPageView.swift in Sources */,
 				8EE52EF31EEC2E3C003C0116 /* empty.swift in Sources */,
 				8EFF6E221EF92973008FABA6 /* ChuLiTableViewCell.swift in Sources */,
@@ -621,11 +737,14 @@
 				8E6C501D1EF7F22100EE3B96 /* BGButton.swift in Sources */,
 				8E5C7A481EBB6F9A000E64F7 /* DemoCell.swift in Sources */,
 				8E46AEDE1EC85313004A95D5 /* TPDetailInfoCell.swift in Sources */,
+				07F8B6AF207E092A00ADE910 /* HeadView.swift in Sources */,
+				0766E451204BFD8D0017880E /* Config.swift in Sources */,
 				8EE5FC5C1EFAA3F900103F54 /* PersonalInfoViewController.swift in Sources */,
 				8E6C50191EF7F22100EE3B96 /* ViewController.swift in Sources */,
 				8E7BA4861ED18C9D00969F3C /* TPPosterTableViewController.swift in Sources */,
 				8EFF6E201EF92973008FABA6 /* DaiFuKuanTableViewCell.swift in Sources */,
 				8E3E350D1EAE1C170005C942 /* MapViewController.swift in Sources */,
+				0766E44D204BFC900017880E /* PSDVerifyController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,15 +780,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -692,12 +819,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -711,15 +839,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -736,10 +872,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -750,9 +887,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 7NHUNFTCZQ;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEVELOPMENT_TEAM = 98RSU49GZT;
 				INFOPLIST_FILE = TravelPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.INGSwifters.TravelPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TravelPal/TravelPal-Bridging-Header.h";
@@ -767,9 +906,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 7NHUNFTCZQ;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEVELOPMENT_TEAM = 98RSU49GZT;
 				INFOPLIST_FILE = TravelPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.INGSwifters.TravelPal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TravelPal/TravelPal-Bridging-Header.h";

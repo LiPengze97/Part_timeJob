@@ -16,12 +16,12 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
     var headView : UIView!
     var touxiangBtn : UIButton!
     var username : String!
+    var image : UIImage?
     
-    let screenwidth = UIScreen.main.applicationFrame.size.width
-    let screenheight = UIScreen.main.applicationFrame.size.height
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(0, for: UIBarMetrics.default)
         username = UserManager.shared.username
         self.tableview.reloadData()
@@ -32,10 +32,10 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         
         self.navigationItem.title = "个人资料"
         //上部个人头像
-        headView = UIView(frame: CGRect(x: 0, y: 64, width: screenwidth, height: 194))
+        headView = UIView(frame: CGRect(x: 0, y: 64, width: SCREEN_WIDTH, height: 194))
         headView.backgroundColor = kRGBColorFromHex(rgbValue: 0xf2f2f2)
         //根据是否登录显示两种界面
-        touxiangBtn = UIButton(frame: CGRect(x: screenwidth/2-44, y: 40, width: 88, height: 88))
+        touxiangBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH/2-44, y: 40, width: 88, height: 88))
         headView.addSubview(touxiangBtn)
         touxiangBtn.contentMode = .scaleAspectFill
         touxiangBtn.layer.borderWidth=2
@@ -46,36 +46,14 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         touxiangBtn.layer.cornerRadius = touxiangBtn.frame.width/2
         touxiangBtn.addTarget(self, action: #selector(tapped), for: .touchUpInside)
         
-        tableview = UITableView(frame: CGRect(x: 0, y: 258, width: screenwidth, height: screenheight-194), style: UITableViewStyle.plain)
+        tableview = UITableView(frame: CGRect(x: 0, y: 258, width: SCREEN_WIDTH, height: SCREEN_HEIGHT-194), style: UITableViewStyle.plain)
         tableview.delegate = self
         tableview.dataSource = self
         tableview.showsHorizontalScrollIndicator = false
         tableview.showsVerticalScrollIndicator = false
-        tableview.bounces = false
+
         tableview.register(PersonalInfoTableViewCell.self, forCellReuseIdentifier: "personalinfocell")
-        
-        //根据是否登录显示两种界面
-        //        if UserManager.shared.isLogIn {
-        //            //用url显示头像
-        //            var url = UserManager.shared.image
-        //            //var url = "http://118.190.69.5:65530/headimg/"+UserManager.shared.tel
-        //            var imagehead : UIImageView!
-        //            var urlStr = NSURL(string: url)!
-        //            var nsd = NSData(contentsOf: urlStr as URL)
-        //
-        //            var img: UIImage? = nil
-        //            if nsd != nil {
-        //                imagehead = UIImageView()
-        //                img = UIImage(data: nsd! as Data)!
-        //                imagehead.image = img
-        //                touxiangBtn.setImage(img, for: .normal)
-        //            }
-        //            else{
-        //                touxiangBtn.setImage(UIImage(named: "personal_person"), for: .normal)
-        //            }
-        //
-        //        }
-        //ggggggggggggggggggggggg
+  
         if UserManager.shared.Image != nil {
             touxiangBtn.setImage(UserManager.shared.Image, for: .normal)
         }
@@ -85,11 +63,12 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         
         self.view.addSubview(headView)
         self.view.addSubview(tableview)
+        tableview.tableFooterView = UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return tits.count
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,9 +82,8 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
             secondViewController.tit = "所在地"
             self.navigationController?.pushViewController(secondViewController, animated: true)
         default:
-            let secondViewController = modifyViewController()
-            secondViewController.tit = "昵称"
-            self.navigationController?.pushViewController(secondViewController, animated: true)
+            UserManager.shared.userLogOut()
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -123,8 +101,10 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
             let titleString = "所在地：             "+UserManager.shared.location
             cell?.setupUI(titleString: titleString)
         default:
-            let titleString = "厦门"
+            let titleString = "退出登录"
             cell?.setupUI(titleString: titleString)
+            cell?.titleLabel?.textAlignment = .center
+            
         }
         
         return cell!
@@ -134,11 +114,7 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         return 50
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
+ 
     //关于上传头像
     func tapped(){
         //从相册中选择还是。。。。
@@ -152,7 +128,7 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 let picker = UIImagePickerController()
                 picker.sourceType = .camera
-                picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                picker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
                 picker.allowsEditing = true
                 self.present(picker, animated: true, completion: nil)
                 
@@ -169,7 +145,7 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
             //调用相册功能，打开相册
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
-            picker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            picker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
             picker.allowsEditing = true
             self.present(picker, animated: true, completion: nil)
             
@@ -181,7 +157,7 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         
     }
     //选择一张照片的代理方法
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let type: String = (info[UIImagePickerControllerMediaType] as! String)
         
         //当选择的类型是图片
@@ -205,36 +181,20 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
             do {
                 try fileManager.createDirectory(atPath: documentPath, withIntermediateDirectories: true, attributes: nil)
             }
-            catch let error {
+            catch _ {
             }
             fileManager.createFile(atPath: documentPath.appending("/image.png"), contents: data, attributes: nil)
             //得到选择后沙盒中图片的完整路径
             let filePath: String = String(format: "%@%@", documentPath, "/image.png")
             print("filePath:" + filePath)
-            picker.dismiss(animated: true, completion: nil)
             UserManager.shared.Image = UIImage(data: data!)
             self.touxiangBtn.setImage(UIImage(data: data!), for: .normal)
-            //            Alamofire.upload("http://192.168.3.16:9060/client/updateHeadUrl",method: .post,multipartFormData: { multipartFormData in
-            //                let lastData = NSData(contentsOfFile: filePath)
-            //
-            //                multipartFormData.appendBodyPart(data: lastData!, name: "image")
-            //
-            //            }, encodingCompletion: { response in
-            //                picker.dismissViewControllerAnimated(true, completion: nil)
-            //                switch response {
-            //                case .Success(let upload, _, _):
-            //                    upload.responseJSON(completionHandler: { (response) in
-            //                        print(response)
-            //                        self.touxiangBtn.setImage(UIImage(data: data!), for: .normal)
-            //                })
-            //
-            //                case .Failure(let encodingError):
-            //                    print(encodingError)
-            //                }
-            //
-            //            })
+            self.image = UIImage(data: data!)
+            self.headView.reloadInputViews()
+            self.touxiangBtn.reloadInputViews()
+            picker.dismiss(animated: true, completion: nil)
             
-            
+       
         }
     }
     //修正上传的照片的方向
@@ -290,9 +250,6 @@ class PersonalInfoViewController: UIViewController,UITableViewDataSource,UIImage
         return img
     }
     
-    
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+   
     
 }

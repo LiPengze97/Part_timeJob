@@ -15,14 +15,12 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
     var coBtn:UIButton?
     var frBtn:UIButton?
     var overlayController:OverlayController!
-    //特殊标记，0为一般，1位特殊
+    ///特殊标记，0为近程，1位远途
     var mark = 0
     
-    var lvbaninfo:TourismLvbanInfo?{
-        didSet{
-            
-        }
-    }
+    var lvbaninfo:TourismLvbanInfo?
+    
+    var closeinfo:CloseLvbanInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,24 +40,21 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
         createRightBtn()
         registernib()
         
-        // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
         //self.navigationController?.navigationBar.backgroundColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 0)
         self.navigationController?.navigationBar.barTintColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 1)
-        
+    }
 
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //MARK: TableView Delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if mark == 1 {
+            return 3
+        }
         return 4
     }
     
@@ -71,17 +66,28 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
         let cell:UITableViewCell
         if indexPath.section == 0{
             cell = tableView.dequeueReusableCell(withIdentifier: "person", for: indexPath) as! TPPersonInfoCell
-            
         }else if indexPath.section == 1{
             cell = tableView.dequeueReusableCell(withIdentifier: "travel", for: indexPath) as! TPTravelInfoCell
-            (cell as! TPTravelInfoCell).deptTimeLabel.text = self.lvbaninfo?.departureTime
-            (cell as! TPTravelInfoCell).destnationLabel.text = lvbaninfo?.destination
-            (cell as! TPTravelInfoCell).transportationLabel.text = lvbaninfo?.transportation
-            (cell as! TPTravelInfoCell).planpeopleLabel.text = "\((lvbaninfo?.planPeople)!)人"
+            if mark == 1{
+                (cell as! TPTravelInfoCell).deptTimeLabel.text = self.lvbaninfo?.departureTime
+                (cell as! TPTravelInfoCell).destnationLabel.text = lvbaninfo?.destination
+                (cell as! TPTravelInfoCell).transportationLabel.text = lvbaninfo?.transportation
+                (cell as! TPTravelInfoCell).planpeopleLabel.text = "\((lvbaninfo?.planPeople)!)人"
+            }else{
+                (cell as! TPTravelInfoCell).deptTimeLabel.text = self.closeinfo?.departureTime
+                (cell as! TPTravelInfoCell).destnationLabel.text = closeinfo?.destination
+                (cell as! TPTravelInfoCell).transportationLabel.text = "自行前往"
+                if let l = (cell as? TPTravelInfoCell)?.planpeopleLabel {
+                    l.text = "\((closeinfo?.planPeople) ?? "_" )人"
+                }
+            }
+            
         }else if indexPath.section == 2{
             cell = tableView.dequeueReusableCell(withIdentifier: "detail", for: indexPath) as! TPDetailInfoCell
             if mark == 1 {
                 (cell as! TPDetailInfoCell).detailLabel.text = lvbaninfo?.detailed
+            }else{
+                (cell as! TPDetailInfoCell).detailLabel.text = closeinfo?.detailed
             }
         }else{
             cell = tableView.dequeueReusableCell(withIdentifier: "geo", for: indexPath) as! TPGeoInfoCell
@@ -89,6 +95,7 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
                 (cell as! TPGeoInfoCell).targetLocation = CLLocationCoordinate2D.init(latitude: CLLocationDegrees.init((lvbaninfo?.latitude)!)!, longitude: CLLocationDegrees.init((lvbaninfo?.longitude)!)!)
             }
         }
+        cell.selectionStyle = .none
 //        cell.isUserInteractionEnabled = false
         return cell
    }
@@ -129,28 +136,13 @@ class TravelPalDetailViewController: UITableViewController,UIGestureRecognizerDe
         self.tableView.bringSubview(toFront: frBtn!)
         
         ctBtn?.addTarget(self, action: #selector(TravelPalDetailViewController.contactDidTapped), for: .touchUpInside)
-//        let ss = UIView.init(frame: CGRect.init(x: 10, y: 10, width: SCREEN_HEIGHT - 20, height: 48))
-//        ss.addSubview(ctBtn)
-//        ss.addSubview(coBtn)
-//        ss.addSubview(frBtn)
-//        self.tableView.tableFooterView = ss
-//        let contactBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "contactBtn"), style: .done, target: self, action: nil)//联系
-//        let collectBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "collectBtn"), style: .done, target: self, action: nil) //收藏
-//        let friendsBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "friendsBtn"), style: .done, target: self, action: nil)//加好友
-//        contactBtn.title = "联系Ta"
-//        contactBtn.tintColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 1)
+        coBtn?.addTarget(self, action: #selector(addToCollection), for: .touchUpInside)
         
-//        collectBtn.title = "收藏"
-//        collectBtn.tintColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 0.8)
-        
-//        friendsBtn.title = "加好友"
-//        friendsBtn.tintColor = UIColor.init(red: 30/255.0, green: 168/255.0, blue: 134/255.0, alpha: 0.6)
-        
-//        let flexibleSpace = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-//        let btnarr:[UIBarButtonItem] = [friendsBtn,collectBtn,contactBtn]
-//        self.toolbarItems = btnarr
-        
+ 
+    }
+    
+    func addToCollection() {
+
     }
     
     func contactDidTapped(){

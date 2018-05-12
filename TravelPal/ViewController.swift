@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController,tableViewDelegate{
+class ViewController: UIViewController, tableViewDelegate {
     
    var location = String()
     
@@ -69,60 +69,51 @@ class ViewController: UIViewController,tableViewDelegate{
     func topButtonTap(_ _button:UIButton){
         
        let secondView = SearchViewController()
-        self.present(secondView, animated: true, completion: nil)
-    
+       // self.present(secondView, animated: true, completion: nil)
+        pushWithoutTab(secondView);
     }
     
     func leftButtonTap(_ _button:UIButton){
-    
-  //CCCCCCCCCCCCCCCCC1
+ 
         let secondView = SearchResultViewController()
         secondView.result = location
-        self.present(secondView, animated: true, completion: nil)
-//CCCCCCCCCCCCCCCCCC1
+        //self.present(secondView, animated: true, completion: nil)
+        pushWithoutTab(secondView)
     }
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+ 
 //maintableview里点击cell的代理方法
     func didSelectCell(_ Section: Int, Row: Int) {
         
     }
+    
     func jumpToInformationView(_ title:String){
         
         let secondView = InformationViewController()
         secondView.titlek = title
-        self.present(secondView, animated: true, completion: nil)
-        
+        //self.present(secondView, animated: true, completion: nil)
+        pushWithoutTab(secondView)
     }
-    
-    //CCCCCCCCCCCCCCCCCCCC2
+ 
     func jumpToSearchResultView(_ title:String){
         let secondView = SearchResultViewController()
         secondView.result = title
-        self.present(secondView, animated: true, completion: nil)
-    
-    
+        //self.present(secondView, animated: true, completion: nil)
+        pushWithoutTab(secondView)
     }
-    //CCCCCCCCCCCCCCCCCCC2
-    
-
-//maintableview里scrollview用到的代理方法
+ 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+ 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("aa")
-        //设置rollingEnable为true即可开启自动滚动功能
+ 
         mainTableView.loopPage.rollingEnable = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         //需要在退出前停止自动滚动,否则会内存泄露
-        print("bb")
         mainTableView.loopPage.rollingEnable = false
     }
     

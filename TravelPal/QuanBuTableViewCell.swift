@@ -19,21 +19,21 @@ class QuanBuTableViewCell: UITableViewCell {
     var strokeLabel: UILabel?
     var clickLabel:UILabel?
     
-    let screenwidth = UIScreen.main.applicationFrame.size.width
+ 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // 设置选中cell时无高亮等效果
         self.selectionStyle = .none
-        color = UIView(frame: CGRect(x: 0, y: 0, width: screenwidth, height: 8))
+        color = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 8))
         color?.backgroundColor=UIColor(red: 242/255.0, green: 110/255.0, blue: 125/255.0, alpha: 1.0)
         nameLabel = UILabel(frame: CGRect(x: 16, y: 25, width: 100, height: 12))
         describeLabel = UILabel(frame: CGRect(x: 16, y: 44, width: 75, height: 12))
         travelLabel = UILabel(frame: CGRect(x: 110, y: 25, width: 35, height: 16))
         travelLabel?.text = "旅游"
-        priceLabel = UILabel(frame: CGRect(x: screenwidth-100, y: 25, width: 100, height: 16))
-        dateLabel = UILabel(frame: CGRect(x: 16, y: 65, width: screenwidth, height: 12))
-        strokeLabel = UILabel(frame: CGRect(x: 16, y: 85, width: screenwidth, height: 12))
-        clickLabel = UILabel(frame: CGRect(x: 16, y: 107, width: screenwidth, height: 12))
+        priceLabel = UILabel(frame: CGRect(x: SCREEN_WIDTH-100, y: 25, width: 100, height: 16))
+        dateLabel = UILabel(frame: CGRect(x: 16, y: 65, width: SCREEN_WIDTH, height: 12))
+        strokeLabel = UILabel(frame: CGRect(x: 16, y: 85, width: SCREEN_WIDTH, height: 12))
+        clickLabel = UILabel(frame: CGRect(x: 16, y: 107, width: SCREEN_WIDTH, height: 12))
         clickLabel?.text = "点击查看详细订单"
         
         nameLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -84,9 +84,7 @@ class QuanBuTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    func kRGBColorFromHex(rgbValue: Int) -> (UIColor) {
-        return UIColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0,green: ((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0,blue: ((CGFloat)(rgbValue & 0xFF)) / 255.0,alpha: 1.0)
-    }
+  
 
 
 }
